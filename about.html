@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Noah De Guzman</title>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
+  <script>
+    const _s = localStorage.getItem('theme');
+    const _d = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (_s === 'light' || (!_s && !_d)) document.documentElement.setAttribute('data-theme','light');
+  </script>
+  <style>
+    /* ─────────────────────────────────────────────
+       TOKENS
+    ───────────────────────────────────────────── */
+    :root {
+      --font-display: "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --font-text:    "SF Pro Text",    "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --font-mono:    "SF Mono", "Fira Mono", "Consolas", monospace;
+
+      --c-bg:      #161614;
+      --c-surface: #1c1c1e;
+      --c-border:  rgba(255,255,255,0.1);
+      --c-text:    #f5f5f7;
+      --c-muted:   #a1a1a6;
+      --c-subtle:  #6e6e73;
+      --c-blue:    #2997ff;
+      --c-green:   #30d158;
+      --c-white:   #ffffff;
+
+      --c-nav-bg:      rgba(0,0,0,0.72);
+      --c-nav-border:  rgba(255,255,255,0.1);
+      --c-ring-border: rgba(255,255,255,0.5);
+
+      --nav-h:     52px;
+      --r-card:    6px;
+      --r-pill:    980px;
+      --pad:       56px;
+
+      --ease:        cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --t:           0.45s;
+      --t-fast:      0.2s;
+    }
+
+    /* ─────────────────────────────────────────────
+       LIGHT MODE
+    ───────────────────────────────────────────── */
+    [data-theme="light"] {
+      --c-bg:      #f5f5f7;
+      --c-surface: #ffffff;
+      --c-border:  rgba(0,0,0,0.1);
+      --c-text:    #1d1d1f;
+      --c-muted:   #515154;
+      --c-subtle:  #86868b;
+      --c-white:   #1d1d1f;
+
+      --c-nav-bg:      rgba(255,255,255,0.72);
+      --c-nav-border:  rgba(0,0,0,0.1);
+      --c-ring-border: rgba(0,0,0,0.35);
+    }
+
+    /* ─────────────────────────────────────────────
+       RESET
+    ───────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      scroll-behavior: smooth;
+    }
+    .theme-transitioning *,
+    .theme-transitioning *::before,
+    .theme-transitioning *::after {
+      transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease !important;
+    }
+
+    body {
+      font-family: var(--font-text);
+      background: var(--c-bg);
+      color: var(--c-text);
+      font-size: 17px;
+      line-height: 1.5;
+      overflow-x: hidden;
+      cursor: none;
+    }
+    * { cursor: none !important; }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+    ul { list-style: none; }
+
+    /* ─────────────────────────────────────────────
+       NAV
+    ───────────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      z-index: 9000;
+      display: flex;
+      align-items: center;
+    }
+    .nav-inner {
+      width: 100%;
+      padding: 0 var(--pad);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
+    .nav-logo {
+      font-size: 24px;
+      color: var(--c-white);
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: opacity var(--t) var(--ease), transform var(--t) var(--ease);
+      display: inline-block;
+    }
+    @keyframes spin-cw  { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes spin-ccw { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+    .nav-logo.spin-cw  { animation: spin-cw  0.5s var(--ease) forwards; }
+    .nav-logo.spin-ccw { animation: spin-ccw 0.5s var(--ease) forwards; }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+    }
+    .nav-links a {
+      font-family: var(--font-text);
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0;
+      color: var(--c-muted);
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: color var(--t-fast) var(--ease),
+                  opacity var(--t) var(--ease),
+                  transform var(--t) var(--ease);
+    }
+    .nav-links a:hover { color: var(--c-text); }
+    .nav-links a.active { color: var(--c-text); }
+    .ext-icon {
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 4px;
+      margin-bottom: 3px;
+      opacity: 0.5;
+    }
+    .nav-links a:nth-child(1) { transition-delay: 0.04s; }
+    .nav-links a:nth-child(2) { transition-delay: 0.08s; }
+    .nav-links a:nth-child(3) { transition-delay: 0.12s; }
+    .nav.loaded .nav-logo,
+    .nav.loaded .nav-links a { opacity: 1; transform: translateY(0); }
+
+    /* ─────────────────────────────────────────────
+       CONTENT
+    ───────────────────────────────────────────── */
+    .page-content {
+      padding: calc(var(--nav-h) + 48px) var(--pad) 80px;
+      min-height: calc(100svh - 53px);
+    }
+
+    /* ─────────────────────────────────────────────
+       ABOUT HERO
+    ───────────────────────────────────────────── */
+    .about-hero {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+      gap: 64px;
+    }
+    .history {
+      flex: 0 0 45%;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.75s var(--ease) 0.5s, transform 0.75s var(--ease) 0.5s;
+    }
+    .about-hero.loaded .about-desc-heading,
+    .about-hero.loaded .about-desc-body,
+    .about-hero.loaded .history { opacity: 1; transform: translateY(0); }
+    .about-words {
+      flex: 0 0 45%;
+      min-width: 0;
+    }
+    /* ─────────────────────────────────────────────
+       HISTORY
+    ───────────────────────────────────────────── */
+    .history-section h2 {
+      font-family: var(--font-display);
+      font-size: clamp(15px, 1.15vw, 17px);
+      font-weight: 400;
+      letter-spacing: -0.015em;
+      color: var(--c-text);
+      text-transform: none;
+      margin-bottom: 20px;
+    }
+    .history-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      padding: 6px 0;
+    }
+    .history-row + .history-row {
+      border-top: 1px solid var(--c-border);
+    }
+    .history-left {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .history-company {
+      font-family: var(--font-display);
+      font-size: clamp(14px, 1.1vw, 16px);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: var(--c-text);
+    }
+    .history-role {
+      font-family: var(--font-text);
+      font-size: clamp(13px, 1vw, 15px);
+      color: var(--c-subtle);
+    }
+    .history-year {
+      font-family: var(--font-text);
+      font-size: clamp(13px, 1vw, 15px);
+      color: var(--c-muted);
+      flex-shrink: 0;
+    }
+    .about-desc {
+      flex: 1 1 0;
+      min-width: 0;
+      padding-bottom: 0.1em;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .about-desc-heading {
+      font-family: var(--font-display);
+      font-size: clamp(16px, 1.6vw, 22px);
+      font-weight: 400;
+      letter-spacing: -0.015em;
+      line-height: 1.65;
+      color: var(--c-text);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.75s var(--ease) 0.15s, transform 0.75s var(--ease) 0.15s;
+    }
+    .about-desc-body {
+      font-family: var(--font-text);
+      font-size: clamp(13px, 1vw, 15px);
+      color: var(--c-muted);
+      line-height: 1.75;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.75s var(--ease) 0.35s, transform 0.75s var(--ease) 0.35s;
+    }
+
+    /* ─────────────────────────────────────────────
+       FULL-WIDTH BANNER
+    ───────────────────────────────────────────── */
+    .about-banner {
+      margin-top: 48px;
+      border-radius: 8px;
+      overflow: hidden;
+      height: 520px;
+    }
+    .about-banner img,
+    .about-banner video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    @media (max-width: 860px) {
+      .about-hero { flex-direction: column; align-items: flex-start; gap: 40px; }
+      .about-banner { height: 260px; }
+    }
+
+
+
+    .hover-preview {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      border-radius: 4px;
+      overflow: hidden;
+      width: 340px;
+      opacity: 0;
+      transform: scale(0.92);
+      transition: opacity 0.2s var(--ease), transform 0.2s var(--ease);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+    .hover-preview.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .hover-preview img {
+      width: 100%;
+      display: block;
+    }
+
+
+    .footer {
+      border-top: 1px solid var(--c-border);
+      padding: 20px var(--pad);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-copy {
+      font-family: var(--font-text);
+      font-size: 12px;
+      color: var(--c-subtle);
+    }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a {
+      font-family: var(--font-text);
+      font-size: 12px;
+      color: var(--c-subtle);
+      transition: color var(--t-fast);
+    }
+    .footer-links a:hover { color: var(--c-muted); }
+
+    /* ─────────────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────────────── */
+    @media (max-width: 860px) {
+      :root { --pad: 24px; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 560px) {
+      .footer { flex-direction: column; gap: 16px; }
+    }
+
+    /* ─────────────────────────────────────────────
+       THEME TOGGLE
+    ───────────────────────────────────────────── */
+    .theme-toggle {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--c-border);
+      background: var(--c-surface);
+      color: var(--c-muted);
+      z-index: 9000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.25s var(--ease), border-color 0.25s var(--ease), color 0.2s var(--ease);
+      cursor: none !important;
+    }
+    .theme-toggle:hover { color: var(--c-text); }
+    .theme-toggle-label {
+      position: absolute;
+      right: calc(100% + 10px);
+      top: 50%;
+      transform: translateY(-50%) translateX(8px);
+      white-space: nowrap;
+      font-family: var(--font-text);
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--c-muted);
+      background: var(--c-surface);
+      border: 1px solid var(--c-border);
+      border-radius: var(--r-pill);
+      padding: 4px 10px;
+      opacity: 0;
+      transition: opacity var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
+      pointer-events: none;
+    }
+    .theme-toggle:hover .theme-toggle-label { opacity: 1; transform: translateY(-50%) translateX(0); }
+    .theme-toggle-label .label-dark  { display: inline; }
+    .theme-toggle-label .label-light { display: none; }
+    [data-theme="light"] .theme-toggle-label .label-dark  { display: none; }
+    [data-theme="light"] .theme-toggle-label .label-light { display: inline; }
+    .theme-toggle .icon-sun  { display: block; }
+    .theme-toggle .icon-moon { display: none; }
+    [data-theme="light"] .theme-toggle .icon-sun  { display: none; }
+    [data-theme="light"] .theme-toggle .icon-moon { display: block; }
+
+    /* ─────────────────────────────────────────────
+       CURSOR RING
+    ───────────────────────────────────────────── */
+    .cursor-ring {
+      position: fixed;
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--c-ring-border);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99999;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.2s ease;
+      opacity: 0;
+    }
+    .cursor-ring.visible { opacity: 1; }
+  </style>
+</head>
+<body>
+
+  <!-- ── Nav ─────────────────────────────────────────────────────────── -->
+  <nav class="nav" id="nav" role="banner">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html" aria-label="noah de guzman home">❋</a>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html">Work</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">Resume<svg class="ext-icon" width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 8L8 1M8 1H2M8 1V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ── Content ──────────────────────────────────────────────────────── -->
+  <main class="page-content" id="main" aria-label="About">
+    <div class="about-hero" id="about-hero">
+      <div class="about-desc">
+        <p class="about-desc-heading">A little glimpse into my life 📷</p>
+        <p class="about-desc-body">I'm a UX Designer based in Vancouver, BC. Through co-op experiences at companies like Nokia and Invoke, I've developed a strong ability to transform complex processes into intuitive, research-driven experiences. In my free time, I love staying active by playing volleyball with my friends, trying out new food places seen on TikTok, creating cinematic vlogs, and taking my dog out around the city.</p>
+      </div>
+      <div class="history">
+        <div class="history-section">
+          <h2>Experience</h2>
+          <div class="history-row" id="sap-row">
+            <div class="history-left">
+              <span class="history-company">SAP</span>
+              <span class="history-role">UX Designer</span>
+            </div>
+            <span class="history-year">2026</span>
+          </div>
+          <div class="history-row" id="nokia-row">
+            <div class="history-left">
+              <span class="history-company">Nokia</span>
+              <span class="history-role">UX Designer</span>
+            </div>
+            <span class="history-year">2025</span>
+          </div>
+          <div class="history-row" id="invoke-row">
+            <div class="history-left">
+              <span class="history-company">Invoke Co.</span>
+              <span class="history-role">Product Designer</span>
+            </div>
+            <span class="history-year">2024</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Full-width video ──────────────────────── -->
+    <div class="about-banner">
+      <video src="images/portfolio-reel.mov" autoplay muted loop playsinline></video>
+    </div>
+  </main>
+
+  <!-- ── Footer ───────────────────────────────────────────────────────── -->
+  <footer class="footer" role="contentinfo">
+    <p class="footer-copy">© 2026 Noah De Guzman</p>
+    <ul class="footer-links" role="list">
+      <li><a href="https://www.linkedin.com/in/noah-de-guzman/" target="_blank" rel="noopener">LinkedIn</a></li>
+      <li><a href="Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">Resume<svg class="ext-icon" width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 8L8 1M8 1H2M8 1V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+    </ul>
+  </footer>
+
+<!-- ── Hover preview ───────────────────────────────────────────────── -->
+  <div class="cursor-ring" id="cursor-ring"></div>
+  <div class="hover-preview" id="invoke-preview">
+    <img src="images/about-images/invoke.jpg" alt="Invoke Co." />
+  </div>
+  <div class="hover-preview" id="nokia-preview" style="height:220px;">
+    <img src="images/about-images/sugarbush.png" alt="Nokia" style="width:100%; height:100%; object-fit:cover; object-position:30% center; transform:scale(1.4); transform-origin:center 40%;" />
+  </div>
+  <div class="hover-preview" id="sap-preview">
+    <img src="images/about-images/sap-team.jpg" alt="SAP" />
+  </div>
+
+  <script>
+  (() => {
+    'use strict';
+
+    /* ── Entrance ─────────────────────────────── */
+    window.addEventListener('DOMContentLoaded', () => {
+      requestAnimationFrame(() => {
+        document.getElementById('nav').classList.add('loaded');
+        document.getElementById('about-hero').classList.add('loaded');
+      });
+    });
+
+    /* ── Nav frosted glass on scroll ──────────── */
+    const nav = document.getElementById('nav');
+    window._onScroll = () => {
+      const past = window.scrollY > 60;
+      const st = getComputedStyle(document.documentElement);
+      nav.style.background           = past ? st.getPropertyValue('--c-nav-bg').trim() : 'transparent';
+      nav.style.backdropFilter       = past ? 'saturate(180%) blur(20px)' : '';
+      nav.style.webkitBackdropFilter = past ? 'saturate(180%) blur(20px)' : '';
+      nav.style.borderBottom         = past ? `1px solid ${st.getPropertyValue('--c-nav-border').trim()}` : 'none';
+    };
+    window.addEventListener('scroll', window._onScroll, { passive: true });
+    window._onScroll();
+
+    /* ── Cursor ring ──────────────────────────── */
+    const ring = document.getElementById('cursor-ring');
+    document.addEventListener('mousemove', e => {
+      ring.style.left = e.clientX + 'px';
+      ring.style.top  = e.clientY + 'px';
+      ring.classList.add('visible');
+    }, { passive: true });
+    document.addEventListener('mouseleave', () => ring.classList.remove('visible'));
+
+    /* ── Invoke hover preview ─────────────────── */
+    const invokeRow     = document.getElementById('invoke-row');
+    const invokePreview = document.getElementById('invoke-preview');
+
+    invokeRow.addEventListener('mouseenter', () => invokePreview.classList.add('visible'));
+    invokeRow.addEventListener('mouseleave', () => invokePreview.classList.remove('visible'));
+    invokeRow.addEventListener('mousemove', e => {
+      const previewW = 340;
+      const offset   = 16;
+      const nearLeft = e.clientX - offset - previewW < 0;
+      invokePreview.style.left = nearLeft
+        ? (e.clientX + offset) + 'px'
+        : (e.clientX - offset - previewW) + 'px';
+      invokePreview.style.top  = (e.clientY + offset) + 'px';
+    });
+
+    const sapRow     = document.getElementById('sap-row');
+    const sapPreview = document.getElementById('sap-preview');
+
+    sapRow.addEventListener('mouseenter', () => sapPreview.classList.add('visible'));
+    sapRow.addEventListener('mouseleave', () => sapPreview.classList.remove('visible'));
+    sapRow.addEventListener('mousemove', e => {
+      const previewW = 340;
+      const offset   = 16;
+      const nearLeft = e.clientX - offset - previewW < 0;
+      sapPreview.style.left = nearLeft
+        ? (e.clientX + offset) + 'px'
+        : (e.clientX - offset - previewW) + 'px';
+      sapPreview.style.top  = (e.clientY + offset) + 'px';
+    });
+    const nokiaRow    = document.getElementById('nokia-row');
+    const nokiaPreview = document.getElementById('nokia-preview');
+
+    nokiaRow.addEventListener('mouseenter', () => nokiaPreview.classList.add('visible'));
+    nokiaRow.addEventListener('mouseleave', () => nokiaPreview.classList.remove('visible'));
+    nokiaRow.addEventListener('mousemove', e => {
+      const previewW = 340;
+      const offset   = 16;
+      const nearLeft = e.clientX - offset - previewW < 0;
+      nokiaPreview.style.left = nearLeft
+        ? (e.clientX + offset) + 'px'
+        : (e.clientX - offset - previewW) + 'px';
+      nokiaPreview.style.top  = (e.clientY + offset) + 'px';
+    });
+
+  })();
+  </script>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">
+    <span class="theme-toggle-label"><span class="label-dark">Change to Light mode</span><span class="label-light">Change to Dark mode</span></span>
+    <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+
+  <script>
+  (() => {
+    const root = document.documentElement;
+    const btn  = document.getElementById('theme-toggle');
+    const logo = document.querySelector('.nav-logo');
+    btn.addEventListener('click', () => {
+      document.documentElement.classList.add('theme-transitioning');
+      const isLight = root.getAttribute('data-theme') === 'light';
+      if (isLight) {
+        root.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'dark');
+        logo.classList.remove('spin-ccw');
+        void logo.offsetWidth;
+        logo.classList.add('spin-cw');
+      } else {
+        root.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+        logo.classList.remove('spin-cw');
+        void logo.offsetWidth;
+        logo.classList.add('spin-ccw');
+      }
+      setTimeout(() => document.documentElement.classList.remove('theme-transitioning'), 400);
+      if (window._onScroll) window._onScroll();
+    });
+  })();
+  </script>
+
+  <div id="theme-flash"></div>
+
+</body>
+</html>
