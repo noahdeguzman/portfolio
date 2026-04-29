@@ -223,7 +223,6 @@
       flex-direction: column;
       opacity: 0;
       transform: translateY(20px);
-      min-height: 480px;
       transition: opacity 0.9s var(--ease),
                   transform 0.9s var(--ease),
                   box-shadow 0.4s var(--ease);
@@ -316,7 +315,8 @@
     }
     .pg-card-split .pg-scene {
       position: relative;
-      height: 480px;
+      aspect-ratio: 16 / 9;
+      height: auto;
       flex-shrink: 0;
     }
     .pg-card-split .pg-cover {
@@ -528,7 +528,8 @@
       :root { --pad: 24px; }
       .hero-statement { font-size: 14px; }
       .hero-roles { text-align: left; margin-top: 40px; }
-      .project-grid { grid-template-columns: 1fr; grid-template-rows: repeat(4, 380px); }
+      .project-grid { grid-template-columns: 1fr; grid-template-rows: none; }
+      .pg-card-split .pg-scene { aspect-ratio: 16 / 9; height: auto; }
       .nav-links { display: none; }
       .contact-inner { flex-direction: column; align-items: flex-start; }
       .contact-right { text-align: left; }
