@@ -90,7 +90,7 @@
     }
     .nav-inner {
       width: 100%;
-      max-width: 1440px;
+      max-width: 1600px;
       margin: 0 auto;
       padding: 0 var(--pad);
       display: flex;
@@ -149,7 +149,7 @@
     .sidebar {
       position: fixed;
       top: calc(var(--nav-h) + 40px);
-      left: 0;
+      left: max(0px, calc(50vw - 800px));
       width: 260px;
       height: calc(100vh - var(--nav-h));
       padding: 0 var(--pad);
@@ -178,7 +178,7 @@
     .page-content {
       padding: calc(var(--nav-h) + 40px) var(--pad) 0 calc(260px + var(--pad));
       min-height: calc(100svh - 53px);
-      max-width: 1440px;
+      max-width: 1600px;
       margin: 0 auto;
     }
 
