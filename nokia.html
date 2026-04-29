@@ -378,12 +378,14 @@
     ───────────────────────────────────────────── */
     .footer {
       border-top: 1px solid var(--c-border);
+    }
+    .footer-inner {
+      max-width: 1600px;
+      margin: 0 auto;
       padding: 20px var(--pad);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      max-width: 1600px;
-      margin: 0 auto;
     }
     .footer-copy {
       font-family: var(--font-text);
@@ -410,7 +412,7 @@
       .cs-overview-hero { flex-direction: column; align-items: flex-start; gap: 40px; }
     }
     @media (max-width: 560px) {
-      .footer { flex-direction: column; gap: 16px; }
+      .footer-inner { flex-direction: column; gap: 16px; }
     }
 
     /* ─────────────────────────────────────────────
@@ -598,10 +600,13 @@
 
   <!-- ── Footer ───────────────────────────────────────────────────────── -->
   <footer class="footer" role="contentinfo">
-    <p class="footer-copy">© 2026 Noah De Guzman</p>
-    <ul class="footer-links" role="list">
-      <li><a href="https://www.linkedin.com/in/noah-de-guzman/" target="_blank" rel="noopener">LinkedIn</a></li>
-      <li><a href="Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">Resume<svg class="ext-icon" width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 8L8 1M8 1H2M8 1V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+    <div class="footer-inner">
+      <p class="footer-copy">© 2026 Noah De Guzman</p>
+      <ul class="footer-links" role="list">
+        <li><a href="https://www.linkedin.com/in/noah-de-guzman/" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">Resume<svg class="ext-icon" width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 8L8 1M8 1H2M8 1V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+      </ul>
+    </div>
     </ul>
   </footer>
 
