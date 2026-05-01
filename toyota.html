@@ -468,15 +468,16 @@
     ───────────────────────────────────────────── */
     .cursor-ring {
       position: fixed;
-      width: 36px;
-      height: 36px;
+      width: 24px;
+      height: 24px;
       border: 1px solid var(--c-ring-border);
       border-radius: 50%;
       pointer-events: none;
       z-index: 99999;
       transform: translate(-50%, -50%);
-      transition: opacity 0.2s ease, background 0.2s ease;
+      transition: opacity 0.2s ease, width 0.2s ease, height 0.2s ease, background 0.2s ease;
       opacity: 0;
+      background: rgba(180,180,180,0.15);
     }
     .cursor-ring.visible { opacity: 1; }
 
