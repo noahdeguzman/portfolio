@@ -542,7 +542,7 @@
         <div class="cs-overview-left">
           <p style="font-family:var(--font-text); font-size:13px; color:var(--c-subtle);">SAP · 2026</p>
           <h1 class="cs-overview-title">Unifying Admin Settings across products in Business Data Cloud <span class="pg-nda">NDA</span></h1>
-          <p class="cs-overview-desc">At SAP, I worked within the Business Data Cloud (BDC) platform — a unified data environment that brings together SAP and non-SAP data. My focus was on the admin settings experience, which had grown inconsistently across multiple product teams. The goal was to create a single, coherent admin interface that worked across the entire BDC ecosystem.</p>
+          <p class="cs-overview-desc">Business Data Cloud (BDC) brings together SAP Datasphere, SAP Analytics Cloud, and BDC Cockpit under a single platform. Each product had built its own admin settings area in isolation — and the cracks were showing. I was brought in to close those gaps, aligning the admin experience across products so administrators could manage their tenants without having to re-learn where everything lives.</p>
         </div>
         <div class="cs-overview-right">
           <div class="cs-meta-grid">
@@ -555,19 +555,19 @@
             <div class="cs-meta-row">
               <div class="cs-meta-row-left">
                 <span class="cs-meta-col-label">Platform</span>
-                <span class="cs-meta-col-item">Figma, SAP BDC</span>
+                <span class="cs-meta-col-item">SAP Datasphere, SAP Analytics Cloud, BDC Cockpit</span>
               </div>
             </div>
             <div class="cs-meta-row">
               <div class="cs-meta-row-left">
                 <span class="cs-meta-col-label">Tasks</span>
-                <span class="cs-meta-col-item">UX Design, Systems Thinking, Stakeholder Alignment</span>
+                <span class="cs-meta-col-item">UX Design, Information Architecture, Cross-team Alignment</span>
               </div>
             </div>
             <div class="cs-meta-row">
               <div class="cs-meta-row-left">
                 <span class="cs-meta-col-label">Deliverables</span>
-                <span class="cs-meta-col-item">UX Spec, Component Designs, Prototype</span>
+                <span class="cs-meta-col-item">UX Spec, Interaction Design, Figma Prototype</span>
               </div>
             </div>
             <div class="cs-meta-row">
@@ -588,21 +588,28 @@
     <!-- Problem -->
     <section class="cs-section" id="problem">
       <p class="cs-section-label">problem</p>
-      <h2 class="cs-section-heading">Admin settings across BDC products had grown independently, resulting in an inconsistent and fragmented experience. How might we design a <strong>unified admin settings framework</strong> that scales across products and reduces cognitive overhead for enterprise users?</h2>
-      <p class="cs-section-body">Enterprise administrators managing multiple products within Business Data Cloud faced a disjointed experience — each product had its own settings structure, terminology, and navigation patterns. This created confusion, increased onboarding time, and made it difficult to manage cross-product configurations in a single workflow.</p>
+      <h2 class="cs-section-heading">SAP Datasphere and SAP Analytics Cloud had operated independently for years — and it showed. How do you design a <strong>consistent admin experience</strong> across products that were never built to share one?</h2>
+      <p class="cs-section-body">When SAC and Datasphere became part of Business Data Cloud, administrators suddenly had to manage settings across products with different structures, different terminology, and different navigation patterns. Simple tasks — like configuring system information or customising how a tenant appears in the browser — lived in different places on each product, with no shared conventions.</p>
+      <p class="cs-section-body">The fragmentation wasn't just an inconvenience. It signalled to enterprise customers that BDC wasn't ready — a platform stitched together rather than designed as one. The work spanned three interconnected problems: aligning how tenant information is displayed across products, standardising the admin navigation structure, and giving administrators the tools to visually differentiate their tenants.</p>
     </section>
 
     <!-- Process -->
     <section class="cs-section" id="process">
       <p class="cs-section-label">process</p>
-      <h3 class="cs-subheading" style="margin-top:0;">Discovery & Audit</h3>
-      <p class="cs-section-body">I began by auditing the existing admin settings across all affected BDC products, documenting inconsistencies in structure, labelling, and interaction patterns. This audit formed the basis for identifying shared patterns and opportunities for consolidation.</p>
 
-      <h3 class="cs-subheading">Design & Iteration</h3>
-      <p class="cs-section-body">Working closely with product teams and stakeholders, I designed a unified settings framework — establishing consistent information architecture, navigation conventions, and component patterns that could be adopted across all products without disrupting existing workflows.</p>
+      <h3 class="cs-subheading" style="margin-top:0;">Mapping the gaps</h3>
+      <p class="cs-section-body">I started by auditing the existing admin areas across Datasphere, SAC, and BDC Cockpit — documenting where settings lived, what they were called, and how they behaved. The audit revealed three distinct problem areas that needed to be addressed together: browser tab and favicon behaviour, System Information placement, and tenant visual identity.</p>
+      <p class="cs-section-body">Each product had tackled these in its own way. Datasphere had System Information buried in a Configuration area. SAC handled it differently. Neither was consistent with UXC standards for browser integration. The favicon — a small but visible signal of product identity — had no shared handling at all.</p>
 
-      <h3 class="cs-subheading">Handoff</h3>
-      <p class="cs-section-body">Detailed UX specs were produced in Figma and aligned with the SAP DNA Web UI Kit design system, ensuring the designs were implementation-ready and consistent with SAP Fiori standards.</p>
+      <h3 class="cs-subheading">Designing a unified Default Appearance tab</h3>
+      <p class="cs-section-body">The core structural change was introducing a <strong>Default Appearance</strong> tab into Datasphere's Administration area — consolidating System Information, favicon settings, and tenant customisation into a single, predictable location. This aligned Datasphere with SAC's structure while establishing a shared entry point that could scale to other BDC products.</p>
+      <p class="cs-section-body">For favicon handling, I designed a dropdown that lets administrators choose between the SAP logo and a product-specific icon (Datasphere or Analytics Cloud), replacing the previous inconsistency with a single, themeable control that meets UXC standards. Browser tab behaviour was also brought into alignment — giving administrators a consistent way to set tenant name and visual markers across products.</p>
+
+      <h3 class="cs-subheading">Tenant identification</h3>
+      <p class="cs-section-body">A separate but related workstream focused on visual tenant differentiation — a recurring pain point for customers managing multiple environments like production, staging, and dev. I explored two approaches: a persistent secondary shell bar that labels the tenant type throughout the product, and browser tab labelling using free-text input. Both required close collaboration with developers and product managers to assess feasibility before the direction was locked.</p>
+
+      <h3 class="cs-subheading">Cross-team alignment</h3>
+      <p class="cs-section-body">Both workstreams involved coordinating across multiple product teams — aligning on scope with product owners, validating feasibility with developers, and ensuring the designs met UXC standards before moving to handoff. Detailed specs were produced in Figma, covering interaction states, component behaviour, and edge cases, and reviewed with the relevant teams before engineering handoff.</p>
     </section>
 
   </main>
