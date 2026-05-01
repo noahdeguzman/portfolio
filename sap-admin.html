@@ -523,8 +523,11 @@
     <img src="images/sap-logo.png" alt="SAP" class="sidebar-logo" style="width: 40%; height: auto; margin-bottom: 24px; display: block;" />
     <nav class="sidebar-nav">
       <a href="#top" class="active">Overview</a>
+      <a href="#context">Context</a>
       <a href="#problem">Problem</a>
+      <a href="#goals">Goals</a>
       <a href="#process">Process</a>
+      <a href="#outcome">Outcome</a>
     </nav>
   </aside>
 
@@ -586,30 +589,59 @@
     </div>
 
     <!-- Problem -->
+    <section class="cs-section" id="context">
+      <p class="cs-section-label">context</p>
+      <h2 class="cs-section-heading">Business Data Cloud is SAP's unified data platform — but its admin experience still reflected <strong>three separate products</strong> that had never been designed to share one.</h2>
+      <p class="cs-section-body">BDC brings together SAP Datasphere, SAP Analytics Cloud (SAC), and BDC Cockpit under a single platform. Each component has its own Administration area used by the BDC Administrator persona to maintain their tenant — configuring SSO settings, managing system information, and controlling how the product appears in the browser.</p>
+      <p class="cs-section-body">Because SAC and Datasphere operated independently for a long time, the administration areas had seen product-specific settings introduced in isolation. Now that both are part of BDC, the differences are highly visible — and contributing to a feeling among customers that the platform isn't enterprise-ready.</p>
+    </section>
+
+    <!-- Problem -->
     <section class="cs-section" id="problem">
       <p class="cs-section-label">problem</p>
-      <h2 class="cs-section-heading">SAP Datasphere and SAP Analytics Cloud had operated independently for years — and it showed. How do you design a <strong>consistent admin experience</strong> across products that were never built to share one?</h2>
-      <p class="cs-section-body">When SAC and Datasphere became part of Business Data Cloud, administrators suddenly had to manage settings across products with different structures, different terminology, and different navigation patterns. Simple tasks — like configuring system information or customising how a tenant appears in the browser — lived in different places on each product, with no shared conventions.</p>
-      <p class="cs-section-body">The fragmentation wasn't just an inconvenience. It signalled to enterprise customers that BDC wasn't ready — a platform stitched together rather than designed as one. The work spanned three interconnected problems: aligning how tenant information is displayed across products, standardising the admin navigation structure, and giving administrators the tools to visually differentiate their tenants.</p>
+      <h2 class="cs-section-heading">Administrators navigating between Datasphere, SAC, and BDC Cockpit had to re-learn where everything was. How do you unify an admin experience across products that were <strong>never built to share one</strong>?</h2>
+      <p class="cs-section-body">Simple tasks — configuring tenant appearance, setting the browser tab favicon, or finding System Information — lived in different places on each product with different naming conventions and no shared structure. There was no consistent entry point, no shared navigation pattern, and no alignment on how browser-level product identity should work.</p>
+      <p class="cs-section-body">The fragmentation wasn't just inconvenient. For enterprise customers managing multiple tenants across environments, it created real confusion and made BDC feel like three separate tools loosely bundled together rather than a single platform.</p>
+    </section>
+
+    <!-- Goals -->
+    <section class="cs-section" id="goals">
+      <p class="cs-section-label">goals</p>
+      <h2 class="cs-section-heading">Three interconnected problems to solve — browser identity, settings structure, and <strong>tenant differentiation</strong>.</h2>
+
+      <h3 class="cs-subheading" style="margin-top:0;">Browser integration & favicon alignment</h3>
+      <p class="cs-section-body">Datasphere and SAC each handled browser tab identity differently. The goal was to align both products to a shared UXC standard — same entry point, same interaction pattern, and a consistent favicon control that lets administrators choose between the SAP logo and a product-specific icon.</p>
+
+      <h3 class="cs-subheading">Admin settings structure</h3>
+      <p class="cs-section-body">Datasphere's System Information was buried in a Configuration area rather than Administration. The goal was to introduce a <strong>Default Appearance</strong> tab within Datasphere's Administration area and relocate System Information there — bringing it into alignment with SAC and establishing a predictable, shared structure across products.</p>
+
+      <h3 class="cs-subheading">Visual tenant identification</h3>
+      <p class="cs-section-body">Administrators managing multiple tenant environments — production, non-production, dev — had no visual way to tell them apart at a glance. The goal was to design a system that lets administrators set a free-text tenant label (e.g. "Prod", "Dev", "nonProd") that surfaces visibly throughout the product.</p>
     </section>
 
     <!-- Process -->
     <section class="cs-section" id="process">
       <p class="cs-section-label">process</p>
 
-      <h3 class="cs-subheading" style="margin-top:0;">Mapping the gaps</h3>
-      <p class="cs-section-body">I started by auditing the existing admin areas across Datasphere, SAC, and BDC Cockpit — documenting where settings lived, what they were called, and how they behaved. The audit revealed three distinct problem areas that needed to be addressed together: browser tab and favicon behaviour, System Information placement, and tenant visual identity.</p>
-      <p class="cs-section-body">Each product had tackled these in its own way. Datasphere had System Information buried in a Configuration area. SAC handled it differently. Neither was consistent with UXC standards for browser integration. The favicon — a small but visible signal of product identity — had no shared handling at all.</p>
+      <h3 class="cs-subheading" style="margin-top:0;">Auditing the current state</h3>
+      <p class="cs-section-body">I started by mapping the existing admin areas across Datasphere, SAC, and BDC Cockpit — documenting where settings lived, what they were called, and how each product handled browser integration and tenant information. The audit gave a clear picture of which inconsistencies were structural, which were cosmetic, and where a shared pattern could be introduced without disrupting existing workflows.</p>
 
-      <h3 class="cs-subheading">Designing a unified Default Appearance tab</h3>
-      <p class="cs-section-body">The core structural change was introducing a <strong>Default Appearance</strong> tab into Datasphere's Administration area — consolidating System Information, favicon settings, and tenant customisation into a single, predictable location. This aligned Datasphere with SAC's structure while establishing a shared entry point that could scale to other BDC products.</p>
-      <p class="cs-section-body">For favicon handling, I designed a dropdown that lets administrators choose between the SAP logo and a product-specific icon (Datasphere or Analytics Cloud), replacing the previous inconsistency with a single, themeable control that meets UXC standards. Browser tab behaviour was also brought into alignment — giving administrators a consistent way to set tenant name and visual markers across products.</p>
+      <h3 class="cs-subheading">Designing the Default Appearance tab</h3>
+      <p class="cs-section-body">The core structural change was introducing a Default Appearance tab in Datasphere's Administration area, consolidating System Information and favicon controls into a single predictable location. For the favicon, I designed a dropdown allowing administrators to choose between the SAP logo and a product-specific icon — meeting UXC standards while giving each product the flexibility it needed. The same pattern was aligned with SAC so both products share the same entry point and interaction model.</p>
 
       <h3 class="cs-subheading">Tenant identification</h3>
-      <p class="cs-section-body">A separate but related workstream focused on visual tenant differentiation — a recurring pain point for customers managing multiple environments like production, staging, and dev. I explored two approaches: a persistent secondary shell bar that labels the tenant type throughout the product, and browser tab labelling using free-text input. Both required close collaboration with developers and product managers to assess feasibility before the direction was locked.</p>
+      <p class="cs-section-body">For visual tenant differentiation, I explored two approaches: a persistent secondary shell bar that labels the tenant type throughout the product, and browser tab labelling using free-text input. Both required a feasibility check with engineering before a direction could be committed to. I worked through both options in detail — covering interaction states, edge cases, and how each approach would behave across different environments — so the team had everything needed to make an informed call.</p>
 
-      <h3 class="cs-subheading">Cross-team alignment</h3>
-      <p class="cs-section-body">Both workstreams involved coordinating across multiple product teams — aligning on scope with product owners, validating feasibility with developers, and ensuring the designs met UXC standards before moving to handoff. Detailed specs were produced in Figma, covering interaction states, component behaviour, and edge cases, and reviewed with the relevant teams before engineering handoff.</p>
+      <h3 class="cs-subheading">Cross-team coordination</h3>
+      <p class="cs-section-body">Both workstreams touched multiple product teams. I aligned on scope with product owners, validated technical feasibility with developers, and ensured designs met UXC standards before handoff. Detailed specs were produced in Figma — covering component behaviour, interaction states, and edge cases — and reviewed with engineering and PM before being handed over.</p>
+    </section>
+
+    <!-- Outcome -->
+    <section class="cs-section" id="outcome">
+      <p class="cs-section-label">outcome</p>
+      <h2 class="cs-section-heading">Designs handed off to engineering. Work ongoing as part of the broader <strong>BDC admin unification</strong> effort.</h2>
+      <p class="cs-section-body">The Default Appearance tab design, favicon controls, and browser integration spec were completed and handed off to the development team. The tenant identification direction is pending final feasibility sign-off before engineering begins.</p>
+      <p class="cs-section-body">Full case study details — including design decisions, iteration history, and outcomes — will be available after August 2026 when the NDA period ends.</p>
     </section>
 
   </main>
