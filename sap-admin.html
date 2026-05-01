@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en" id="top">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Noah De Guzman — SAP Admin Settings</title>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
+  <script>
+    const _s = localStorage.getItem('theme');
+    const _d = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (_s === 'light' || (!_s && !_d)) document.documentElement.setAttribute('data-theme','light');
+  </script>
+  <style>
+    :root {
+      --font-display: "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --font-text:    "SF Pro Text",    "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --font-mono:    "SF Mono", "Fira Mono", "Consolas", monospace;
+
+      --c-bg:      #161614;
+      --c-surface: #1c1c1e;
+      --c-border:  rgba(255,255,255,0.1);
+      --c-text:    #f5f5f7;
+      --c-muted:   #a1a1a6;
+      --c-subtle:  #6e6e73;
+      --c-blue:    #2997ff;
+
+      --c-nav-bg:      rgba(0,0,0,0.72);
+      --c-nav-border:  rgba(255,255,255,0.1);
+      --c-ring-border: rgba(255,255,255,0.5);
+
+      --nav-h:  52px;
+      --pad:    56px;
+
+      --ease:        cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --t:      0.45s;
+      --t-fast: 0.2s;
+      --r-pill: 980px;
+    }
+
+    [data-theme="light"] {
+      --c-bg:      #f5f5f7;
+      --c-surface: #ffffff;
+      --c-border:  rgba(0,0,0,0.1);
+      --c-text:    #1d1d1f;
+      --c-muted:   #515154;
+      --c-subtle:  #86868b;
+
+      --c-nav-bg:      rgba(255,255,255,0.72);
+      --c-nav-border:  rgba(0,0,0,0.1);
+      --c-ring-border: rgba(0,0,0,0.35);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      scroll-behavior: smooth;
+    }
+    .theme-transitioning *,
+    .theme-transitioning *::before,
+    .theme-transitioning *::after {
+      transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease !important;
+    }
+
+    body {
+      font-family: var(--font-text);
+      background: var(--c-bg);
+      color: var(--c-text);
+      font-size: 17px;
+      line-height: 1.5;
+      overflow-x: hidden;
+      cursor: none;
+    }
+    * { cursor: none !important; }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+    ul { list-style: none; }
+
+    /* ─────────────────────────────────────────────
+       NAV
+    ───────────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      z-index: 9000;
+      display: flex;
+      align-items: center;
+    }
+    .nav-inner {
+      width: 100%;
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 0 var(--pad);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
+    .nav-logo {
+      font-size: 24px;
+      color: var(--c-white);
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: opacity var(--t) var(--ease), transform var(--t) var(--ease);
+      display: inline-block;
+    }
+    @keyframes spin-cw  { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes spin-ccw { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+    .nav-logo.spin-cw  { animation: spin-cw  0.5s var(--ease) forwards; }
+    .nav-logo.spin-ccw { animation: spin-ccw 0.5s var(--ease) forwards; }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+    }
+    .sidebar-logo { filter: brightness(0) invert(1); opacity: 0.85; }
+    [data-theme="light"] .sidebar-logo { filter: none; opacity: 0.85; }
+    .nav-links a {
+      font-family: var(--font-text);
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--c-muted);
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: color var(--t-fast) var(--ease),
+                  opacity var(--t) var(--ease),
+                  transform var(--t) var(--ease);
+    }
+    .nav-links a:hover { color: var(--c-text); }
+    .nav-links a.active { color: var(--c-text); }
+    .ext-icon {
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 4px;
+      margin-bottom: 3px;
+      opacity: 0.5;
+    }
+    .nav-links a:nth-child(1) { transition-delay: 0.04s; }
+    .nav-links a:nth-child(2) { transition-delay: 0.08s; }
+    .nav-links a:nth-child(3) { transition-delay: 0.12s; }
+    .nav.loaded .nav-logo,
+    .nav.loaded .nav-links a { opacity: 1; transform: translateY(0); }
+
+    /* ─────────────────────────────────────────────
+       SIDEBAR
+    ───────────────────────────────────────────── */
+    .sidebar {
+      position: fixed;
+      top: calc(var(--nav-h) + 40px);
+      left: max(0px, calc(50vw - 800px));
+      width: 260px;
+      height: calc(100vh - var(--nav-h));
+      padding: 0 var(--pad);
+      display: flex;
+      flex-direction: column;
+      z-index: 100;
+    }
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .sidebar-nav a {
+      font-family: var(--font-text);
+      font-size: 13px;
+      color: var(--c-subtle);
+      transition: color var(--t-fast);
+      line-height: 1.4;
+    }
+    .sidebar-nav a:hover,
+    .sidebar-nav a.active { color: var(--c-text); }
+
+    /* ─────────────────────────────────────────────
+       CONTENT
+    ───────────────────────────────────────────── */
+    .page-content {
+      padding: calc(var(--nav-h) + 40px) var(--pad) 0 calc(260px + var(--pad));
+      min-height: calc(100svh - 53px);
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    /* ─────────────────────────────────────────────
+       NDA STRIP
+    ───────────────────────────────────────────── */
+    .cs-nda {
+      width: 100%;
+      background: #f5f0d8;
+      border: 1px solid #e8dfa8;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 32px;
+      font-family: var(--font-text);
+      font-size: clamp(13px, 1vw, 15px);
+      font-weight: 500;
+      color: #5c4f1e;
+      line-height: 1.5;
+    }
+
+    /* ─────────────────────────────────────────────
+       SECTION LABELS
+    ───────────────────────────────────────────── */
+    .cs-section-label {
+      font-family: var(--font-text);
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--c-subtle);
+      margin-bottom: 12px;
+      text-transform: capitalize;
+    }
+
+    /* ─────────────────────────────────────────────
+       OVERVIEW
+    ───────────────────────────────────────────── */
+    .cs-overview {
+      padding: 0 0 80px;
+      border-bottom: 1px solid var(--c-border);
+    }
+    .cs-overview-hero {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+      gap: 64px;
+    }
+    .cs-overview-left {
+      flex: 1 1 0;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .cs-overview-right {
+      flex: 0 0 35%;
+      min-width: 0;
+    }
+    .cs-overview-title {
+      font-family: var(--font-display);
+      font-size: clamp(16px, 1.6vw, 22px);
+      font-weight: 400;
+      letter-spacing: -0.015em;
+      line-height: 1.65;
+      color: var(--c-text);
+    }
+    .pg-nda {
+      display: inline-block;
+      font-family: var(--font-text);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: #6b5200;
+      background: #fdf4a3;
+      border-radius: var(--r-pill);
+      padding: 2px 7px;
+      line-height: 1.6;
+      vertical-align: middle;
+      margin-left: 6px;
+      position: relative;
+      top: -1px;
+    }
+    .cs-overview-desc {
+      font-family: var(--font-text);
+      font-size: clamp(13px, 1vw, 15px);
+      color: var(--c-muted);
+      line-height: 1.75;
+    }
+    .cs-meta-grid {
+      display: flex;
+      flex-direction: column;
+    }
+    .cs-meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      padding: 6px 0;
+    }
+    .cs-meta-row + .cs-meta-row {
+      border-top: 1px solid var(--c-border);
+    }
+    .cs-meta-row-left {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .cs-meta-col-label {
+      font-family: var(--font-text);
+      font-size: clamp(13px, 1vw, 15px);
+      color: var(--c-subtle);
+    }
+    .cs-meta-col-item {
+      font-family: var(--font-display);
+      font-size: clamp(14px, 1.1vw, 16px);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: var(--c-muted);
+    }
+    .cs-overview-banner {
+      margin-top: 48px;
+      border-radius: 8px;
+      overflow: hidden;
+      height: 520px;
+      background: var(--c-surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cs-overview-banner img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+    .cs-overview-banner .banner-placeholder {
+      font-family: var(--font-text);
+      font-size: 13px;
+      color: var(--c-subtle);
+    }
+
+    /* ─────────────────────────────────────────────
+       SECTIONS
+    ───────────────────────────────────────────── */
+    .cs-section {
+      padding: 80px 0;
+      border-bottom: 1px solid var(--c-border);
+    }
+    .cs-section:last-child { border-bottom: none; }
+    .cs-section-heading {
+      font-family: var(--font-display);
+      font-size: clamp(16px, 1.6vw, 22px);
+      font-weight: 400;
+      letter-spacing: -0.015em;
+      line-height: 1.65;
+      color: var(--c-text);
+      margin-bottom: 20px;
+    }
+    .cs-section-body {
+      font-family: var(--font-text);
+      font-size: clamp(13px, 1vw, 15px);
+      color: var(--c-muted);
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+    .cs-section-body:last-child { margin-bottom: 0; }
+    .cs-section-body strong {
+      color: var(--c-text);
+      font-weight: 500;
+    }
+    .cs-section-heading strong {
+      font-weight: 500;
+      background: linear-gradient(90deg, #2997ff, #0071e3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .cs-subheading {
+      font-family: var(--font-display);
+      font-size: clamp(15px, 1.15vw, 17px);
+      font-weight: 400;
+      letter-spacing: -0.015em;
+      color: var(--c-text);
+      margin-top: 40px;
+      margin-bottom: 12px;
+    }
+    .cs-img {
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 32px 0;
+      background: var(--c-surface);
+    }
+    .cs-img img {
+      width: 100%;
+      display: block;
+    }
+
+    /* ─────────────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────────────── */
+    .footer {
+      border-top: 1px solid var(--c-border);
+    }
+    .footer-inner {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 20px var(--pad);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-copy {
+      font-family: var(--font-text);
+      font-size: 12px;
+      color: var(--c-subtle);
+    }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a {
+      font-family: var(--font-text);
+      font-size: 12px;
+      color: var(--c-subtle);
+      transition: color var(--t-fast);
+    }
+    .footer-links a:hover { color: var(--c-muted); }
+
+    /* ─────────────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────────────── */
+    @media (max-width: 860px) {
+      :root { --pad: 24px; }
+      .sidebar { display: none; }
+      .page-content { padding-left: var(--pad); }
+      .nav-links { display: none; }
+      .cs-overview-hero { flex-direction: column; align-items: flex-start; gap: 40px; }
+    }
+    @media (max-width: 560px) {
+      .footer-inner { flex-direction: column; gap: 16px; }
+    }
+
+    /* ─────────────────────────────────────────────
+       THEME TOGGLE
+    ───────────────────────────────────────────── */
+    .theme-toggle {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--c-border);
+      background: var(--c-surface);
+      color: var(--c-muted);
+      z-index: 9000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.25s var(--ease), border-color 0.25s var(--ease), color 0.2s var(--ease);
+      cursor: none !important;
+    }
+    .theme-toggle:hover { color: var(--c-text); }
+    .theme-toggle-label {
+      position: absolute;
+      right: calc(100% + 10px);
+      top: 50%;
+      transform: translateY(-50%) translateX(8px);
+      white-space: nowrap;
+      font-family: var(--font-text);
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--c-muted);
+      background: var(--c-surface);
+      border: 1px solid var(--c-border);
+      border-radius: var(--r-pill);
+      padding: 4px 10px;
+      opacity: 0;
+      transition: opacity var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
+      pointer-events: none;
+    }
+    .theme-toggle:hover .theme-toggle-label { opacity: 1; transform: translateY(-50%) translateX(0); }
+    .theme-toggle-label .label-dark  { display: inline; }
+    .theme-toggle-label .label-light { display: none; }
+    [data-theme="light"] .theme-toggle-label .label-dark  { display: none; }
+    [data-theme="light"] .theme-toggle-label .label-light { display: inline; }
+    .theme-toggle .icon-sun  { display: block; }
+    .theme-toggle .icon-moon { display: none; }
+    [data-theme="light"] .theme-toggle .icon-sun  { display: none; }
+    [data-theme="light"] .theme-toggle .icon-moon { display: block; }
+
+    /* ─────────────────────────────────────────────
+       CURSOR RING
+    ───────────────────────────────────────────── */
+    .cursor-ring {
+      position: fixed;
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--c-ring-border);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99999;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.2s ease, background 0.2s ease;
+      opacity: 0;
+    }
+    .cursor-ring.visible { opacity: 1; }
+
+    /* ─────────────────────────────────────────────
+       PAGE ENTRANCE
+    ───────────────────────────────────────────── */
+    .sidebar,
+    .page-content {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 1.2s var(--ease), transform 1.2s var(--ease);
+    }
+    .sidebar.loaded {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.3s;
+    }
+    .page-content.loaded {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.2s;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Nav ─────────────────────────────────────────────────────────── -->
+  <nav class="nav" id="nav" role="banner">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html" aria-label="noah de guzman home">❋</a>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html">Work</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">Resume<svg class="ext-icon" width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 8L8 1M8 1H2M8 1V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ── Sidebar ──────────────────────────────────────────────────────── -->
+  <aside class="sidebar" id="sidebar">
+    <img src="images/sap-logo.png" alt="SAP" class="sidebar-logo" style="width: 40%; height: auto; margin-bottom: 24px; display: block;" />
+    <nav class="sidebar-nav">
+      <a href="#top" class="active">Overview</a>
+      <a href="#problem">Problem</a>
+      <a href="#process">Process</a>
+    </nav>
+  </aside>
+
+  <!-- ── Content ──────────────────────────────────────────────────────── -->
+  <main class="page-content" id="main">
+
+    <!-- NDA Banner -->
+    <div class="cs-nda">
+      🔒 This case study is currently under NDA. Details will be shared after August 2026.
+    </div>
+
+    <!-- Overview -->
+    <div class="cs-overview" id="overview">
+      <div class="cs-overview-hero">
+        <div class="cs-overview-left">
+          <p style="font-family:var(--font-text); font-size:13px; color:var(--c-subtle);">SAP · 2026</p>
+          <h1 class="cs-overview-title">Unifying Admin Settings across products in Business Data Cloud <span class="pg-nda">NDA</span></h1>
+          <p class="cs-overview-desc">At SAP, I worked within the Business Data Cloud (BDC) platform — a unified data environment that brings together SAP and non-SAP data. My focus was on the admin settings experience, which had grown inconsistently across multiple product teams. The goal was to create a single, coherent admin interface that worked across the entire BDC ecosystem.</p>
+        </div>
+        <div class="cs-overview-right">
+          <div class="cs-meta-grid">
+            <div class="cs-meta-row">
+              <div class="cs-meta-row-left">
+                <span class="cs-meta-col-label">Company</span>
+                <span class="cs-meta-col-item">SAP</span>
+              </div>
+            </div>
+            <div class="cs-meta-row">
+              <div class="cs-meta-row-left">
+                <span class="cs-meta-col-label">Platform</span>
+                <span class="cs-meta-col-item">Figma, SAP BDC</span>
+              </div>
+            </div>
+            <div class="cs-meta-row">
+              <div class="cs-meta-row-left">
+                <span class="cs-meta-col-label">Tasks</span>
+                <span class="cs-meta-col-item">UX Design, Systems Thinking, Stakeholder Alignment</span>
+              </div>
+            </div>
+            <div class="cs-meta-row">
+              <div class="cs-meta-row-left">
+                <span class="cs-meta-col-label">Deliverables</span>
+                <span class="cs-meta-col-item">UX Spec, Component Designs, Prototype</span>
+              </div>
+            </div>
+            <div class="cs-meta-row">
+              <div class="cs-meta-row-left">
+                <span class="cs-meta-col-label">Role</span>
+                <span class="cs-meta-col-item">UX Designer</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-overview-banner">
+        <span class="banner-placeholder">Cover image coming soon</span>
+      </div>
+    </div>
+
+    <!-- Problem -->
+    <section class="cs-section" id="problem">
+      <p class="cs-section-label">problem</p>
+      <h2 class="cs-section-heading">Admin settings across BDC products had grown independently, resulting in an inconsistent and fragmented experience. How might we design a <strong>unified admin settings framework</strong> that scales across products and reduces cognitive overhead for enterprise users?</h2>
+      <p class="cs-section-body">Enterprise administrators managing multiple products within Business Data Cloud faced a disjointed experience — each product had its own settings structure, terminology, and navigation patterns. This created confusion, increased onboarding time, and made it difficult to manage cross-product configurations in a single workflow.</p>
+    </section>
+
+    <!-- Process -->
+    <section class="cs-section" id="process">
+      <p class="cs-section-label">process</p>
+      <h3 class="cs-subheading" style="margin-top:0;">Discovery & Audit</h3>
+      <p class="cs-section-body">I began by auditing the existing admin settings across all affected BDC products, documenting inconsistencies in structure, labelling, and interaction patterns. This audit formed the basis for identifying shared patterns and opportunities for consolidation.</p>
+
+      <h3 class="cs-subheading">Design & Iteration</h3>
+      <p class="cs-section-body">Working closely with product teams and stakeholders, I designed a unified settings framework — establishing consistent information architecture, navigation conventions, and component patterns that could be adopted across all products without disrupting existing workflows.</p>
+
+      <h3 class="cs-subheading">Handoff</h3>
+      <p class="cs-section-body">Detailed UX specs were produced in Figma and aligned with the SAP DNA Web UI Kit design system, ensuring the designs were implementation-ready and consistent with SAP Fiori standards.</p>
+    </section>
+
+  </main>
+
+  <!-- ── Footer ───────────────────────────────────────────────────────── -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-inner">
+      <p class="footer-copy">© 2026 Noah De Guzman</p>
+      <ul class="footer-links" role="list">
+        <li><a href="https://www.linkedin.com/in/noah-de-guzman/" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">Resume<svg class="ext-icon" width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 8L8 1M8 1H2M8 1V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script>
+  (() => {
+    'use strict';
+
+    /* ── Nav entrance ────────────────────────── */
+    window.addEventListener('DOMContentLoaded', () => {
+      requestAnimationFrame(() => {
+        document.getElementById('nav').classList.add('loaded');
+        document.getElementById('sidebar').classList.add('loaded');
+        document.getElementById('main').classList.add('loaded');
+      });
+    });
+
+    /* ── Nav frosted glass on scroll ──────────── */
+    const nav = document.getElementById('nav');
+    window._onScroll = () => {
+      const past = window.scrollY > 60;
+      const st = getComputedStyle(document.documentElement);
+      nav.style.background           = past ? st.getPropertyValue('--c-nav-bg').trim() : 'transparent';
+      nav.style.backdropFilter       = past ? 'saturate(180%) blur(20px)' : '';
+      nav.style.webkitBackdropFilter = past ? 'saturate(180%) blur(20px)' : '';
+      nav.style.borderBottom         = past ? `1px solid ${st.getPropertyValue('--c-nav-border').trim()}` : 'none';
+    };
+    window.addEventListener('scroll', window._onScroll, { passive: true });
+    window._onScroll();
+
+    /* ── Sidebar active state on scroll ──────── */
+    const sections = document.querySelectorAll('[id]');
+    const navLinks = document.querySelectorAll('.sidebar-nav a');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const id = e.target.id;
+          navLinks.forEach(a => {
+            const href = a.getAttribute('href');
+            const matches = href === '#' + id || (id === 'overview' && href === '#top');
+            a.classList.toggle('active', matches);
+          });
+        }
+      });
+    }, { threshold: 0.3 });
+
+    sections.forEach(s => observer.observe(s));
+
+    /* ── Cursor ring ──────────────────────────── */
+    window.addEventListener('DOMContentLoaded', () => {
+      const ring = document.getElementById('cursor-ring');
+
+      document.addEventListener('mousemove', e => {
+        ring.style.left = e.clientX + 'px';
+        ring.style.top  = e.clientY + 'px';
+        ring.classList.add('visible');
+
+        const r = 18;
+        const points = [
+          [e.clientX, e.clientY],
+          [e.clientX + r, e.clientY],
+          [e.clientX - r, e.clientY],
+          [e.clientX, e.clientY + r],
+          [e.clientX, e.clientY - r],
+        ];
+
+        let hits = 0;
+        points.forEach(([x, y]) => {
+          const el = document.elementFromPoint(x, y);
+          if (el && (el.tagName === 'IMG' || el.tagName === 'VIDEO')) hits++;
+        });
+
+        const t = hits / points.length;
+        if (t === 0) {
+          ring.style.background  = '';
+          ring.style.borderColor = '';
+        } else {
+          const alpha = t * 0.3;
+          const borderAlpha = 0.5 - t * 0.3;
+          ring.style.background   = `rgba(0,0,0,${alpha.toFixed(2)})`;
+          ring.style.borderColor  = `rgba(${t < 0.5 ? '255,255,255' : '0,0,0'},${(t < 0.5 ? borderAlpha : 0.4).toFixed(2)})`;
+        }
+      }, { passive: true });
+
+      document.addEventListener('mouseleave', () => ring.classList.remove('visible'));
+    });
+
+  })();
+  </script>
+
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">
+    <span class="theme-toggle-label"><span class="label-dark">Change to Light mode</span><span class="label-light">Change to Dark mode</span></span>
+    <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+
+  <script>
+  (() => {
+    const root = document.documentElement;
+    const btn  = document.getElementById('theme-toggle');
+    const logo = document.querySelector('.nav-logo');
+    btn.addEventListener('click', () => {
+      document.documentElement.classList.add('theme-transitioning');
+      const isLight = root.getAttribute('data-theme') === 'light';
+      if (isLight) {
+        root.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'dark');
+        logo.classList.remove('spin-ccw');
+        void logo.offsetWidth;
+        logo.classList.add('spin-cw');
+      } else {
+        root.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+        logo.classList.remove('spin-cw');
+        void logo.offsetWidth;
+        logo.classList.add('spin-ccw');
+      }
+      setTimeout(() => document.documentElement.classList.remove('theme-transitioning'), 400);
+      if (window._onScroll) window._onScroll();
+    });
+  })();
+  </script>
+
+  <div class="cursor-ring" id="cursor-ring"></div>
+
+</body>
+</html>
