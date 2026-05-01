@@ -545,7 +545,7 @@
         <div class="cs-overview-left">
           <p style="font-family:var(--font-text); font-size:13px; color:var(--c-subtle);">SAP · 2026</p>
           <h1 class="cs-overview-title">Unifying Admin Settings across products in Business Data Cloud <span class="pg-nda">NDA</span></h1>
-          <p class="cs-overview-desc">SAP Datasphere and SAP Analytics Cloud had each built their admin settings in isolation for years. When both became part of Business Data Cloud, the inconsistencies became impossible to ignore. I led two connected workstreams to bring the admin experience into alignment — first fixing UXC compliance issues around browser integration and tenant appearance, then establishing a shared layout standard for admin settings across all products.</p>
+          <p class="cs-overview-desc">Business Data Cloud brings together SAP Analytics Cloud, SAP Datasphere, and BDC Cockpit under one platform. As the product suite expanded, differences in how admin settings were structured and presented across products became more noticeable. I led two connected workstreams to bring the admin experience into alignment — first fixing compliance issues around browser integration and tenant appearance, then establishing a shared layout standard for admin settings across all products.</p>
         </div>
         <div class="cs-overview-right">
           <div class="cs-meta-grid">
@@ -585,15 +585,15 @@
     <!-- Context -->
     <section class="cs-section" id="context">
       <p class="cs-section-label">context</p>
-      <h2 class="cs-section-heading">SAC was built first. DSP came after, borrowing components quickly to ship. <strong>BDC inherited both.</strong></h2>
-      <p class="cs-section-body">Business Data Cloud brings together SAP Analytics Cloud, SAP Datasphere, and BDC Cockpit under one platform. But the administration areas for each had been built by separate teams with separate timelines — SAC first, then DSP reusing SAC components to move fast. Over time, each team had layered on product-specific settings, creating two admin areas that looked and behaved differently despite managing the same administrator persona.</p>
-      <p class="cs-section-body">Because most DSP admins were also SAC admins, the inconsistency had gone largely unchallenged — users had adapted. But as BDC positioned itself as an enterprise-ready unified platform, the fragmentation became a visible signal that it wasn't quite there yet. Two parallel workstreams were scoped to address this: one focused on UXC compliance for browser and tenant appearance, and one focused on unifying the admin page layout itself.</p>
+      <h2 class="cs-section-heading">Business Data Cloud unified three products under one platform. The admin experience <strong>needed to follow.</strong></h2>
+      <p class="cs-section-body">Business Data Cloud brings together SAP Analytics Cloud, SAP Datasphere, and BDC Cockpit under one platform. Each product has its own Administration area used by the BDC Administrator persona to maintain their tenant — configuring SSO settings, managing system information, and controlling how the product appears in the browser.</p>
+      <p class="cs-section-body">As BDC grew, differences in admin settings structure across products became increasingly visible — contributing to a sense of inconsistency for administrators managing multiple products. Two parallel workstreams were scoped to address this: one focused on compliance for browser and tenant appearance, and one focused on unifying the admin page layout itself.</p>
     </section>
 
     <!-- Problem -->
     <section class="cs-section" id="problem">
       <p class="cs-section-label">problem</p>
-      <h2 class="cs-section-heading">Two separate compliance and consistency problems — <strong>same root cause</strong>.</h2>
+      <h2 class="cs-section-heading">Two separate compliance and consistency problems — <strong>addressed together</strong>.</h2>
 
       <h3 class="cs-subheading" style="margin-top:0;">Workstream 1 — Browser integration & tenant appearance</h3>
       <p class="cs-section-body">DSP was using the Datasphere icon as its default favicon, violating UXC-023 which requires the SAP icon as default. Both SAC and DSP were also in violation of UXC-010 — the colour options in the System Information settings were hardcoded hex values instead of SAP's themeable variables, meaning they broke under dark themes. On top of the compliance issues, the settings for managing these features lived in completely different places across products, with no shared entry point or interaction pattern.</p>
@@ -625,7 +625,7 @@
       <p class="cs-section-body">The spec was structured to cover SAC and DSP together — with callouts for which changes applied to which product — so that multiple dev teams could reference a single document rather than coordinating across separate specs.</p>
 
       <h3 class="cs-subheading">Workstream 1 — Stakeholder feedback and iteration</h3>
-      <p class="cs-section-body">Presentation feedback from the UXC lead (PSL) and senior designer (Jordan) shaped several decisions. The cut-in plan needed to be made more explicit for customers. The object page floorplan was confirmed as the right direction over alternative layout approaches. The spec format was refined — shifting from Figma file reviews to a structured presentation format so development leads could follow the flow without navigating the design file directly.</p>
+      <p class="cs-section-body">Presentation feedback from the UXC lead and senior designer shaped several decisions. The cut-in plan needed to be made more explicit for customers. The object page floorplan was confirmed as the right direction over alternative layout approaches. The spec format was refined — shifting from Figma file reviews to a structured presentation format so the development lead could follow the flow without navigating the design file directly.</p>
       <p class="cs-section-body">In a follow-up meeting with the development lead, additional edge cases were raised: how the save button should behave when changes are made and then reverted, how the DSP favicon would render in a browser tab under dark mode in Chrome, and whether a hardcoded fallback value might be needed for that scenario. These were incorporated into the spec before handoff.</p>
 
       <h3 class="cs-subheading">Workstream 2 — Establishing the Object Page standard</h3>
@@ -635,7 +635,7 @@
       <p class="cs-section-body">Switch components were audited across all tabs. Any switch not tied to an instant or autosave change was flagged for replacement with a checkbox — the correct component pattern when a save action is required. Migration guidelines were written to help tab owners apply the new standard, covering layout, content guidelines, responsiveness, and how to handle custom elements like the Quick Filters section in Catalog.</p>
 
       <h3 class="cs-subheading">Working across teams</h3>
-      <p class="cs-section-body">Both workstreams involved coordinating across UX, UA, PM, and development — with team members spread across different product areas. I worked with the UX content designer to align on label naming (e.g. "Display system information bar" over shorter alternatives). Scope changes mid-project — including a PM transition and a decision to phase Configuration settings out of scope for V1 — were incorporated without restarting the work. Regular check-ins with PSL (UXC) ensured both specs met cross-platform standards throughout the process.</p>
+      <p class="cs-section-body">Both workstreams involved coordinating across UX, content design, PM, and development — with team members spread across different product areas. I worked with the content designer to align on label naming (e.g. "Display system information bar" over shorter alternatives). Scope changes mid-project — including a PM transition and a decision to phase Configuration settings out of scope for V1 — were incorporated without restarting the work. Regular check-ins with the UXC lead ensured both specs met cross-platform standards throughout the process.</p>
     </section>
 
     <!-- Outcome -->
