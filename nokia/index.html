@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Noah De Guzman</title>
-  <link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
+  <link rel="icon" type="image/svg+xml" href="../images/favicon.svg" />
   <script>
     const _s = localStorage.getItem('theme');
     const _d = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -24,7 +24,7 @@
       --c-subtle:  #6e6e73;
       --c-blue:    #2997ff;
 
-      --c-nav-bg:      rgba(0,0,0,0.55);
+      --c-nav-bg:      rgba(0,0,0,0.72);
       --c-nav-border:  rgba(255,255,255,0.1);
       --c-ring-border: rgba(255,255,255,0.5);
 
@@ -212,6 +212,23 @@
     }
 
     /* ─────────────────────────────────────────────
+       NDA BANNER
+    ───────────────────────────────────────────── */
+    .cs-nda {
+      width: 100%;
+      background: #f5f0d8;
+      border: 1px solid #e8dfa8;
+      border-radius: 8px;
+      padding: 8px 12px;
+      margin-bottom: 32px;
+      font-family: var(--font-text);
+      font-size: clamp(11px, 0.8vw, 13px);
+      font-weight: 400;
+      color: #5c4f1e;
+      line-height: 1.5;
+    }
+
+    /* ─────────────────────────────────────────────
        OVERVIEW
     ───────────────────────────────────────────── */
     .cs-overview {
@@ -242,6 +259,22 @@
       letter-spacing: -0.015em;
       line-height: 1.65;
       color: var(--c-text);
+    }
+    .pg-nda {
+      display: inline-block;
+      font-family: var(--font-text);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: #6b5200;
+      background: #fdf4a3;
+      border-radius: var(--r-pill);
+      padding: 2px 7px;
+      line-height: 1.6;
+      vertical-align: middle;
+      margin-left: 6px;
+      position: relative;
+      top: -1px;
     }
     .cs-overview-desc {
       font-family: var(--font-text);
@@ -292,27 +325,12 @@
       border-radius: 8px;
       overflow: hidden;
       height: 520px;
-      position: relative;
     }
     .cs-overview-banner img {
       width: 100%;
       height: 100%;
       display: block;
       object-fit: cover;
-    }
-    .cs-overview-banner iframe {
-      width: 100%;
-      height: 100%;
-      display: block;
-      border: none;
-      pointer-events: none;
-    }
-    .cs-overview-banner .yt-block {
-      position: absolute;
-      inset: 0;
-      z-index: 10;
-      pointer-events: all;
-      background: transparent;
     }
 
     /* ─────────────────────────────────────────────
@@ -346,7 +364,10 @@
     }
     .cs-section-heading strong {
       font-weight: 500;
-      color: #eb0a1e;
+      background: linear-gradient(90deg, #a855f7, #7c3aed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
     .cs-subheading {
       font-family: var(--font-display);
@@ -367,13 +388,6 @@
     .cs-img img {
       width: 100%;
       display: block;
-    }
-    .cs-img-placeholder {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      background: var(--c-surface);
-      border: 1px dashed var(--c-border);
-      border-radius: 8px;
     }
 
     /* ─────────────────────────────────────────────
@@ -512,38 +526,39 @@
   <!-- ── Nav ─────────────────────────────────────────────────────────── -->
   <nav class="nav" id="nav" role="banner">
     <div class="nav-inner">
-      <a class="nav-logo" href="index.html" aria-label="noah de guzman home">❋</a>
+      <a class="nav-logo" href="/" aria-label="noah de guzman home">❋</a>
       <ul class="nav-links" role="list">
-        <li><a href="index.html">Work</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">Resume<svg class="ext-icon" width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 8L8 1M8 1H2M8 1V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+        <li><a href="/">Work</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="../Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">Resume<svg class="ext-icon" width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 8L8 1M8 1H2M8 1V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
       </ul>
     </div>
   </nav>
 
   <!-- ── Sidebar ───────────────────────────────────────────────────────── -->
   <aside class="sidebar" id="sidebar">
-    <img src="images/toyota-1-logo 1.png" alt="Toyota" class="sidebar-logo" style="width: 65%; height: auto; margin-bottom: 24px; display: block;" />
+    <img src="../images/nokia-logo.svg" alt="Nokia" class="sidebar-logo" style="width: 50%; height: auto; margin-bottom: 24px; display: block;" />
     <nav class="sidebar-nav">
       <a href="#top" class="active">Overview</a>
-      <a href="#context">Context</a>
       <a href="#problem">Problem</a>
       <a href="#process">Process</a>
-      <a href="#outcome">Outcome</a>
-      <a href="#reflections">Reflections</a>
     </nav>
   </aside>
 
   <!-- ── Content ──────────────────────────────────────────────────────── -->
   <main class="page-content" id="main">
 
+    <div class="cs-nda">
+      🔒 This case study is currently under NDA. Please contact me for a full walkthrough.
+    </div>
+
     <!-- Overview -->
     <div class="cs-overview" id="overview">
       <div class="cs-overview-hero">
         <div class="cs-overview-left">
-          <p style="font-family:var(--font-text); font-size:13px; color:var(--c-subtle);">Toyota · 2024</p>
-          <h1 class="cs-overview-title">Enhancing dealership operations with effortless fleet management</h1>
-          <p class="cs-overview-desc">Toyota is a client of Invoke, my previous co-op employer, where the two companies collaborate across a range of projects. Working within a three-person team, I led the design work and presented to the client throughout the project. The focus was the order limiter tool, redesigning the interface used by Dolan Toyota administrators to manage vehicle order limits.</p>
+          <p style="font-family:var(--font-text); font-size:13px; color:var(--c-subtle);">Nokia · 2025</p>
+          <h1 class="cs-overview-title">Streamlining the Frostbuster submission process for developers</h1>
+          <p class="cs-overview-desc">Frostbuster is a merge request process that allows developers to merge their code within a locked branch. During code-freeze, developers (if needed) will submit a request to merge their code. Each merge request requires approval from a panel of reviewers. For the most part, this current process has not been updated for 20 years. This project was showcased as my final case study presentation at the end of my 8-month co-op with Nokia.</p>
         </div>
         <div class="cs-overview-right">
           <div class="cs-meta-grid">
@@ -556,19 +571,19 @@
             <div class="cs-meta-row">
               <div class="cs-meta-row-left">
                 <span class="cs-meta-col-label">Tasks</span>
-                <span class="cs-meta-col-item">Prototyping, UI Components</span>
+                <span class="cs-meta-col-item">Prototyping, Workshops, User Interviews</span>
               </div>
             </div>
             <div class="cs-meta-row">
               <div class="cs-meta-row-left">
                 <span class="cs-meta-col-label">Deliverables</span>
-                <span class="cs-meta-col-item">Mockups, Final Prototype</span>
+                <span class="cs-meta-col-item">User Flows, Mockups, Final Prototype</span>
               </div>
             </div>
             <div class="cs-meta-row">
               <div class="cs-meta-row-left">
                 <span class="cs-meta-col-label">Team</span>
-                <span class="cs-meta-col-item">Senior Product Designer, Project Manager</span>
+                <span class="cs-meta-col-item">User Researcher</span>
               </div>
             </div>
           </div>
@@ -576,87 +591,31 @@
       </div>
 
       <div class="cs-overview-banner">
-        <img src="images/toyota-img.png" alt="Toyota" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img src="../images/nokia-banner.gif" alt="Nokia — Frostbuster" />
       </div>
     </div>
-
-    <!-- Context -->
-    <section class="cs-section" id="context">
-      <p class="cs-section-label">context</p>
-      <h2 class="cs-section-heading">Toyota TMNA oversees all operations in North America. <strong>Invoke helps build the tools that support them.</strong></h2>
-      <p class="cs-section-body">Toyota Motor North America (TMNA) manages all Toyota operations across the continent. Invoke is a design and development agency that works with Toyota across a range of projects. My role within the team was to lead the design work and present to the client.</p>
-      <p class="cs-section-body">The team was three people: myself as the junior designer, one senior product designer, and one project manager. Weekly internal meetings were used to review tasks and changes, with bi-weekly sessions with the Toyota team to present progress. This project was one of several Toyota engagements at Invoke. I also worked on the mobile version of a Car Rental Reservation System for Dolan Toyota.</p>
-    </section>
 
     <!-- Problem -->
     <section class="cs-section" id="problem">
       <p class="cs-section-label">problem</p>
-      <h2 class="cs-section-heading">The existing order limiter system has outdated UI and is challenging for new admins to learn. How might we design a more intuitive fleet management system that <strong>empowers administrators to efficiently manage vehicle order limits</strong>?</h2>
-      <p class="cs-section-body">The backend vehicle ordering system Toyota admins relied on had outdated visuals, inconsistent hierarchy, and no clear way to set or view limits alongside order progress. Administrators needed a single interface where all of that information was visible and actionable. The client's request was explicit: the redesign had to be both efficient and aesthetic.</p>
+      <h2 class="cs-section-heading">Developers face an inefficient process when implementing necessary code changes after a code freeze, resulting in excessive effort for both developers and reviewers. How might we optimize the process and <strong>reduce the manual effort and time</strong> it takes for developers and reviewers to submit/process a frostbuster request.</h2>
     </section>
 
     <!-- Process -->
     <section class="cs-section" id="process">
       <p class="cs-section-label">process</p>
 
-      <h3 class="cs-subheading" style="margin-top:0;">Auditing the original system</h3>
-      <p class="cs-section-body">The first step was a close look at the existing fleet management system. The original UI had outdated visuals, inconsistent hierarchy, and no clear visual affordances for key actions like creating a new rule. The layout created cognitive overload rather than supporting the task.</p>
-      <p class="cs-section-body">Vehicle data was displayed in a dense, unstructured layout rather than a proper table, making it difficult to compare values across records at a glance. There was no obvious primary action; key functions were buried with no visual hierarchy to guide new admins. Inconsistent spacing and an absence of a layout grid added to the confusion. The dark, automotive consumer branding was also applied directly to the admin tool, prioritizing visual identity over the clarity and efficiency that an admin interface requires.</p>
-      <div class="cs-img cs-img--placeholder" style="display:flex; align-items:center; justify-content:center; min-height:640px;">
-        <img src="images/old-fleet.avif" alt="Original fleet management system" style="max-width:70%; max-height:70%; width:auto; display:block; border-radius:8px; box-shadow: 0 4px 16px rgba(0,0,0,0.18);" />
-      </div>
+      <h3 class="cs-subheading" style="margin-top:0;">User Research</h3>
+      <p class="cs-section-body">I conducted <strong>30+ user interviews</strong> with developers across multiple Nokia teams to understand their current workflows, pain points, and mental models around the submission process. I also facilitated developer workshops to identify usability gaps and translate findings into actionable design improvements.</p>
 
-      <h3 class="cs-subheading">Finding inspiration</h3>
-      <p class="cs-section-body">Before moving into solutions, existing data table and admin dashboard patterns from other products were reviewed to identify conventions worth adapting. Two patterns stood out: a side navigation bar for quick access between admin sections, and a table layout for listing and managing records at a glance. Both directly informed the structural direction of the redesign.</p>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:32px; margin:32px 0;">
-        <img src="images/fleet-ex1.png" alt="Inspiration example 1" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:8px;" />
-        <img src="images/fleet-ex2.png" alt="Inspiration example 2" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:8px;" />
-      </div>
+      <h3 class="cs-subheading">Defining the Flow</h3>
+      <p class="cs-section-body">Using the research findings, I mapped the end-to-end submission journey and identified the key moments of friction. I redesigned the information architecture to create a clear, linear flow with explicit step indicators and contextual guidance throughout.</p>
 
-      <h3 class="cs-subheading">Workshop and whiteboard sketches</h3>
-      <p class="cs-section-body">The senior product designer and I ran a workshop to sketch out the logic behind creating rules and setting limits. Working directly on a whiteboard helped us visualize the admin's workflow, identify edge cases, and align on a direction before moving into any digital work. The simplicity of sketching made it easy to share ideas, gather feedback, and explore multiple solutions quickly.</p>
-
-      <h3 class="cs-subheading">Designing the table view</h3>
-      <p class="cs-section-body">A table view listing all vehicles with a limit applied was the direction taken. This gave administrators a full overview of all models and series at once, directly supporting the efficiency goal. Expandable rows allowed rule details to be reviewed inline without navigating away. Presenting this version to the client for the first time underscored the importance of walking through the full flow thoroughly, not just the final screens.</p>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:32px; margin:32px 0;">
-        <img src="images/fleet-sketch.png" alt="Fleet lo-fi sketch" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:0px;" />
-        <img src="images/fleet-v1.png" alt="Fleet version 1 wireframe" style="width:100%; height:100%; object-fit:contain; display:block; border-radius:8px;" />
-      </div>
-      <h3 class="cs-subheading">Client reviews and feedback</h3>
-      <p class="cs-section-body">Client meetings brought together about seven participants, three from Invoke and two developers and two project leads from Toyota. Each session was used to walk through the current designs and give the Toyota team space to discuss and respond. The project manager documented key points and action items, which were reviewed internally before the next iteration.</p>
-      <p class="cs-section-body">The first review after v1 surfaced a range of functional requirements that hadn't been captured upfront. The client responded positively to elements like the filter, total order counts, and the model description screen, but also raised specific constraints: limits in the current month should be fixed and non-editable, rules with no data should be hidden, and the new rule modal needed dropdown filtering by series and model. This feedback directly shaped what changed between v1 and the final prototype.</p>
-
-      <h3 class="cs-subheading">Creating component sets</h3>
-      <p class="cs-section-body">Component sets were not part of the original scope, but I built them independently after the core design work was done. Since the components were already in auto layout, reconstructing them into a structured design system was straightforward. The goal was to make the work easier to maintain and hand off.</p>
-      <div class="cs-img cs-img--placeholder" style="overflow:hidden; max-height:520px; background:#ffffff;">
-        <img src="images/fleet-components.png" alt="Fleet component sets" style="width:75%; display:block; object-fit:cover; object-position:top; margin:0 auto;" />
-      </div>
-      <h3 class="cs-subheading">Final prototype and handoff</h3>
-      <p class="cs-section-body">Reducing the number of clicks and pages an administrator had to navigate was the core constraint throughout. The final prototype kept all necessary information surfaced and actionable within a single view, with no unnecessary context switching. A UX spec was prepared for handoff covering five main use cases: the current order period flow including in-line edits and table interactions, the order period selector for navigating past and future periods, the future order period flow for editing and setting series and group limits, confirmation modals for destructive actions, and adding a new rule.</p>
+      <h3 class="cs-subheading">Design and Prototyping</h3>
+      <p class="cs-section-body">I led the design and prototyping of user flows for creating and editing complex network configurations, collaborating closely with product managers and developers to ensure seamless integration with existing systems. Multiple rounds of iteration were driven by feedback from usability testing sessions.</p>
       <div class="cs-img">
-        <img src="images/toyota-banner.avif" alt="Toyota final prototype" style="width:100%; display:block;" />
+        <img src="../images/nokia-process.avif" alt="Nokia — process" />
       </div>
-    </section>
-
-    <!-- Outcome -->
-    <section class="cs-section" id="outcome">
-      <p class="cs-section-label">outcome</p>
-      <h2 class="cs-section-heading">A modernized fleet management system, <strong>built around admin efficiency</strong>.</h2>
-      <p class="cs-section-body">The final prototype was delivered to Dolan Toyota with a redesigned order limiter interface. The fragmented original was replaced with a unified table view where administrators could manage vehicle order limits, review rules, and take action without leaving the main screen.</p>
-    </section>
-
-    <!-- Reflections -->
-    <section class="cs-section" id="reflections">
-      <p class="cs-section-label">reflections</p>
-
-      <h3 class="cs-subheading" style="margin-top:0;">Communicating design decisions</h3>
-      <p class="cs-section-body">Invoke was my first design co-op, and this project was the first time I presented work to project managers, developers, and a client. Leading the client meetings built confidence in walking stakeholders through design decisions and responding to feedback directly, a skill that carried into subsequent projects.</p>
-      <div class="cs-img">
-        <img src="images/about-images/invoke.jpg" alt="Invoke team" style="width:100%; display:block;" />
-      </div>
-
-      <h3 class="cs-subheading">Building practical Figma skills</h3>
-      <p class="cs-section-body">Working on a real product gave me hands-on experience in Figma that went beyond the basics. Building out component sets, using auto layout to construct complex dashboard screens, and creating a working prototype all became skills I developed through this project rather than in isolation.</p>
     </section>
 
   </main>
@@ -667,9 +626,10 @@
       <p class="footer-copy">© 2026 Noah De Guzman</p>
       <ul class="footer-links" role="list">
         <li><a href="https://www.linkedin.com/in/noah-de-guzman/" target="_blank" rel="noopener">LinkedIn</a></li>
-        <li><a href="Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">Resume<svg class="ext-icon" width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 8L8 1M8 1H2M8 1V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+        <li><a href="../Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">Resume<svg class="ext-icon" width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 8L8 1M8 1H2M8 1V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
       </ul>
     </div>
+    </ul>
   </footer>
 
   <script>
@@ -699,7 +659,7 @@
     window._onScroll();
 
     /* ── Sidebar active state on scroll ──────── */
-    const sections = document.querySelectorAll('.cs-section[id], .cs-overview[id]');
+    const sections = document.querySelectorAll('[id]');
     const navLinks = document.querySelectorAll('.sidebar-nav a');
 
     const observer = new IntersectionObserver(entries => {
@@ -713,7 +673,7 @@
           });
         }
       });
-    }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+    }, { threshold: 0.3 });
 
     sections.forEach(s => observer.observe(s));
 

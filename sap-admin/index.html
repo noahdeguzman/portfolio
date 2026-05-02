@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Noah De Guzman</title>
-  <link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
+  <title>Noah De Guzman — SAP Admin Settings</title>
+  <link rel="icon" type="image/svg+xml" href="../images/favicon.svg" />
   <script>
     const _s = localStorage.getItem('theme');
     const _d = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -114,8 +114,8 @@
       display: flex;
       gap: 28px;
     }
-    .sidebar-logo { filter: brightness(0) invert(1); opacity: 0.85; }
-    [data-theme="light"] .sidebar-logo { filter: none; opacity: 0.85; }
+    .sidebar-logo { opacity: 0.9; }
+    [data-theme="light"] .sidebar-logo { opacity: 0.9; }
     .nav-links a {
       font-family: var(--font-text);
       font-size: 13px;
@@ -145,7 +145,6 @@
     /* ─────────────────────────────────────────────
        SIDEBAR
     ───────────────────────────────────────────── */
-
     .sidebar {
       position: fixed;
       top: calc(var(--nav-h) + 40px);
@@ -190,11 +189,11 @@
       background: #f5f0d8;
       border: 1px solid #e8dfa8;
       border-radius: 8px;
-      padding: 12px 16px;
-      margin-bottom: 0;
+      padding: 8px 12px;
+      margin-bottom: 32px;
       font-family: var(--font-text);
-      font-size: clamp(13px, 1vw, 15px);
-      font-weight: 500;
+      font-size: clamp(11px, 0.8vw, 13px);
+      font-weight: 400;
       color: #5c4f1e;
       line-height: 1.5;
     }
@@ -209,23 +208,6 @@
       color: var(--c-subtle);
       margin-bottom: 12px;
       text-transform: capitalize;
-    }
-
-    /* ─────────────────────────────────────────────
-       NDA BANNER
-    ───────────────────────────────────────────── */
-    .cs-nda {
-      width: 100%;
-      background: #f5f0d8;
-      border: 1px solid #e8dfa8;
-      border-radius: 8px;
-      padding: 8px 12px;
-      margin-bottom: 32px;
-      font-family: var(--font-text);
-      font-size: clamp(11px, 0.8vw, 13px);
-      font-weight: 400;
-      color: #5c4f1e;
-      line-height: 1.5;
     }
 
     /* ─────────────────────────────────────────────
@@ -314,23 +296,26 @@
       letter-spacing: -0.01em;
       color: var(--c-muted);
     }
-    .cs-meta-year {
-      font-family: var(--font-text);
-      font-size: clamp(13px, 1vw, 15px);
-      color: var(--c-muted);
-      flex-shrink: 0;
-    }
     .cs-overview-banner {
       margin-top: 48px;
       border-radius: 8px;
       overflow: hidden;
       height: 520px;
+      background: var(--c-surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .cs-overview-banner img {
       width: 100%;
       height: 100%;
       display: block;
       object-fit: cover;
+    }
+    .cs-overview-banner .banner-placeholder {
+      font-family: var(--font-text);
+      font-size: 13px;
+      color: var(--c-subtle);
     }
 
     /* ─────────────────────────────────────────────
@@ -364,10 +349,7 @@
     }
     .cs-section-heading strong {
       font-weight: 500;
-      background: linear-gradient(90deg, #a855f7, #7c3aed);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: #0070f2;
     }
     .cs-subheading {
       font-family: var(--font-display);
@@ -493,7 +475,7 @@
       pointer-events: none;
       z-index: 99999;
       transform: translate(-50%, -50%);
-      transition: opacity 0.2s ease, width 0.2s ease, height 0.2s ease, background 0.2s ease;
+      transition: opacity 0.2s ease, background 0.2s ease, width 0.2s ease, height 0.2s ease;
       opacity: 0;
       background: rgba(180,180,180,0.15);
     }
@@ -518,7 +500,6 @@
       transform: translateY(0);
       transition-delay: 0.2s;
     }
-
   </style>
 </head>
 <body>
@@ -526,28 +507,33 @@
   <!-- ── Nav ─────────────────────────────────────────────────────────── -->
   <nav class="nav" id="nav" role="banner">
     <div class="nav-inner">
-      <a class="nav-logo" href="index.html" aria-label="noah de guzman home">❋</a>
+      <a class="nav-logo" href="/" aria-label="noah de guzman home">❋</a>
       <ul class="nav-links" role="list">
-        <li><a href="index.html">Work</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">Resume<svg class="ext-icon" width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 8L8 1M8 1H2M8 1V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+        <li><a href="/">Work</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="../Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">Resume<svg class="ext-icon" width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 8L8 1M8 1H2M8 1V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
       </ul>
     </div>
   </nav>
 
-  <!-- ── Sidebar ───────────────────────────────────────────────────────── -->
+  <!-- ── Sidebar ──────────────────────────────────────────────────────── -->
   <aside class="sidebar" id="sidebar">
-    <img src="images/nokia-logo.svg" alt="Nokia" class="sidebar-logo" style="width: 50%; height: auto; margin-bottom: 24px; display: block;" />
+    <img src="../images/sap-logo.png" alt="SAP" class="sidebar-logo" style="width: 40%; height: auto; margin-bottom: 24px; display: block;" />
     <nav class="sidebar-nav">
       <a href="#top" class="active">Overview</a>
+      <a href="#context">Context</a>
       <a href="#problem">Problem</a>
+      <a href="#goals">Goals</a>
       <a href="#process">Process</a>
+      <a href="#outcome">Outcome</a>
+      <a href="#reflections">Reflections</a>
     </nav>
   </aside>
 
   <!-- ── Content ──────────────────────────────────────────────────────── -->
   <main class="page-content" id="main">
 
+    <!-- NDA Banner -->
     <div class="cs-nda">
       🔒 This case study is currently under NDA. Please contact me for a full walkthrough.
     </div>
@@ -556,34 +542,34 @@
     <div class="cs-overview" id="overview">
       <div class="cs-overview-hero">
         <div class="cs-overview-left">
-          <p style="font-family:var(--font-text); font-size:13px; color:var(--c-subtle);">Nokia · 2025</p>
-          <h1 class="cs-overview-title">Streamlining the Frostbuster submission process for developers</h1>
-          <p class="cs-overview-desc">Frostbuster is a merge request process that allows developers to merge their code within a locked branch. During code-freeze, developers (if needed) will submit a request to merge their code. Each merge request requires approval from a panel of reviewers. For the most part, this current process has not been updated for 20 years. This project was showcased as my final case study presentation at the end of my 8-month co-op with Nokia.</p>
+          <p style="font-family:var(--font-text); font-size:13px; color:var(--c-subtle);">SAP · 2026</p>
+          <h1 class="cs-overview-title">Unifying Admin Settings across products in Business Data Cloud</h1>
+          <p class="cs-overview-desc">Business Data Cloud brings together SAP Analytics Cloud (SAC), Datasphere (DSP), and BDC under one platform. Differences in how admin settings were structured across products created a noticeable inconsistency for administrators. Collaborating with one other UX designer, I worked across two connected workstreams: one focused on compliance for browser integration and tenant appearance, and one focused on establishing a shared layout standard for admin settings across all products.</p>
         </div>
         <div class="cs-overview-right">
           <div class="cs-meta-grid">
             <div class="cs-meta-row">
               <div class="cs-meta-row-left">
-                <span class="cs-meta-col-label">Platforms</span>
+                <span class="cs-meta-col-label">Platform</span>
                 <span class="cs-meta-col-item">Figma</span>
               </div>
             </div>
             <div class="cs-meta-row">
               <div class="cs-meta-row-left">
                 <span class="cs-meta-col-label">Tasks</span>
-                <span class="cs-meta-col-item">Prototyping, Workshops, User Interviews</span>
+                <span class="cs-meta-col-item">Cross-platform Alignment</span>
               </div>
             </div>
             <div class="cs-meta-row">
               <div class="cs-meta-row-left">
                 <span class="cs-meta-col-label">Deliverables</span>
-                <span class="cs-meta-col-item">User Flows, Mockups, Final Prototype</span>
+                <span class="cs-meta-col-item">UX Spec, Prototype</span>
               </div>
             </div>
             <div class="cs-meta-row">
               <div class="cs-meta-row-left">
-                <span class="cs-meta-col-label">Team</span>
-                <span class="cs-meta-col-item">User Researcher</span>
+                <span class="cs-meta-col-label">Role</span>
+                <span class="cs-meta-col-item">UX Designer</span>
               </div>
             </div>
           </div>
@@ -591,31 +577,83 @@
       </div>
 
       <div class="cs-overview-banner">
-        <img src="images/nokia-banner.avif" alt="Nokia — Frostbuster" />
+        <img src="../images/Cover.png" alt="SAP Admin Settings cover" style="object-position: center 20%;" />
       </div>
     </div>
+
+    <!-- Context -->
+    <section class="cs-section" id="context">
+      <p class="cs-section-label">context</p>
+      <h2 class="cs-section-heading">Business Data Cloud unified three products under one platform. The admin experience <strong>needed to follow.</strong></h2>
+      <p class="cs-section-body">Business Data Cloud brings together SAP Analytics Cloud (SAC), Datasphere (DSP), and BDC under one platform. Each product has its own Administration area used by administrators to maintain their tenant, including configuring SSO settings, managing system information, and controlling how the product appears in the browser.</p>
+      <p class="cs-section-body">Differences in admin settings structure across products created a noticeable inconsistency for administrators managing multiple products. Rather than addressing each issue separately, two parallel workstreams were scoped together: one focused on compliance for browser and tenant appearance, and one focused on unifying the admin page layout itself. Running them in parallel meant both problems could be tackled at once, with shared learnings feeding into each.</p>
+    </section>
 
     <!-- Problem -->
     <section class="cs-section" id="problem">
       <p class="cs-section-label">problem</p>
-      <h2 class="cs-section-heading">Developers face an inefficient process when implementing necessary code changes after a code freeze, resulting in excessive effort for both developers and reviewers. How might we optimize the process and <strong>reduce the manual effort and time</strong> it takes for developers and reviewers to submit/process a frostbuster request.</h2>
+      <h2 class="cs-section-heading">Two separate compliance and consistency problems, <strong>addressed together</strong>.</h2>
+
+      <h3 class="cs-subheading" style="margin-top:0;">Workstream 1 — Browser integration &amp; tenant appearance</h3>
+      <p class="cs-section-body">Both SAC and DSP had compliance gaps in how they handled browser-level product identity and tenant appearance settings. On top of that, the settings for managing these features lived in different places across products with no shared entry point or interaction pattern, creating an inconsistent experience for administrators.</p>
+
+      <h3 class="cs-subheading">Workstream 2 — Admin page template</h3>
+      <p class="cs-section-body">Across SAC and DSP's administration tabs, there was no consistent way to save changes, no shared layout structure, and no shared component conventions. Each tab had been built independently, and it showed. The goal was to define a single standard that all admin settings tabs could adopt going forward.</p>
+    </section>
+
+    <!-- Goals -->
+    <section class="cs-section" id="goals">
+      <p class="cs-section-label">goals</p>
+      <h2 class="cs-section-heading">Fix compliance, align structure, and give every admin tab <strong>the same foundation.</strong></h2>
+
+      <h3 class="cs-subheading" style="margin-top:0;">Workstream 1</h3>
+      <p class="cs-section-body">Resolve compliance gaps across SAC and DSP and align both products to a shared standard for browser integration and tenant appearance settings. Create a single spec covering both products so development teams spread across multiple countries could understand the full scope. Design a rollout plan that handled existing and new customers differently without breaking either experience.</p>
+
+      <h3 class="cs-subheading">Workstream 2</h3>
+      <p class="cs-section-body">Establish a single layout standard for all admin settings tabs across SAC, DSP, and eventually BDC. Unify save behaviour across every tab, standardize component usage, and produce migration guidelines for teams updating existing tabs to the new standard.</p>
     </section>
 
     <!-- Process -->
     <section class="cs-section" id="process">
       <p class="cs-section-label">process</p>
 
-      <h3 class="cs-subheading" style="margin-top:0;">User Research</h3>
-      <p class="cs-section-body">I conducted <strong>30+ user interviews</strong> with developers across multiple Nokia teams to understand their current workflows, pain points, and mental models around the submission process. I also facilitated developer workshops to identify usability gaps and translate findings into actionable design improvements.</p>
+      <h3 class="cs-subheading" style="margin-top:0;">Workstream 1 — Auditing and scoping compliance fixes</h3>
+      <p class="cs-section-body">I started by auditing the current state of browser integration and appearance settings across SAC and DSP, mapping where compliance gaps existed and what a compliant version would look like. The audit identified several affected components, all using hardcoded values where SAP's themeable variables were required.</p>
+      <p class="cs-section-body">The design proposal introduced a new settings section that consolidated appearance-related controls into one predictable location. The rollout plan accounted for existing customers separately from new customers to avoid disrupting established workflows. Edge cases around theming and the interaction between different appearance settings were worked through and documented before handoff.</p>
+      <p class="cs-section-body">The spec was structured to cover SAC and DSP together, with clear callouts for which changes applied to which product, so multiple development teams could reference a single document rather than coordinating across separate specs.</p>
 
-      <h3 class="cs-subheading">Defining the Flow</h3>
-      <p class="cs-section-body">Using the research findings, I mapped the end-to-end submission journey and identified the key moments of friction. I redesigned the information architecture to create a clear, linear flow with explicit step indicators and contextual guidance throughout.</p>
+      <h3 class="cs-subheading">Workstream 1 — Stakeholder feedback and iteration</h3>
+      <p class="cs-section-body">Feedback from the UXC lead and senior designer shaped several decisions around the rollout plan and layout direction. The spec format was also refined based on feedback, shifting to a structured presentation format so the development lead could follow the flow without navigating the design file directly.</p>
+      <p class="cs-section-body">A follow-up review with the development lead surfaced additional edge cases around save state behaviour and how appearance settings would render under different browser and theme configurations. These were incorporated into the spec before handoff.</p>
 
-      <h3 class="cs-subheading">Design and Prototyping</h3>
-      <p class="cs-section-body">I led the design and prototyping of user flows for creating and editing complex network configurations, collaborating closely with product managers and developers to ensure seamless integration with existing systems. Multiple rounds of iteration were driven by feedback from usability testing sessions.</p>
-      <div class="cs-img">
-        <img src="images/nokia-process.avif" alt="Nokia — process" />
-      </div>
+      <h3 class="cs-subheading">Workstream 2 — Establishing the layout standard</h3>
+      <p class="cs-section-body">The admin page template work began with a high-level audit of how settings were being saved and displayed across all administration tabs. Multiple inconsistent patterns were in use with no shared convention. The goal was to consolidate these into a single, predictable pattern applied consistently across the page.</p>
+      <p class="cs-section-body">A layout standard was defined based on an established SAP floorplan, giving every admin tab a shared structure for sections, content width, and save behaviour. The footer was standardized to surface a consistent set of actions across all tabs.</p>
+      <p class="cs-section-body">Component usage was also audited across all tabs. Several components were being used outside their intended pattern, and migration guidelines were written to help tab owners apply the new standard correctly, covering layout, content guidelines, responsiveness, and how to handle existing custom elements.</p>
+
+      <h3 class="cs-subheading">Working across teams</h3>
+      <p class="cs-section-body">Both workstreams involved coordinating across UX, User Assistance (UA), project managers, and development, with team members spread across different product areas. I worked with the UA designer to align on content and label standards. Scope changes mid-project, including a project manager transition and phasing decisions around what to include in scope, were incorporated without restarting the work. Regular check-ins with the UXC lead and developers ensured both specs met cross-platform standards and feasible implementation throughout the process.</p>
+    </section>
+
+    <!-- Outcome -->
+    <section class="cs-section" id="outcome">
+      <p class="cs-section-label">outcome</p>
+      <h2 class="cs-section-heading">Both specs completed and <strong>handed off to development</strong>.</h2>
+      <p class="cs-section-body">Both specs were completed and handed off to development. Full case study details are available on request.</p>
+    </section>
+
+    <!-- Reflections -->
+    <section class="cs-section" id="reflections">
+      <p class="cs-section-label">reflections</p>
+
+      <h3 class="cs-subheading" style="margin-top:0;">Decisions take time, and that's okay</h3>
+      <p class="cs-section-body">Even small design decisions can involve multiple stakeholders, reviews, and back-and-forths before a direction is locked. Working at enterprise scale taught me to separate the design work from the decision-making process. Keeping specs well-documented meant that when decisions finally landed, implementation could move quickly.</p>
+
+      <h3 class="cs-subheading">How you present work matters as much as the work itself</h3>
+      <p class="cs-section-body">I learned early on that the format you use to present to developers shapes how well they understand the design intent. A Figma file works in a design review, but a structured spec or a live prototype is what actually moves things forward in a dev handoff. Developers respond well to being able to interact with the design directly rather than interpreting static screens. Finding the right format for the right audience became a skill in itself.</p>
+
+      <h3 class="cs-subheading">Leading design conversations and advocating for decisions</h3>
+      <p class="cs-section-body">Working with developers and project managers on a regular basis gave me hands-on experience presenting design rationale and defending decisions in a professional setting. One thing I underestimated early on was assuming stakeholders remembered the full context of the project. In reality, everyone is juggling multiple workstreams, and coming into a review with full context, not just the latest changes, made conversations more productive and helped move decisions forward faster.</p>
     </section>
 
   </main>
@@ -626,10 +664,9 @@
       <p class="footer-copy">© 2026 Noah De Guzman</p>
       <ul class="footer-links" role="list">
         <li><a href="https://www.linkedin.com/in/noah-de-guzman/" target="_blank" rel="noopener">LinkedIn</a></li>
-        <li><a href="Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">Resume<svg class="ext-icon" width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 8L8 1M8 1H2M8 1V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+        <li><a href="../Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">Resume<svg class="ext-icon" width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 8L8 1M8 1H2M8 1V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
       </ul>
     </div>
-    </ul>
   </footer>
 
   <script>
@@ -659,7 +696,7 @@
     window._onScroll();
 
     /* ── Sidebar active state on scroll ──────── */
-    const sections = document.querySelectorAll('[id]');
+    const sections = document.querySelectorAll('.cs-section[id], .cs-overview[id]');
     const navLinks = document.querySelectorAll('.sidebar-nav a');
 
     const observer = new IntersectionObserver(entries => {
@@ -673,7 +710,7 @@
           });
         }
       });
-    }, { threshold: 0.3 });
+    }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
 
     sections.forEach(s => observer.observe(s));
 
@@ -686,8 +723,7 @@
         ring.style.top  = e.clientY + 'px';
         ring.classList.add('visible');
 
-        // Sample multiple points around the ring edge to detect overlap with media
-        const r = 18; // half of ring width
+        const r = 18;
         const points = [
           [e.clientX, e.clientY],
           [e.clientX + r, e.clientY],
@@ -702,10 +738,8 @@
           if (el && (el.tagName === 'IMG' || el.tagName === 'VIDEO')) hits++;
         });
 
-        // Interpolate: 0 hits = default, 5 hits = fully over media
         const t = hits / points.length;
         if (t === 0) {
-          // Not over media — use theme-aware CSS var
           ring.style.background  = '';
           ring.style.borderColor = '';
         } else {
@@ -751,7 +785,6 @@
       }
       setTimeout(() => document.documentElement.classList.remove('theme-transitioning'), 400);
       if (window._onScroll) window._onScroll();
-      window.dispatchEvent(new Event('scroll'));
     });
   })();
   </script>

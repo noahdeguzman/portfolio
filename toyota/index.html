@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Noah De Guzman — SAP Admin Settings</title>
-  <link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
+  <title>Noah De Guzman</title>
+  <link rel="icon" type="image/svg+xml" href="../images/favicon.svg" />
   <script>
     const _s = localStorage.getItem('theme');
     const _d = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -24,7 +24,7 @@
       --c-subtle:  #6e6e73;
       --c-blue:    #2997ff;
 
-      --c-nav-bg:      rgba(0,0,0,0.72);
+      --c-nav-bg:      rgba(0,0,0,0.55);
       --c-nav-border:  rgba(255,255,255,0.1);
       --c-ring-border: rgba(255,255,255,0.5);
 
@@ -114,8 +114,8 @@
       display: flex;
       gap: 28px;
     }
-    .sidebar-logo { opacity: 0.9; }
-    [data-theme="light"] .sidebar-logo { opacity: 0.9; }
+    .sidebar-logo { filter: brightness(0) invert(1); opacity: 0.85; }
+    [data-theme="light"] .sidebar-logo { filter: none; opacity: 0.85; }
     .nav-links a {
       font-family: var(--font-text);
       font-size: 13px;
@@ -145,6 +145,7 @@
     /* ─────────────────────────────────────────────
        SIDEBAR
     ───────────────────────────────────────────── */
+
     .sidebar {
       position: fixed;
       top: calc(var(--nav-h) + 40px);
@@ -189,11 +190,11 @@
       background: #f5f0d8;
       border: 1px solid #e8dfa8;
       border-radius: 8px;
-      padding: 8px 12px;
-      margin-bottom: 32px;
+      padding: 12px 16px;
+      margin-bottom: 0;
       font-family: var(--font-text);
-      font-size: clamp(11px, 0.8vw, 13px);
-      font-weight: 400;
+      font-size: clamp(13px, 1vw, 15px);
+      font-weight: 500;
       color: #5c4f1e;
       line-height: 1.5;
     }
@@ -242,22 +243,6 @@
       line-height: 1.65;
       color: var(--c-text);
     }
-    .pg-nda {
-      display: inline-block;
-      font-family: var(--font-text);
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      color: #6b5200;
-      background: #fdf4a3;
-      border-radius: var(--r-pill);
-      padding: 2px 7px;
-      line-height: 1.6;
-      vertical-align: middle;
-      margin-left: 6px;
-      position: relative;
-      top: -1px;
-    }
     .cs-overview-desc {
       font-family: var(--font-text);
       font-size: clamp(13px, 1vw, 15px);
@@ -296,15 +281,18 @@
       letter-spacing: -0.01em;
       color: var(--c-muted);
     }
+    .cs-meta-year {
+      font-family: var(--font-text);
+      font-size: clamp(13px, 1vw, 15px);
+      color: var(--c-muted);
+      flex-shrink: 0;
+    }
     .cs-overview-banner {
       margin-top: 48px;
       border-radius: 8px;
       overflow: hidden;
       height: 520px;
-      background: var(--c-surface);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: relative;
     }
     .cs-overview-banner img {
       width: 100%;
@@ -312,10 +300,19 @@
       display: block;
       object-fit: cover;
     }
-    .cs-overview-banner .banner-placeholder {
-      font-family: var(--font-text);
-      font-size: 13px;
-      color: var(--c-subtle);
+    .cs-overview-banner iframe {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border: none;
+      pointer-events: none;
+    }
+    .cs-overview-banner .yt-block {
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+      pointer-events: all;
+      background: transparent;
     }
 
     /* ─────────────────────────────────────────────
@@ -349,7 +346,7 @@
     }
     .cs-section-heading strong {
       font-weight: 500;
-      color: #0070f2;
+      color: #eb0a1e;
     }
     .cs-subheading {
       font-family: var(--font-display);
@@ -370,6 +367,13 @@
     .cs-img img {
       width: 100%;
       display: block;
+    }
+    .cs-img-placeholder {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: var(--c-surface);
+      border: 1px dashed var(--c-border);
+      border-radius: 8px;
     }
 
     /* ─────────────────────────────────────────────
@@ -475,7 +479,7 @@
       pointer-events: none;
       z-index: 99999;
       transform: translate(-50%, -50%);
-      transition: opacity 0.2s ease, background 0.2s ease, width 0.2s ease, height 0.2s ease;
+      transition: opacity 0.2s ease, width 0.2s ease, height 0.2s ease, background 0.2s ease;
       opacity: 0;
       background: rgba(180,180,180,0.15);
     }
@@ -500,6 +504,7 @@
       transform: translateY(0);
       transition-delay: 0.2s;
     }
+
   </style>
 </head>
 <body>
@@ -507,23 +512,22 @@
   <!-- ── Nav ─────────────────────────────────────────────────────────── -->
   <nav class="nav" id="nav" role="banner">
     <div class="nav-inner">
-      <a class="nav-logo" href="index.html" aria-label="noah de guzman home">❋</a>
+      <a class="nav-logo" href="/" aria-label="noah de guzman home">❋</a>
       <ul class="nav-links" role="list">
-        <li><a href="index.html">Work</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">Resume<svg class="ext-icon" width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 8L8 1M8 1H2M8 1V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+        <li><a href="/">Work</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="../Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">Resume<svg class="ext-icon" width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 8L8 1M8 1H2M8 1V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
       </ul>
     </div>
   </nav>
 
-  <!-- ── Sidebar ──────────────────────────────────────────────────────── -->
+  <!-- ── Sidebar ───────────────────────────────────────────────────────── -->
   <aside class="sidebar" id="sidebar">
-    <img src="images/sap-logo.png" alt="SAP" class="sidebar-logo" style="width: 40%; height: auto; margin-bottom: 24px; display: block;" />
+    <img src="../images/toyota-1-logo 1.png" alt="Toyota" class="sidebar-logo" style="width: 65%; height: auto; margin-bottom: 24px; display: block;" />
     <nav class="sidebar-nav">
       <a href="#top" class="active">Overview</a>
       <a href="#context">Context</a>
       <a href="#problem">Problem</a>
-      <a href="#goals">Goals</a>
       <a href="#process">Process</a>
       <a href="#outcome">Outcome</a>
       <a href="#reflections">Reflections</a>
@@ -533,43 +537,38 @@
   <!-- ── Content ──────────────────────────────────────────────────────── -->
   <main class="page-content" id="main">
 
-    <!-- NDA Banner -->
-    <div class="cs-nda">
-      🔒 This case study is currently under NDA. Please contact me for a full walkthrough.
-    </div>
-
     <!-- Overview -->
     <div class="cs-overview" id="overview">
       <div class="cs-overview-hero">
         <div class="cs-overview-left">
-          <p style="font-family:var(--font-text); font-size:13px; color:var(--c-subtle);">SAP · 2026</p>
-          <h1 class="cs-overview-title">Unifying Admin Settings across products in Business Data Cloud</h1>
-          <p class="cs-overview-desc">Business Data Cloud brings together SAP Analytics Cloud (SAC), Datasphere (DSP), and BDC under one platform. Differences in how admin settings were structured across products created a noticeable inconsistency for administrators. Collaborating with one other UX designer, I worked across two connected workstreams: one focused on compliance for browser integration and tenant appearance, and one focused on establishing a shared layout standard for admin settings across all products.</p>
+          <p style="font-family:var(--font-text); font-size:13px; color:var(--c-subtle);">Toyota · 2024</p>
+          <h1 class="cs-overview-title">Enhancing dealership operations with effortless fleet management</h1>
+          <p class="cs-overview-desc">Toyota is a client of Invoke, my previous co-op employer, where the two companies collaborate across a range of projects. Working within a three-person team, I led the design work and presented to the client throughout the project. The focus was the order limiter tool, redesigning the interface used by Dolan Toyota administrators to manage vehicle order limits.</p>
         </div>
         <div class="cs-overview-right">
           <div class="cs-meta-grid">
             <div class="cs-meta-row">
               <div class="cs-meta-row-left">
-                <span class="cs-meta-col-label">Platform</span>
+                <span class="cs-meta-col-label">Platforms</span>
                 <span class="cs-meta-col-item">Figma</span>
               </div>
             </div>
             <div class="cs-meta-row">
               <div class="cs-meta-row-left">
                 <span class="cs-meta-col-label">Tasks</span>
-                <span class="cs-meta-col-item">Cross-platform Alignment</span>
+                <span class="cs-meta-col-item">Prototyping, UI Components</span>
               </div>
             </div>
             <div class="cs-meta-row">
               <div class="cs-meta-row-left">
                 <span class="cs-meta-col-label">Deliverables</span>
-                <span class="cs-meta-col-item">UX Spec, Prototype</span>
+                <span class="cs-meta-col-item">Mockups, Final Prototype</span>
               </div>
             </div>
             <div class="cs-meta-row">
               <div class="cs-meta-row-left">
-                <span class="cs-meta-col-label">Role</span>
-                <span class="cs-meta-col-item">UX Designer</span>
+                <span class="cs-meta-col-label">Team</span>
+                <span class="cs-meta-col-item">Senior Product Designer, Project Manager</span>
               </div>
             </div>
           </div>
@@ -577,83 +576,87 @@
       </div>
 
       <div class="cs-overview-banner">
-        <img src="images/Cover.png" alt="SAP Admin Settings cover" style="object-position: center 20%;" />
+        <img src="../images/toyota-img.png" alt="Toyota" style="width:100%;height:100%;object-fit:cover;display:block;">
       </div>
     </div>
 
     <!-- Context -->
     <section class="cs-section" id="context">
       <p class="cs-section-label">context</p>
-      <h2 class="cs-section-heading">Business Data Cloud unified three products under one platform. The admin experience <strong>needed to follow.</strong></h2>
-      <p class="cs-section-body">Business Data Cloud brings together SAP Analytics Cloud (SAC), Datasphere (DSP), and BDC under one platform. Each product has its own Administration area used by administrators to maintain their tenant, including configuring SSO settings, managing system information, and controlling how the product appears in the browser.</p>
-      <p class="cs-section-body">Differences in admin settings structure across products created a noticeable inconsistency for administrators managing multiple products. Rather than addressing each issue separately, two parallel workstreams were scoped together: one focused on compliance for browser and tenant appearance, and one focused on unifying the admin page layout itself. Running them in parallel meant both problems could be tackled at once, with shared learnings feeding into each.</p>
+      <h2 class="cs-section-heading">Toyota TMNA oversees all operations in North America. <strong>Invoke helps build the tools that support them.</strong></h2>
+      <p class="cs-section-body">Toyota Motor North America (TMNA) manages all Toyota operations across the continent. Invoke is a design and development agency that works with Toyota across a range of projects. My role within the team was to lead the design work and present to the client.</p>
+      <p class="cs-section-body">The team was three people: myself as the junior designer, one senior product designer, and one project manager. Weekly internal meetings were used to review tasks and changes, with bi-weekly sessions with the Toyota team to present progress. This project was one of several Toyota engagements at Invoke. I also worked on the mobile version of a Car Rental Reservation System for Dolan Toyota.</p>
     </section>
 
     <!-- Problem -->
     <section class="cs-section" id="problem">
       <p class="cs-section-label">problem</p>
-      <h2 class="cs-section-heading">Two separate compliance and consistency problems, <strong>addressed together</strong>.</h2>
-
-      <h3 class="cs-subheading" style="margin-top:0;">Workstream 1 — Browser integration &amp; tenant appearance</h3>
-      <p class="cs-section-body">Both SAC and DSP had compliance gaps in how they handled browser-level product identity and tenant appearance settings. On top of that, the settings for managing these features lived in different places across products with no shared entry point or interaction pattern, creating an inconsistent experience for administrators.</p>
-
-      <h3 class="cs-subheading">Workstream 2 — Admin page template</h3>
-      <p class="cs-section-body">Across SAC and DSP's administration tabs, there was no consistent way to save changes, no shared layout structure, and no shared component conventions. Each tab had been built independently, and it showed. The goal was to define a single standard that all admin settings tabs could adopt going forward.</p>
-    </section>
-
-    <!-- Goals -->
-    <section class="cs-section" id="goals">
-      <p class="cs-section-label">goals</p>
-      <h2 class="cs-section-heading">Fix compliance, align structure, and give every admin tab <strong>the same foundation.</strong></h2>
-
-      <h3 class="cs-subheading" style="margin-top:0;">Workstream 1</h3>
-      <p class="cs-section-body">Resolve compliance gaps across SAC and DSP and align both products to a shared standard for browser integration and tenant appearance settings. Create a single spec covering both products so development teams spread across multiple countries could understand the full scope. Design a rollout plan that handled existing and new customers differently without breaking either experience.</p>
-
-      <h3 class="cs-subheading">Workstream 2</h3>
-      <p class="cs-section-body">Establish a single layout standard for all admin settings tabs across SAC, DSP, and eventually BDC. Unify save behaviour across every tab, standardize component usage, and produce migration guidelines for teams updating existing tabs to the new standard.</p>
+      <h2 class="cs-section-heading">The existing order limiter system has outdated UI and is challenging for new admins to learn. How might we design a more intuitive fleet management system that <strong>empowers administrators to efficiently manage vehicle order limits</strong>?</h2>
+      <p class="cs-section-body">The backend vehicle ordering system Toyota admins relied on had outdated visuals, inconsistent hierarchy, and no clear way to set or view limits alongside order progress. Administrators needed a single interface where all of that information was visible and actionable. The client's request was explicit: the redesign had to be both efficient and aesthetic.</p>
     </section>
 
     <!-- Process -->
     <section class="cs-section" id="process">
       <p class="cs-section-label">process</p>
 
-      <h3 class="cs-subheading" style="margin-top:0;">Workstream 1 — Auditing and scoping compliance fixes</h3>
-      <p class="cs-section-body">I started by auditing the current state of browser integration and appearance settings across SAC and DSP, mapping where compliance gaps existed and what a compliant version would look like. The audit identified several affected components, all using hardcoded values where SAP's themeable variables were required.</p>
-      <p class="cs-section-body">The design proposal introduced a new settings section that consolidated appearance-related controls into one predictable location. The rollout plan accounted for existing customers separately from new customers to avoid disrupting established workflows. Edge cases around theming and the interaction between different appearance settings were worked through and documented before handoff.</p>
-      <p class="cs-section-body">The spec was structured to cover SAC and DSP together, with clear callouts for which changes applied to which product, so multiple development teams could reference a single document rather than coordinating across separate specs.</p>
+      <h3 class="cs-subheading" style="margin-top:0;">Auditing the original system</h3>
+      <p class="cs-section-body">The first step was a close look at the existing fleet management system. The original UI had outdated visuals, inconsistent hierarchy, and no clear visual affordances for key actions like creating a new rule. The layout created cognitive overload rather than supporting the task.</p>
+      <p class="cs-section-body">Vehicle data was displayed in a dense, unstructured layout rather than a proper table, making it difficult to compare values across records at a glance. There was no obvious primary action; key functions were buried with no visual hierarchy to guide new admins. Inconsistent spacing and an absence of a layout grid added to the confusion. The dark, automotive consumer branding was also applied directly to the admin tool, prioritizing visual identity over the clarity and efficiency that an admin interface requires.</p>
+      <div class="cs-img cs-img--placeholder" style="display:flex; align-items:center; justify-content:center; min-height:640px;">
+        <img src="../images/old-fleet.avif" alt="Original fleet management system" style="max-width:70%; max-height:70%; width:auto; display:block; border-radius:8px; box-shadow: 0 4px 16px rgba(0,0,0,0.18);" />
+      </div>
 
-      <h3 class="cs-subheading">Workstream 1 — Stakeholder feedback and iteration</h3>
-      <p class="cs-section-body">Feedback from the UXC lead and senior designer shaped several decisions around the rollout plan and layout direction. The spec format was also refined based on feedback, shifting to a structured presentation format so the development lead could follow the flow without navigating the design file directly.</p>
-      <p class="cs-section-body">A follow-up review with the development lead surfaced additional edge cases around save state behaviour and how appearance settings would render under different browser and theme configurations. These were incorporated into the spec before handoff.</p>
+      <h3 class="cs-subheading">Finding inspiration</h3>
+      <p class="cs-section-body">Before moving into solutions, existing data table and admin dashboard patterns from other products were reviewed to identify conventions worth adapting. Two patterns stood out: a side navigation bar for quick access between admin sections, and a table layout for listing and managing records at a glance. Both directly informed the structural direction of the redesign.</p>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:32px; margin:32px 0;">
+        <img src="../images/fleet-ex1.png" alt="Inspiration example 1" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:8px;" />
+        <img src="../images/fleet-ex2.png" alt="Inspiration example 2" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:8px;" />
+      </div>
 
-      <h3 class="cs-subheading">Workstream 2 — Establishing the layout standard</h3>
-      <p class="cs-section-body">The admin page template work began with a high-level audit of how settings were being saved and displayed across all administration tabs. Multiple inconsistent patterns were in use with no shared convention. The goal was to consolidate these into a single, predictable pattern applied consistently across the page.</p>
-      <p class="cs-section-body">A layout standard was defined based on an established SAP floorplan, giving every admin tab a shared structure for sections, content width, and save behaviour. The footer was standardized to surface a consistent set of actions across all tabs.</p>
-      <p class="cs-section-body">Component usage was also audited across all tabs. Several components were being used outside their intended pattern, and migration guidelines were written to help tab owners apply the new standard correctly, covering layout, content guidelines, responsiveness, and how to handle existing custom elements.</p>
+      <h3 class="cs-subheading">Workshop and whiteboard sketches</h3>
+      <p class="cs-section-body">The senior product designer and I ran a workshop to sketch out the logic behind creating rules and setting limits. Working directly on a whiteboard helped us visualize the admin's workflow, identify edge cases, and align on a direction before moving into any digital work. The simplicity of sketching made it easy to share ideas, gather feedback, and explore multiple solutions quickly.</p>
 
-      <h3 class="cs-subheading">Working across teams</h3>
-      <p class="cs-section-body">Both workstreams involved coordinating across UX, User Assistance (UA), project managers, and development, with team members spread across different product areas. I worked with the UA designer to align on content and label standards. Scope changes mid-project, including a project manager transition and phasing decisions around what to include in scope, were incorporated without restarting the work. Regular check-ins with the UXC lead and developers ensured both specs met cross-platform standards and feasible implementation throughout the process.</p>
+      <h3 class="cs-subheading">Designing the table view</h3>
+      <p class="cs-section-body">A table view listing all vehicles with a limit applied was the direction taken. This gave administrators a full overview of all models and series at once, directly supporting the efficiency goal. Expandable rows allowed rule details to be reviewed inline without navigating away. Presenting this version to the client for the first time underscored the importance of walking through the full flow thoroughly, not just the final screens.</p>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:32px; margin:32px 0;">
+        <img src="../images/fleet-sketch.png" alt="Fleet lo-fi sketch" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:0px;" />
+        <img src="../images/fleet-v1.png" alt="Fleet version 1 wireframe" style="width:100%; height:100%; object-fit:contain; display:block; border-radius:8px;" />
+      </div>
+      <h3 class="cs-subheading">Client reviews and feedback</h3>
+      <p class="cs-section-body">Client meetings brought together about seven participants, three from Invoke and two developers and two project leads from Toyota. Each session was used to walk through the current designs and give the Toyota team space to discuss and respond. The project manager documented key points and action items, which were reviewed internally before the next iteration.</p>
+      <p class="cs-section-body">The first review after v1 surfaced a range of functional requirements that hadn't been captured upfront. The client responded positively to elements like the filter, total order counts, and the model description screen, but also raised specific constraints: limits in the current month should be fixed and non-editable, rules with no data should be hidden, and the new rule modal needed dropdown filtering by series and model. This feedback directly shaped what changed between v1 and the final prototype.</p>
+
+      <h3 class="cs-subheading">Creating component sets</h3>
+      <p class="cs-section-body">Component sets were not part of the original scope, but I built them independently after the core design work was done. Since the components were already in auto layout, reconstructing them into a structured design system was straightforward. The goal was to make the work easier to maintain and hand off.</p>
+      <div class="cs-img cs-img--placeholder" style="overflow:hidden; max-height:520px; background:#ffffff;">
+        <img src="../images/fleet-components.png" alt="Fleet component sets" style="width:75%; display:block; object-fit:cover; object-position:top; margin:0 auto;" />
+      </div>
+      <h3 class="cs-subheading">Final prototype and handoff</h3>
+      <p class="cs-section-body">Reducing the number of clicks and pages an administrator had to navigate was the core constraint throughout. The final prototype kept all necessary information surfaced and actionable within a single view, with no unnecessary context switching. A UX spec was prepared for handoff covering five main use cases: the current order period flow including in-line edits and table interactions, the order period selector for navigating past and future periods, the future order period flow for editing and setting series and group limits, confirmation modals for destructive actions, and adding a new rule.</p>
+      <div class="cs-img">
+        <img src="../images/toyota-banner.avif" alt="Toyota final prototype" style="width:100%; display:block;" />
+      </div>
     </section>
 
     <!-- Outcome -->
     <section class="cs-section" id="outcome">
       <p class="cs-section-label">outcome</p>
-      <h2 class="cs-section-heading">Both specs completed and <strong>handed off to development</strong>.</h2>
-      <p class="cs-section-body">Both specs were completed and handed off to development. Full case study details are available on request.</p>
+      <h2 class="cs-section-heading">A modernized fleet management system, <strong>built around admin efficiency</strong>.</h2>
+      <p class="cs-section-body">The final prototype was delivered to Dolan Toyota with a redesigned order limiter interface. The fragmented original was replaced with a unified table view where administrators could manage vehicle order limits, review rules, and take action without leaving the main screen.</p>
     </section>
 
     <!-- Reflections -->
     <section class="cs-section" id="reflections">
       <p class="cs-section-label">reflections</p>
 
-      <h3 class="cs-subheading" style="margin-top:0;">Decisions take time, and that's okay</h3>
-      <p class="cs-section-body">Even small design decisions can involve multiple stakeholders, reviews, and back-and-forths before a direction is locked. Working at enterprise scale taught me to separate the design work from the decision-making process. Keeping specs well-documented meant that when decisions finally landed, implementation could move quickly.</p>
+      <h3 class="cs-subheading" style="margin-top:0;">Communicating design decisions</h3>
+      <p class="cs-section-body">Invoke was my first design co-op, and this project was the first time I presented work to project managers, developers, and a client. Leading the client meetings built confidence in walking stakeholders through design decisions and responding to feedback directly, a skill that carried into subsequent projects.</p>
+      <div class="cs-img">
+        <img src="../images/about-images/invoke.jpg" alt="Invoke team" style="width:100%; display:block;" />
+      </div>
 
-      <h3 class="cs-subheading">How you present work matters as much as the work itself</h3>
-      <p class="cs-section-body">I learned early on that the format you use to present to developers shapes how well they understand the design intent. A Figma file works in a design review, but a structured spec or a live prototype is what actually moves things forward in a dev handoff. Developers respond well to being able to interact with the design directly rather than interpreting static screens. Finding the right format for the right audience became a skill in itself.</p>
-
-      <h3 class="cs-subheading">Leading design conversations and advocating for decisions</h3>
-      <p class="cs-section-body">Working with developers and project managers on a regular basis gave me hands-on experience presenting design rationale and defending decisions in a professional setting. One thing I underestimated early on was assuming stakeholders remembered the full context of the project. In reality, everyone is juggling multiple workstreams, and coming into a review with full context, not just the latest changes, made conversations more productive and helped move decisions forward faster.</p>
+      <h3 class="cs-subheading">Building practical Figma skills</h3>
+      <p class="cs-section-body">Working on a real product gave me hands-on experience in Figma that went beyond the basics. Building out component sets, using auto layout to construct complex dashboard screens, and creating a working prototype all became skills I developed through this project rather than in isolation.</p>
     </section>
 
   </main>
@@ -664,7 +667,7 @@
       <p class="footer-copy">© 2026 Noah De Guzman</p>
       <ul class="footer-links" role="list">
         <li><a href="https://www.linkedin.com/in/noah-de-guzman/" target="_blank" rel="noopener">LinkedIn</a></li>
-        <li><a href="Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">Resume<svg class="ext-icon" width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 8L8 1M8 1H2M8 1V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+        <li><a href="../Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">Resume<svg class="ext-icon" width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 8L8 1M8 1H2M8 1V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
       </ul>
     </div>
   </footer>
@@ -723,7 +726,8 @@
         ring.style.top  = e.clientY + 'px';
         ring.classList.add('visible');
 
-        const r = 18;
+        // Sample multiple points around the ring edge to detect overlap with media
+        const r = 18; // half of ring width
         const points = [
           [e.clientX, e.clientY],
           [e.clientX + r, e.clientY],
@@ -738,8 +742,10 @@
           if (el && (el.tagName === 'IMG' || el.tagName === 'VIDEO')) hits++;
         });
 
+        // Interpolate: 0 hits = default, 5 hits = fully over media
         const t = hits / points.length;
         if (t === 0) {
+          // Not over media — use theme-aware CSS var
           ring.style.background  = '';
           ring.style.borderColor = '';
         } else {
@@ -785,6 +791,7 @@
       }
       setTimeout(() => document.documentElement.classList.remove('theme-transitioning'), 400);
       if (window._onScroll) window._onScroll();
+      window.dispatchEvent(new Event('scroll'));
     });
   })();
   </script>
