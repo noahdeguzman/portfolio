@@ -543,7 +543,7 @@
       <div class="cs-overview-hero">
         <div class="cs-overview-left">
           <p style="font-family:var(--font-text); font-size:13px; color:var(--c-subtle);">SAP · 2026</p>
-          <h1 class="cs-overview-title">Unifying Admin Settings across products in Business Data Cloud <span class="pg-nda">NDA</span></h1>
+          <h1 class="cs-overview-title">Unifying Admin Settings across products in Business Data Cloud</h1>
           <p class="cs-overview-desc">Business Data Cloud brings together SAP Analytics Cloud (SAC), Datasphere (DSP), and BDC under one platform. Differences in how admin settings were structured across products created a noticeable inconsistency for administrators. Collaborating with one other UX designer, I worked across two connected workstreams: one focused on compliance for browser integration and tenant appearance, and one focused on establishing a shared layout standard for admin settings across all products.</p>
         </div>
         <div class="cs-overview-right">
@@ -610,7 +610,7 @@
       <p class="cs-section-body">Resolve compliance gaps across SAC and DSP and align both products to a shared standard for browser integration and tenant appearance settings. Create a single spec covering both products so development teams spread across multiple countries could understand the full scope. Design a rollout plan that handled existing and new customers differently without breaking either experience.</p>
 
       <h3 class="cs-subheading">Workstream 2</h3>
-      <p class="cs-section-body">Establish a single layout standard for all admin settings tabs across SAC, DSP, and eventually BDC. Unify save behaviour across every tab, standardise component usage, and produce migration guidelines for teams updating existing tabs to the new standard.</p>
+      <p class="cs-section-body">Establish a single layout standard for all admin settings tabs across SAC, DSP, and eventually BDC. Unify save behaviour across every tab, standardize component usage, and produce migration guidelines for teams updating existing tabs to the new standard.</p>
     </section>
 
     <!-- Process -->
@@ -628,7 +628,7 @@
 
       <h3 class="cs-subheading">Workstream 2 — Establishing the layout standard</h3>
       <p class="cs-section-body">The admin page template work began with a high-level audit of how settings were being saved and displayed across all administration tabs. Multiple inconsistent patterns were in use with no shared convention. The goal was to consolidate these into a single, predictable pattern applied consistently across the page.</p>
-      <p class="cs-section-body">A layout standard was defined based on an established SAP floorplan, giving every admin tab a shared structure for sections, content width, and save behaviour. The footer was standardised to surface a consistent set of actions across all tabs.</p>
+      <p class="cs-section-body">A layout standard was defined based on an established SAP floorplan, giving every admin tab a shared structure for sections, content width, and save behaviour. The footer was standardized to surface a consistent set of actions across all tabs.</p>
       <p class="cs-section-body">Component usage was also audited across all tabs. Several components were being used outside their intended pattern, and migration guidelines were written to help tab owners apply the new standard correctly, covering layout, content guidelines, responsiveness, and how to handle existing custom elements.</p>
 
       <h3 class="cs-subheading">Working across teams</h3>
@@ -696,7 +696,7 @@
     window._onScroll();
 
     /* ── Sidebar active state on scroll ──────── */
-    const sections = document.querySelectorAll('[id]');
+    const sections = document.querySelectorAll('.cs-section[id], .cs-overview[id]');
     const navLinks = document.querySelectorAll('.sidebar-nav a');
 
     const observer = new IntersectionObserver(entries => {
@@ -710,7 +710,7 @@
           });
         }
       });
-    }, { threshold: 0.3 });
+    }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
 
     sections.forEach(s => observer.observe(s));
 

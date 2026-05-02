@@ -212,6 +212,23 @@
     }
 
     /* ─────────────────────────────────────────────
+       NDA BANNER
+    ───────────────────────────────────────────── */
+    .cs-nda {
+      width: 100%;
+      background: #f5f0d8;
+      border: 1px solid #e8dfa8;
+      border-radius: 8px;
+      padding: 8px 12px;
+      margin-bottom: 32px;
+      font-family: var(--font-text);
+      font-size: clamp(11px, 0.8vw, 13px);
+      font-weight: 400;
+      color: #5c4f1e;
+      line-height: 1.5;
+    }
+
+    /* ─────────────────────────────────────────────
        OVERVIEW
     ───────────────────────────────────────────── */
     .cs-overview {
@@ -531,12 +548,16 @@
   <!-- ── Content ──────────────────────────────────────────────────────── -->
   <main class="page-content" id="main">
 
+    <div class="cs-nda">
+      🔒 This case study is currently under NDA. Please contact me for a full walkthrough.
+    </div>
+
     <!-- Overview -->
     <div class="cs-overview" id="overview">
       <div class="cs-overview-hero">
         <div class="cs-overview-left">
           <p style="font-family:var(--font-text); font-size:13px; color:var(--c-subtle);">Nokia · 2025</p>
-          <h1 class="cs-overview-title">Streamlining the Frostbuster submission process for developers <span class="pg-nda">NDA</span></h1>
+          <h1 class="cs-overview-title">Streamlining the Frostbuster submission process for developers</h1>
           <p class="cs-overview-desc">Frostbuster is a merge request process that allows developers to merge their code within a locked branch. During code-freeze, developers (if needed) will submit a request to merge their code. Each merge request requires approval from a panel of reviewers. For the most part, this current process has not been updated for 20 years. This project was showcased as my final case study presentation at the end of my 8-month co-op with Nokia.</p>
         </div>
         <div class="cs-overview-right">
