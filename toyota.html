@@ -368,6 +368,13 @@
       width: 100%;
       display: block;
     }
+    .cs-img-placeholder {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: var(--c-surface);
+      border: 1px dashed var(--c-border);
+      border-radius: 8px;
+    }
 
     /* ─────────────────────────────────────────────
        FOOTER
@@ -521,6 +528,7 @@
       <a href="#top" class="active">Overview</a>
       <a href="#problem">Problem</a>
       <a href="#process">Process</a>
+      <a href="#outcome">Outcome</a>
     </nav>
   </aside>
 
@@ -546,13 +554,13 @@
             <div class="cs-meta-row">
               <div class="cs-meta-row-left">
                 <span class="cs-meta-col-label">Tasks</span>
-                <span class="cs-meta-col-item">User Research, Prototyping, Usability Testing</span>
+                <span class="cs-meta-col-item">Prototyping, UI Components</span>
               </div>
             </div>
             <div class="cs-meta-row">
               <div class="cs-meta-row-left">
                 <span class="cs-meta-col-label">Deliverables</span>
-                <span class="cs-meta-col-item">User Flows, Mockups, Final Prototype</span>
+                <span class="cs-meta-col-item">Mockups, Final Prototype</span>
               </div>
             </div>
             <div class="cs-meta-row">
@@ -580,17 +588,45 @@
     <section class="cs-section" id="process">
       <p class="cs-section-label">process</p>
 
-      <h3 class="cs-subheading" style="margin-top:0;">User Research</h3>
-      <p class="cs-section-body">I conducted user interviews with dealership staff to understand their day-to-day workflows, pain points, and mental models around vehicle tracking. Key findings revealed that staff relied heavily on spreadsheets and verbal communication, leading to frequent errors and delays.</p>
-
-      <h3 class="cs-subheading">Defining the Flow</h3>
-      <p class="cs-section-body">Using research insights, I mapped the end-to-end fleet management journey — from vehicle intake to disposition — and identified the key moments of friction. I redesigned the information architecture to surface the most critical data at a glance.</p>
-
-      <h3 class="cs-subheading">Design and Prototyping</h3>
-      <p class="cs-section-body">I designed and prototyped the core fleet dashboard and vehicle detail views in Figma, iterating based on feedback from usability testing sessions with dealership staff. The final prototype focused on reducing clicks, surfacing status clearly, and supporting bulk actions.</p>
-      <div class="cs-img">
-        <img src="images/toyota-process.avif" alt="Toyota — process" />
+      <h3 class="cs-subheading" style="margin-top:0;">Auditing the original system</h3>
+      <p class="cs-section-body">Starting with the existing fleet management system, the first step was understanding what was already there. The original UI had outdated visuals, inconsistent hierarchy, and poor usability. Cognitive overload was a recurring issue, and key actions like creating a new rule lacked clear visual affordances.</p>
+      <div class="cs-img cs-img--placeholder">
+        <div class="cs-img-placeholder"></div>
       </div>
+
+      <h3 class="cs-subheading">Identifying opportunities</h3>
+      <p class="cs-section-body">The audit surfaced a clear opportunity to introduce visual hierarchy and modern design patterns — clear navigation, buttons, and toggles — to help administrators identify and manage series of vehicles with rules applied to them.</p>
+
+      <h3 class="cs-subheading">Workshop and early sketches</h3>
+      <p class="cs-section-body">After gaining a clearer understanding of how the order limiter system worked, the senior product designer and I ran a workshop to brainstorm solutions, refine ideas, and align on a design direction. A complex idea was broken down into simplified sketches on the whiteboard, making it easier to visualise and communicate before any digital work began.</p>
+      <div class="cs-img cs-img--placeholder">
+        <div class="cs-img-placeholder"></div>
+      </div>
+
+      <h3 class="cs-subheading">Lo-fidelity wireframes</h3>
+      <p class="cs-section-body">The whiteboard sketches clearly communicated the design vision — a table structure to organise the different rules for each series of vehicles. Working at this fidelity allowed us to explore multiple solutions and resolve structural issues before committing to a more detailed prototype.</p>
+
+      <h3 class="cs-subheading">Version 1 wireframe</h3>
+      <p class="cs-section-body">A table view listing all vehicles with a limit applied was the direction I pursued. This gave administrators a clear overview of all models and series at once, supporting their goal of staying efficient. Expandable rows allowed rule details to be previewed inline, without navigating away from the table.</p>
+      <div class="cs-img cs-img--placeholder">
+        <div class="cs-img-placeholder"></div>
+      </div>
+
+      <h3 class="cs-subheading">Client reviews and feedback</h3>
+      <p class="cs-section-body">The Invoke team and the Toyota team — two developers and two project leads — met to review the designs and give feedback. These sessions were used to align on direction and surface any outstanding concerns before moving into the final prototype.</p>
+
+      <h3 class="cs-subheading">Final prototype</h3>
+      <p class="cs-section-body">Efficiency was the client's top priority throughout. Reducing the number of clicks and pages an administrator had to navigate became the central constraint shaping every decision. The final prototype presented all necessary information clearly, with minimal context switching.</p>
+      <div class="cs-img cs-img--placeholder">
+        <div class="cs-img-placeholder"></div>
+      </div>
+    </section>
+
+    <!-- Outcome -->
+    <section class="cs-section" id="outcome">
+      <p class="cs-section-label">outcome</p>
+      <h2 class="cs-section-heading">A modernised fleet management system, <strong>built around admin efficiency</strong>.</h2>
+      <p class="cs-section-body">The final prototype was delivered to Dolan Toyota with a redesigned order limiter interface that replaced the original system's fragmented layout with a unified table view. Administrators could manage vehicle order limits, review rules, and take action without leaving the main screen.</p>
     </section>
 
   </main>
