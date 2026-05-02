@@ -24,7 +24,7 @@
       --c-subtle:  #6e6e73;
       --c-blue:    #2997ff;
 
-      --c-nav-bg:      rgba(0,0,0,0.35);
+      --c-nav-bg:      #161614;
       --c-nav-border:  rgba(255,255,255,0.1);
       --c-ring-border: rgba(255,255,255,0.5);
 
@@ -46,7 +46,7 @@
       --c-muted:   #515154;
       --c-subtle:  #86868b;
 
-      --c-nav-bg:      rgba(255,255,255,0.72);
+      --c-nav-bg:      #f5f5f7;
       --c-nav-border:  rgba(0,0,0,0.1);
       --c-ring-border: rgba(0,0,0,0.35);
     }
@@ -688,8 +688,6 @@
       const past = window.scrollY > 60;
       const st = getComputedStyle(document.documentElement);
       nav.style.background           = past ? st.getPropertyValue('--c-nav-bg').trim() : 'transparent';
-      nav.style.backdropFilter       = past ? 'saturate(180%) blur(20px)' : '';
-      nav.style.webkitBackdropFilter = past ? 'saturate(180%) blur(20px)' : '';
       nav.style.borderBottom         = past ? `1px solid ${st.getPropertyValue('--c-nav-border').trim()}` : 'none';
     };
     window.addEventListener('scroll', window._onScroll, { passive: true });
