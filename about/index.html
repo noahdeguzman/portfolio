@@ -337,13 +337,64 @@
     }
     .footer-links a:hover { color: var(--c-muted); }
 
+
+    /* ─────────────────────────────────────────────
+       HAMBURGER MENU
+    ───────────────────────────────────────────── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 32px;
+      height: 32px;
+      background: none;
+      border: none;
+      padding: 0;
+      z-index: 10001;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--c-text);
+      border-radius: 2px;
+      transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
+      transform-origin: center;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    .nav-mobile-menu {
+      display: none;
+      position: fixed;
+      top: var(--nav-h);
+      left: 0; right: 0;
+      background: var(--c-bg);
+      border-bottom: 1px solid var(--c-border);
+      padding: 24px var(--pad);
+      flex-direction: column;
+      gap: 20px;
+      z-index: 9999;
+    }
+    .nav-mobile-menu.open { display: flex; }
+    .nav-mobile-menu a {
+      font-family: var(--font-text);
+      font-size: 15px;
+      color: var(--c-muted);
+      transition: color var(--t-fast);
+    }
+    .nav-mobile-menu a:hover,
+    .nav-mobile-menu a.active { color: var(--c-text); }
+
     /* ─────────────────────────────────────────────
        RESPONSIVE
     ───────────────────────────────────────────── */
     @media (max-width: 860px) {
       :root { --pad: 24px; }
-      .nav-links { gap: 16px; }
-      .nav-links a { font-size: 12px; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
     }
     @media (max-width: 560px) {
       .footer-inner { flex-direction: column; gap: 16px; }
@@ -428,7 +479,16 @@
         <li><a href="/about" class="active">About</a></li>
         <li><a href="../Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">Resume<svg class="ext-icon" width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 8L8 1M8 1H2M8 1V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
       </ul>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+  </nav>
+
+  <nav class="nav-mobile-menu" id="nav-mobile-menu">
+    <a href="/">Work</a>
+    <a href="/about" class="active">About</a>
+    <a href="../Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">Resume</a>
   </nav>
 
   <!-- ── Content ──────────────────────────────────────────────────────── -->
@@ -519,6 +579,20 @@
     };
     window.addEventListener('scroll', window._onScroll, { passive: true });
     window._onScroll();
+
+    /* ── Hamburger menu ───────────────────────── */
+    const hamburger = document.getElementById('nav-hamburger');
+    const mobileMenu = document.getElementById('nav-mobile-menu');
+    hamburger.addEventListener('click', () => {
+      const open = hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open', open);
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+      });
+    });
 
     /* ── Cursor ring ──────────────────────────── */
     const ring = document.getElementById('cursor-ring');
