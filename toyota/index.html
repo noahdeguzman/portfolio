@@ -559,6 +559,12 @@
       transition-delay: 0.2s;
     }
 
+
+    @media (max-width: 860px) {
+      body { cursor: auto; }
+      a, button, [role="button"], * { cursor: auto !important; }
+      .cursor-ring { display: none !important; }
+    }
   </style>
 </head>
 <body>

@@ -468,6 +468,12 @@
       background: rgba(180,180,180,0.15);
     }
     .cursor-ring.visible { opacity: 1; }
+
+    @media (max-width: 860px) {
+      body { cursor: auto; }
+      a, button, [role="button"], * { cursor: auto !important; }
+      .cursor-ring { display: none !important; }
+    }
   </style>
 </head>
 <body>
