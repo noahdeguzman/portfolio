@@ -554,6 +554,52 @@
       transform: translateY(0);
       transition-delay: 0.2s;
     }
+
+    /* ─────────────────────────────────────────────
+       LIGHTBOX
+    ───────────────────────────────────────────── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 99998;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox-img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 4px;
+      display: block;
+    }
+    .lightbox-close {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 18px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: auto !important;
+      cursor: pointer !important;
+    }
+    @media (min-width: 861px) {
+      .cs-img img, .cs-overview-banner img { cursor: zoom-in !important; }
+    }
+    @media (max-width: 860px) {
+      .cs-img img, .cs-overview-banner img { cursor: zoom-in !important; }
+    }
   </style>
 </head>
 <body>
@@ -792,6 +838,37 @@
       });
     });
 
+
+    /* ── Lightbox ────────────────────────────── */
+    window.addEventListener('DOMContentLoaded', () => {
+      const lightbox  = document.getElementById('lightbox');
+      const lbImg     = document.getElementById('lightbox-img');
+      const lbClose   = document.getElementById('lightbox-close');
+
+      document.querySelectorAll('.cs-img img, .cs-overview-banner img').forEach(img => {
+        img.addEventListener('click', () => {
+          lbImg.src = img.src;
+          lbImg.alt = img.alt;
+          lightbox.classList.add('open');
+          document.body.style.overflow = 'hidden';
+        });
+      });
+
+      const closeLightbox = () => {
+        lightbox.classList.remove('open');
+        document.body.style.overflow = '';
+        lbImg.src = '';
+      };
+
+      lbClose.addEventListener('click', closeLightbox);
+      lightbox.addEventListener('click', e => {
+        if (e.target === lightbox) closeLightbox();
+      });
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closeLightbox();
+      });
+    });
+
     /* ── Cursor ring ──────────────────────────── */
     window.addEventListener('DOMContentLoaded', () => {
       const ring = document.getElementById('cursor-ring');
@@ -868,6 +945,13 @@
   </script>
 
   <div class="cursor-ring" id="cursor-ring"></div>
+
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close">✕</button>
+    <img class="lightbox-img" id="lightbox-img" src="" alt="" />
+  </div>
 
 </body>
 </html>
