@@ -612,7 +612,7 @@
         <div class="cs-overview-left">
           <p style="font-family:var(--font-text); font-size:13px; color:var(--c-subtle);">Toyota · 2024</p>
           <h1 class="cs-overview-title">Enhancing dealership operations with effortless fleet management</h1>
-          <p class="cs-overview-desc">Toyota is a client of Invoke, my previous co-op employer, where the two companies collaborate across a range of projects. Working within a three-person team, I led the design work and presented to the client throughout the project. The focus was the order limiter tool, redesigning the interface used by Dolan Toyota administrators to manage vehicle order limits.</p>
+          <p class="cs-overview-desc">Toyota is a long-standing client of Invoke, a design and development agency where I completed my co-op in the Summer of 2024. The project focused on the order limiter tool, a redesign of the internal interface used by Dolan Toyota administrators to manage vehicle order limits. I contributed to the design work and supported client presentations throughout the engagement.</p>
         </div>
         <div class="cs-overview-right">
           <div class="cs-meta-grid">
@@ -653,8 +653,8 @@
     <section class="cs-section" id="context">
       <p class="cs-section-label">context</p>
       <h2 class="cs-section-heading">Toyota TMNA oversees all operations in North America. <strong>Invoke helps build the tools that support them.</strong></h2>
-      <p class="cs-section-body">Toyota Motor North America (TMNA) manages all Toyota operations across the continent. Invoke is a design and development agency that works with Toyota across a range of projects. My role within the team was to lead the design work and present to the client.</p>
-      <p class="cs-section-body">The team was three people: myself as the junior designer, one senior product designer, and one project manager. Weekly internal meetings were used to review tasks and changes, with bi-weekly sessions with the Toyota team to present progress. This project was one of several Toyota engagements at Invoke. I also worked on the mobile version of a Car Rental Reservation System for Dolan Toyota.</p>
+      <p class="cs-section-body">Toyota Motor North America (TMNA) oversees all Toyota operations across the continent. Invoke, a design and development agency, maintains an ongoing partnership with TMNA spanning multiple product engagements. As the junior designer on this project, I was responsible for the prototyping and contributed to design presentations with the client.</p>
+      <p class="cs-section-body">The project team consisted of three members: myself as the junior designer, a senior product designer, and a project manager. We held weekly internal syncs to review progress and align on changes, alongside bi-weekly client sessions with the Toyota team, which was made up of three developers and two project managers. In addition to this engagement, I contributed to a separate Toyota project at Invoke, the mobile version of a Car Rental Reservation System for Dolan Toyota.</p>
     </section>
 
     <!-- Problem -->
@@ -687,16 +687,18 @@
 
       <h3 class="cs-subheading">Designing the table view</h3>
       <p class="cs-section-body">A table view listing all vehicles with a limit applied was the direction taken. This gave administrators a full overview of all models and series at once, directly supporting the efficiency goal. Expandable rows allowed rule details to be reviewed inline without navigating away. Presenting this version to the client for the first time underscored the importance of walking through the full flow thoroughly, not just the final screens.</p>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:32px; margin:32px 0;">
-        <img src="../images/fleet-sketch.png" alt="Fleet lo-fi sketch" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:0px;" />
-        <img src="../images/fleet-v1.png" alt="Fleet version 1 wireframe" style="width:100%; height:100%; object-fit:contain; display:block; border-radius:8px;" />
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:32px; margin:32px 0; align-items:start;">
+        <div style="overflow:hidden; border-radius:8px; aspect-ratio:744/483;">
+          <img src="../images/fleet-sketch.png" alt="Fleet lo-fi sketch" style="width:100%; height:100%; object-fit:cover; display:block;" />
+        </div>
+        <img src="../images/fleet-v1.png" alt="Fleet version 1 wireframe" style="width:100%; display:block; border-radius:8px;" />
       </div>
       <h3 class="cs-subheading">Client reviews and feedback</h3>
       <p class="cs-section-body">Client meetings brought together about seven participants, three from Invoke and two developers and two project leads from Toyota. Each session was used to walk through the current designs and give the Toyota team space to discuss and respond. The project manager documented key points and action items, which were reviewed internally before the next iteration.</p>
       <p class="cs-section-body">The first review after v1 surfaced a range of functional requirements that hadn't been captured upfront. The client responded positively to elements like the filter, total order counts, and the model description screen, but also raised specific constraints: limits in the current month should be fixed and non-editable, rules with no data should be hidden, and the new rule modal needed dropdown filtering by series and model. This feedback directly shaped what changed between v1 and the final prototype.</p>
 
       <h3 class="cs-subheading">Creating component sets</h3>
-      <p class="cs-section-body">Component sets were not part of the original scope, but I built them independently after the core design work was done. Since the components were already in auto layout, reconstructing them into a structured design system was straightforward. The goal was to make the work easier to maintain and hand off.</p>
+      <p class="cs-section-body">Component sets were not part of the original scope, but I built them independently after the core design work was done. As the components were already built with auto layout, organizing them into a structured design system required minimal rework. The goal was to make the work easier to maintain and hand off.</p>
       <div class="cs-img cs-img--placeholder" style="overflow:hidden; max-height:520px; background:#ffffff;">
         <img src="../images/fleet-components.png" alt="Fleet component sets" style="width:75%; display:block; object-fit:cover; object-position:top; margin:0 auto;" />
       </div>
