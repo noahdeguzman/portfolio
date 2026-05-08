@@ -350,6 +350,20 @@
       line-height: 1.6;
       max-width: 80%;
     }
+    .pg-tag {
+      font-family: var(--font-text);
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--c-tag);
+    }
+    .pg-name {
+      font-family: var(--font-display);
+      font-size: clamp(13px, 1.15vw, 15px);
+      font-weight: 500;
+      letter-spacing: -0.015em;
+      line-height: 1.35;
+      color: var(--c-text);
+    }
     .pg-meta {
       text-align: right;
       flex-shrink: 0;
@@ -657,7 +671,7 @@
 <body>
 
 <div class="cursor-ring" id="cursor-ring">
-  <svg class="ring-icon" width="11" height="11" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 4.5H8M8 4.5L5 1.5M8 4.5L5 7.5" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <svg class="ring-icon" width="11" height="11" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 4.5H8M8 4.5L5 1.5M8 4.5L5 7.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </div>
 <div class="cursor-label" id="cursor-label">Go to project</div>
 
@@ -859,11 +873,25 @@
     document.querySelectorAll('.pg-card').forEach(card => {
       card.addEventListener('mouseenter', () => {
         const label = card.getAttribute('aria-label')?.toLowerCase() || '';
-        const isToyota = label.includes('toyota');
-        const isNokia  = label.includes('nokia');
+        const isToyota  = label.includes('toyota');
+        const isNokia   = label.includes('nokia');
+        const isDNAKit  = label.includes('dna web ui kit');
+        const isLight   = document.documentElement.getAttribute('data-theme') === 'light';
+
+        let bg, textColor;
+        if (isDNAKit) {
+          bg        = isLight ? '#000000' : '#ffffff';
+          textColor = isLight ? '#ffffff' : '#000000';
+        } else {
+          bg        = isToyota ? 'rgb(235,10,30)' : isNokia ? 'rgb(0,90,255)' : 'rgb(41,151,255)';
+          textColor = '#ffffff';
+        }
+
         ring.classList.add('hover');
-        ring.style.background = isToyota ? 'rgb(235,10,30)' : isNokia ? 'rgb(0,90,255)' : 'rgb(41,151,255)';
-        cursorLabel.style.background = isToyota ? 'rgb(235,10,30)' : isNokia ? 'rgb(0,90,255)' : 'rgb(41,151,255)';
+        ring.style.background        = bg;
+        ring.style.color             = textColor;
+        cursorLabel.style.background = bg;
+        cursorLabel.style.color      = textColor;
         cursorLabel.classList.add('visible');
         const pillH = cursorLabel.getBoundingClientRect().height;
         ring.style.width  = pillH + 'px';
@@ -871,9 +899,11 @@
       });
       card.addEventListener('mouseleave', () => {
         ring.classList.remove('hover');
-        ring.style.background = '';
-        ring.style.width  = '';
-        ring.style.height = '';
+        ring.style.background   = '';
+        ring.style.color        = '';
+        ring.style.width        = '';
+        ring.style.height       = '';
+        cursorLabel.style.color = '';
         cursorLabel.classList.remove('visible');
       });
     });
