@@ -16,7 +16,7 @@
       --font-text:    "SF Pro Text",    "Helvetica Neue", Helvetica, Arial, sans-serif;
       --font-mono:    "SF Mono", "Fira Mono", "Consolas", monospace;
 
-      --c-bg:      #161614;
+      --c-bg:      #141414;
       --c-surface: #1c1c1e;
       --c-border:  rgba(255,255,255,0.1);
       --c-text:    #f5f5f7;
@@ -24,7 +24,7 @@
       --c-subtle:  #6e6e73;
       --c-blue:    #2997ff;
 
-      --c-nav-bg:      #161614;
+      --c-nav-bg:      #141414;
       --c-nav-border:  rgba(255,255,255,0.1);
       --c-ring-border: rgba(255,255,255,0.5);
 
@@ -39,14 +39,14 @@
     }
 
     [data-theme="light"] {
-      --c-bg:      #f5f5f7;
+      --c-bg:      #fafafa;
       --c-surface: #ffffff;
       --c-border:  rgba(0,0,0,0.1);
       --c-text:    #1d1d1f;
       --c-muted:   #515154;
       --c-subtle:  #86868b;
 
-      --c-nav-bg:      #f5f5f7;
+      --c-nav-bg:      #fafafa;
       --c-nav-border:  rgba(0,0,0,0.1);
       --c-ring-border: rgba(0,0,0,0.35);
     }
@@ -56,6 +56,7 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       scroll-behavior: smooth;
+      overflow-x: hidden;
     }
     .theme-transitioning *,
     .theme-transitioning *::before,
@@ -69,8 +70,21 @@
       color: var(--c-text);
       font-size: 17px;
       line-height: 1.5;
-      overflow-x: hidden;
+      
       cursor: none;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.08;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 300px 300px;
+    }
+    [data-theme="light"] body::before {
+      opacity: 0.18;
     }
     * { cursor: none !important; }
     a { text-decoration: none; color: inherit; }
@@ -182,23 +196,6 @@
     }
 
     /* ─────────────────────────────────────────────
-       NDA STRIP
-    ───────────────────────────────────────────── */
-    .cs-nda {
-      width: 100%;
-      background: #f5f0d8;
-      border: 1px solid #e8dfa8;
-      border-radius: 8px;
-      padding: 8px 12px;
-      margin-bottom: 32px;
-      font-family: var(--font-text);
-      font-size: clamp(11px, 0.8vw, 13px);
-      font-weight: 400;
-      color: #5c4f1e;
-      line-height: 1.5;
-    }
-
-    /* ─────────────────────────────────────────────
        SECTION LABELS
     ───────────────────────────────────────────── */
     .cs-section-label {
@@ -298,7 +295,7 @@
     }
     .cs-overview-banner {
       margin-top: 48px;
-      border-radius: 8px;
+      border-radius: 0;
       overflow: hidden;
       height: 520px;
       background: var(--c-surface);
@@ -362,7 +359,7 @@
     }
     .cs-img {
       width: 100%;
-      border-radius: 8px;
+      border-radius: 0;
       overflow: hidden;
       margin: 32px 0;
       background: var(--c-surface);
@@ -522,17 +519,20 @@
     ───────────────────────────────────────────── */
     .cursor-ring {
       position: fixed;
-      width: 24px;
-      height: 24px;
-      border: 1px solid var(--c-ring-border);
+      width: 12px;
+      height: 12px;
+      background: #ffffff;
       border-radius: 50%;
       pointer-events: none;
       z-index: 99999;
       transform: translate(-50%, -50%);
-      transition: opacity 0.2s ease, background 0.2s ease, width 0.2s ease, height 0.2s ease;
+      transition: opacity 0.2s ease, width 0.25s ease, height 0.25s ease, background 0.2s ease;
       opacity: 0;
-      background: rgba(180,180,180,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+    [data-theme="light"] .cursor-ring { background: #000000; }
     .cursor-ring.visible { opacity: 1; }
 
     /* ─────────────────────────────────────────────
@@ -569,9 +569,9 @@
     <div class="nav-inner">
       <a class="nav-logo" href="/" aria-label="noah de guzman home">❋</a>
       <ul class="nav-links" role="list">
-        <li><a href="/">Work</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="../Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">Resume<svg class="ext-icon" width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 8L8 1M8 1H2M8 1V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+        <li><a href="/">(Work)</a></li>
+        <li><a href="/about">(About)</a></li>
+        <li><a href="../Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">(Resume)</a></li>
       </ul>
       <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu">
         <span></span><span></span><span></span>
@@ -580,9 +580,9 @@
   </nav>
 
   <nav class="nav-mobile-menu" id="nav-mobile-menu">
-    <a href="/">Work</a>
-    <a href="/about">About</a>
-    <a href="../Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+    <a href="/">(Work)</a>
+    <a href="/about">(About)</a>
+    <a href="../Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">(Resume)</a>
   </nav>
 
   <!-- ── Sidebar ──────────────────────────────────────────────────────── -->
@@ -602,10 +602,6 @@
   <!-- ── Content ──────────────────────────────────────────────────────── -->
   <main class="page-content" id="main">
 
-    <!-- NDA Banner -->
-    <div class="cs-nda">
-      🔒 This case study is currently under NDA. Please contact me for a full walkthrough.
-    </div>
 
     <!-- Overview -->
     <div class="cs-overview" id="overview">
@@ -613,7 +609,7 @@
         <div class="cs-overview-left">
           <p style="font-family:var(--font-text); font-size:13px; color:var(--c-subtle);">SAP · 2026</p>
           <h1 class="cs-overview-title">Unifying Admin Settings across products in Business Data Cloud</h1>
-          <p class="cs-overview-desc">Business Data Cloud brings together SAP Analytics Cloud (SAC), Datasphere (DSP), and BDC under one platform. Differences in how admin settings were structured across products created a noticeable inconsistency for administrators. Collaborating with one other UX designer, I worked across two connected workstreams: one focused on compliance for browser integration and tenant appearance, and one focused on establishing a shared layout standard for admin settings across all products.</p>
+          <p class="cs-overview-desc">Business Data Cloud brings together SAP Analytics Cloud (SAC), Datasphere (DSP), and BDC under one platform. Differences in how admin settings were structured across products created a noticeable inconsistency for administrators. Collaborating with one other UX designer, I worked across two connected workstreams: one focused on compliance for browser integration and tenant appearance, and one focused on establishing a shared layout standard for admin settings across all products. This project is under NDA, so details shared here are intentionally high-level.</p>
         </div>
         <div class="cs-overview-right">
           <div class="cs-meta-grid">
@@ -631,8 +627,8 @@
             </div>
             <div class="cs-meta-row">
               <div class="cs-meta-row-left">
-                <span class="cs-meta-col-label">Deliverables</span>
-                <span class="cs-meta-col-item">UX Spec, Prototype</span>
+                <span class="cs-meta-col-label">Timeline</span>
+                <span class="cs-meta-col-item">~5 months</span>
               </div>
             </div>
             <div class="cs-meta-row">
@@ -732,8 +728,8 @@
     <div class="footer-inner">
       <p class="footer-copy">© 2026 Noah De Guzman — <a href="https://www.linkedin.com/in/noah-de-guzman/" target="_blank" rel="noopener" style="color:var(--c-subtle); transition:color var(--t-fast);">let's connect 🍵</a></p>
       <ul class="footer-links" role="list">
-        <li><a href="https://www.linkedin.com/in/noah-de-guzman/" target="_blank" rel="noopener">LinkedIn</a></li>
-        <li><a href="../Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">Resume<svg class="ext-icon" width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 8L8 1M8 1H2M8 1V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+        <li><a href="https://www.linkedin.com/in/noah-de-guzman/" target="_blank" rel="noopener">(LinkedIn)</a></li>
+        <li><a href="../Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">(Resume)</a></li>
       </ul>
     </div>
   </footer>
@@ -799,45 +795,20 @@
     });
 
     /* ── Cursor ring ──────────────────────────── */
-    window.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', () => {
       const ring = document.getElementById('cursor-ring');
-
       document.addEventListener('mousemove', e => {
         ring.style.left = e.clientX + 'px';
         ring.style.top  = e.clientY + 'px';
         ring.classList.add('visible');
-
-        const r = 18;
-        const points = [
-          [e.clientX, e.clientY],
-          [e.clientX + r, e.clientY],
-          [e.clientX - r, e.clientY],
-          [e.clientX, e.clientY + r],
-          [e.clientX, e.clientY - r],
-        ];
-
-        let hits = 0;
-        points.forEach(([x, y]) => {
-          const el = document.elementFromPoint(x, y);
-          if (el && (el.tagName === 'IMG' || el.tagName === 'VIDEO')) hits++;
-        });
-
-        const t = hits / points.length;
-        if (t === 0) {
-          ring.style.background  = '';
-          ring.style.borderColor = '';
-        } else {
-          const alpha = t * 0.3;
-          const borderAlpha = 0.5 - t * 0.3;
-          ring.style.background   = `rgba(0,0,0,${alpha.toFixed(2)})`;
-          ring.style.borderColor  = `rgba(${t < 0.5 ? '255,255,255' : '0,0,0'},${(t < 0.5 ? borderAlpha : 0.4).toFixed(2)})`;
-        }
       }, { passive: true });
-
       document.addEventListener('mouseleave', () => ring.classList.remove('visible'));
     });
 
   })();
+  </script>
+
+  <div class="cursor-ring" id="cursor-ring"></div>
   </script>
 
   <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">
@@ -873,7 +844,6 @@
   })();
   </script>
 
-  <div class="cursor-ring" id="cursor-ring"></div>
 
 </body>
 </html>

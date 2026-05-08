@@ -19,7 +19,7 @@
       --font-text:    "SF Pro Text",    "Helvetica Neue", Helvetica, Arial, sans-serif;
       --font-mono:    "SF Mono", "Fira Mono", "Consolas", monospace;
 
-      --c-bg:      #161614;
+      --c-bg:      #141414;
       --c-surface: #1c1c1e;
       --c-border:  rgba(255,255,255,0.1);
       --c-text:    #f5f5f7;
@@ -29,7 +29,7 @@
       --c-green:   #30d158;
       --c-white:   #ffffff;
 
-      --c-nav-bg:      rgba(0,0,0,0.72);
+      --c-nav-bg:      #141414;
       --c-nav-border:  rgba(255,255,255,0.1);
       --c-ring-border: rgba(255,255,255,0.5);
 
@@ -48,7 +48,7 @@
        LIGHT MODE
     ───────────────────────────────────────────── */
     [data-theme="light"] {
-      --c-bg:      #f5f5f7;
+      --c-bg:      #fafafa;
       --c-surface: #ffffff;
       --c-border:  rgba(0,0,0,0.1);
       --c-text:    #1d1d1f;
@@ -56,7 +56,7 @@
       --c-subtle:  #86868b;
       --c-white:   #1d1d1f;
 
-      --c-nav-bg:      rgba(255,255,255,0.72);
+      --c-nav-bg:      #fafafa;
       --c-nav-border:  rgba(0,0,0,0.1);
       --c-ring-border: rgba(0,0,0,0.35);
     }
@@ -68,7 +68,7 @@
     html {
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-      scroll-behavior: smooth;
+      scroll-behavior: smooth; overflow-x: hidden;
     }
     .theme-transitioning *,
     .theme-transitioning *::before,
@@ -82,8 +82,21 @@
       color: var(--c-text);
       font-size: 17px;
       line-height: 1.5;
-      overflow-x: hidden;
+      
       cursor: none;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.08;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 300px 300px;
+    }
+    [data-theme="light"] body::before {
+      opacity: 0.18;
     }
     * { cursor: none !important; }
     a { text-decoration: none; color: inherit; }
@@ -271,9 +284,10 @@
     ───────────────────────────────────────────── */
     .about-banner {
       margin-top: 48px;
-      border-radius: 8px;
+      border-radius: 0;
       overflow: hidden;
       height: 520px;
+      position: relative;
     }
     .about-banner img,
     .about-banner video {
@@ -456,17 +470,20 @@
     ───────────────────────────────────────────── */
     .cursor-ring {
       position: fixed;
-      width: 24px;
-      height: 24px;
-      border: 1px solid var(--c-ring-border);
+      width: 12px;
+      height: 12px;
+      background: #ffffff;
       border-radius: 50%;
       pointer-events: none;
       z-index: 99999;
       transform: translate(-50%, -50%);
-      transition: opacity 0.2s ease, width 0.2s ease, height 0.2s ease, background 0.2s ease;
+      transition: opacity 0.2s ease, width 0.25s ease, height 0.25s ease, background 0.2s ease;
       opacity: 0;
-      background: rgba(180,180,180,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+    [data-theme="light"] .cursor-ring { background: #000000; }
     .cursor-ring.visible { opacity: 1; }
 
     @media (max-width: 860px) {
@@ -483,9 +500,9 @@
     <div class="nav-inner">
       <a class="nav-logo" href="/" aria-label="noah de guzman home">❋</a>
       <ul class="nav-links" role="list">
-        <li><a href="/">Work</a></li>
-        <li><a href="/about" class="active">About</a></li>
-        <li><a href="../Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">Resume<svg class="ext-icon" width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 8L8 1M8 1H2M8 1V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+        <li><a href="/">(Work)</a></li>
+        <li><a href="/about" class="active">(About)</a></li>
+        <li><a href="../Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">(Resume)</a></li>
       </ul>
       <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu">
         <span></span><span></span><span></span>
@@ -494,9 +511,9 @@
   </nav>
 
   <nav class="nav-mobile-menu" id="nav-mobile-menu">
-    <a href="/">Work</a>
-    <a href="/about" class="active">About</a>
-    <a href="../Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+    <a href="/">(Work)</a>
+    <a href="/about" class="active">(About)</a>
+    <a href="../Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">(Resume)</a>
   </nav>
 
   <!-- ── Content ──────────────────────────────────────────────────────── -->
@@ -546,14 +563,13 @@
     <div class="footer-inner">
       <p class="footer-copy">© 2026 Noah De Guzman — <a href="https://www.linkedin.com/in/noah-de-guzman/" target="_blank" rel="noopener" style="color:var(--c-subtle); transition:color var(--t-fast);">let's connect 🍵</a></p>
       <ul class="footer-links" role="list">
-        <li><a href="https://www.linkedin.com/in/noah-de-guzman/" target="_blank" rel="noopener">LinkedIn</a></li>
-        <li><a href="../Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">Resume<svg class="ext-icon" width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 8L8 1M8 1H2M8 1V7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+        <li><a href="https://www.linkedin.com/in/noah-de-guzman/" target="_blank" rel="noopener">(LinkedIn)</a></li>
+        <li><a href="../Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">(Resume)</a></li>
       </ul>
     </div>
   </footer>
 
 <!-- ── Hover preview ───────────────────────────────────────────────── -->
-  <div class="cursor-ring" id="cursor-ring"></div>
   <div class="hover-preview" id="invoke-preview">
     <img src="../images/about-images/invoke.jpg" alt="Invoke Co." />
   </div>
@@ -606,6 +622,7 @@
     });
 
     /* ── Cursor ring ──────────────────────────── */
+    document.addEventListener('DOMContentLoaded', () => {
     const ring = document.getElementById('cursor-ring');
     document.addEventListener('mousemove', e => {
       ring.style.left = e.clientX + 'px';
@@ -659,8 +676,11 @@
       nokiaPreview.style.top  = (e.clientY + offset) + 'px';
     });
 
+    });  /* end DOMContentLoaded */
+
   })();
   </script>
+  <div class="cursor-ring" id="cursor-ring"></div>
   <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">
     <span class="theme-toggle-label"><span class="label-dark">Change to Light mode</span><span class="label-light">Change to Dark mode</span></span>
     <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
