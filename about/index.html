@@ -7,8 +7,7 @@
   <link rel="icon" type="image/svg+xml" href="../images/favicon.svg" />
   <script>
     const _s = localStorage.getItem('theme');
-    const _d = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    if (_s === 'light' || (!_s && !_d)) document.documentElement.setAttribute('data-theme','light');
+    if (_s !== 'dark') document.documentElement.setAttribute('data-theme','light');
   </script>
   <style>
     /* ─────────────────────────────────────────────
