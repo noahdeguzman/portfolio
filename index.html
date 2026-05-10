@@ -37,7 +37,7 @@
       --nav-h:     52px;
       --r-card:    0px;
       --r-pill:    980px;
-      --pad:       56px;
+      --pad:       26px;
 
       --ease:        cubic-bezier(0.25, 0.46, 0.45, 0.94);
       --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -301,6 +301,7 @@
       aspect-ratio: 16 / 9;
       height: auto;
       flex-shrink: 0;
+      overflow: hidden;
     }
     .pg-card-split .pg-cover {
       position: absolute;
@@ -713,7 +714,7 @@
       <a href="/sap-admin" class="pg-card pg-card-split pg-bg-sap pg-card-bordered" aria-label="SAP — admin settings"
          style="transition-delay:0.10s">
         <div class="pg-scene">
-          <img class="pg-cover" src="images/Cover.jpg" alt="" style="object-fit: fill;" />
+          <video class="pg-cover" src="images/sap-animation.mp4" autoplay muted loop playsinline style="transform:scale(1.03);"></video>
         </div>
         <div class="pg-overlay">
           <div class="pg-overlay-inner">
@@ -733,9 +734,7 @@
       <a href="#" class="pg-card pg-card-split pg-bg-fiori pg-card-bordered" aria-label="SAP DNA Web UI Kit — Design System"
          style="transition-delay:0.18s">
         <div class="pg-scene">
-          <div class="pg-logo-container">
-            <img src="images/sap-logo.png" alt="SAP logo" class="pg-logo-img" />
-          </div>
+          <img class="pg-cover" src="images/sap-ds-img.png" alt="SAP Design System" />
         </div>
         <div class="pg-overlay">
           <div class="pg-overlay-inner">
@@ -755,7 +754,7 @@
       <a href="/nokia" class="pg-card pg-card-split pg-bg-nokia pg-card-bordered" aria-label="Nokia — Frostbuster"
          style="transition-delay:0.26s">
         <div class="pg-scene">
-          <img class="pg-cover" src="images/Nokia.jpg" alt="" style="object-fit: fill;" />
+          <video class="pg-cover" src="images/nokia-animation.mp4" autoplay muted loop playsinline style="transform:scale(1.03);"></video>
         </div>
         <div class="pg-overlay">
           <div class="pg-overlay-inner">
@@ -775,7 +774,7 @@
       <a href="/toyota" class="pg-card pg-card-split pg-bg-invoke pg-card-bordered" aria-label="Toyota — fleet management"
          style="transition-delay:0.34s">
         <div class="pg-scene">
-          <img class="pg-cover" src="images/iMac Mockup.jpg" alt="" />
+          <img class="pg-cover" src="images/toyota-banner.avif" alt="" />
         </div>
         <div class="pg-overlay">
           <div class="pg-overlay-inner">
