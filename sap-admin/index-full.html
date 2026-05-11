@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en" id="top">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Noah De Guzman — SAP Admin Settings</title>
+  <link rel="icon" type="image/svg+xml" href="../images/favicon.svg" />
+  <script>
+    const _s = localStorage.getItem('theme');
+    if (_s !== 'dark') document.documentElement.setAttribute('data-theme','light');
+  </script>
+  <style>
+    :root {
+      --font-display: "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --font-text:    "SF Pro Text",    "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --font-mono:    "SF Mono", "Fira Mono", "Consolas", monospace;
+
+      --c-bg:      #141414;
+      --c-surface: #1c1c1e;
+      --c-border:  rgba(255,255,255,0.1);
+      --c-text:    #f5f5f7;
+      --c-muted:   #a1a1a6;
+      --c-subtle:  #6e6e73;
+      --c-blue:    #2997ff;
+
+      --c-nav-bg:      #141414;
+      --c-nav-border:  rgba(255,255,255,0.1);
+      --c-ring-border: rgba(255,255,255,0.5);
+
+      --nav-h:  52px;
+      --pad:    26px;
+
+      --ease:        cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --t:      0.45s;
+      --t-fast: 0.2s;
+      --r-pill: 980px;
+    }
+
+    [data-theme="light"] {
+      --c-bg:      #fafafa;
+      --c-surface: #ffffff;
+      --c-border:  rgba(0,0,0,0.1);
+      --c-text:    #1d1d1f;
+      --c-muted:   #515154;
+      --c-subtle:  #86868b;
+
+      --c-nav-bg:      #fafafa;
+      --c-nav-border:  rgba(0,0,0,0.1);
+      --c-ring-border: rgba(0,0,0,0.35);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+    .theme-transitioning *,
+    .theme-transitioning *::before,
+    .theme-transitioning *::after {
+      transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease !important;
+    }
+
+    body {
+      font-family: var(--font-text);
+      background: var(--c-bg);
+      color: var(--c-text);
+      font-size: 17px;
+      line-height: 1.5;
+      
+      cursor: none;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.08;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 300px 300px;
+    }
+    [data-theme="light"] body::before {
+      opacity: 0.18;
+    }
+    * { cursor: none !important; }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+    ul { list-style: none; }
+
+    /* ─────────────────────────────────────────────
+       NAV
+    ───────────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      z-index: 9000;
+      display: flex;
+      align-items: center;
+    }
+    .nav-inner {
+      width: 100%;
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 0 var(--pad);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
+    .nav-logo {
+      font-size: 24px;
+      color: var(--c-white);
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: opacity var(--t) var(--ease), transform var(--t) var(--ease);
+      display: inline-block;
+    }
+    @keyframes spin-cw  { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes spin-ccw { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+    .nav-logo.spin-cw  { animation: spin-cw  0.5s var(--ease) forwards; }
+    .nav-logo.spin-ccw { animation: spin-ccw 0.5s var(--ease) forwards; }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+    }
+    .sidebar-logo { opacity: 0.9; }
+    [data-theme="light"] .sidebar-logo { opacity: 0.9; }
+    .nav-links a {
+      font-family: var(--font-text);
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--c-muted);
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: color var(--t-fast) var(--ease),
+                  opacity var(--t) var(--ease),
+                  transform var(--t) var(--ease);
+    }
+    .nav-links a:hover { color: var(--c-text); }
+    .nav-links a.active { color: var(--c-text); }
+    .ext-icon {
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 4px;
+      margin-bottom: 3px;
+      opacity: 0.5;
+    }
+    .nav-links a:nth-child(1) { transition-delay: 0.04s; }
+    .nav-links a:nth-child(2) { transition-delay: 0.08s; }
+    .nav-links a:nth-child(3) { transition-delay: 0.12s; }
+    .nav.loaded .nav-logo,
+    .nav.loaded .nav-links a { opacity: 1; transform: translateY(0); }
+
+    /* ─────────────────────────────────────────────
+       SIDEBAR
+    ───────────────────────────────────────────── */
+    .sidebar {
+      position: fixed;
+      top: calc(var(--nav-h) + 40px);
+      left: max(0px, calc(50vw - 800px));
+      width: 260px;
+      height: calc(100vh - var(--nav-h));
+      padding: 0 var(--pad);
+      display: flex;
+      flex-direction: column;
+      z-index: 100;
+    }
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .sidebar-nav a {
+      font-family: var(--font-text);
+      font-size: 13px;
+      color: var(--c-subtle);
+      transition: color var(--t-fast);
+      line-height: 1.4;
+    }
+    .sidebar-nav a:hover,
+    .sidebar-nav a.active { color: var(--c-text); }
+
+    /* ─────────────────────────────────────────────
+       CONTENT
+    ───────────────────────────────────────────── */
+    .page-content {
+      padding: calc(var(--nav-h) + 40px) var(--pad) 0 calc(260px + var(--pad));
+      min-height: calc(100svh - 53px);
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    /* ─────────────────────────────────────────────
+       SECTION LABELS
+    ───────────────────────────────────────────── */
+    .cs-section-label {
+      font-family: var(--font-text);
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--c-subtle);
+      margin-bottom: 12px;
+      text-transform: capitalize;
+    }
+
+    /* ─────────────────────────────────────────────
+       OVERVIEW
+    ───────────────────────────────────────────── */
+    .cs-overview {
+      padding: 0 0 80px;
+      border-bottom: 1px solid var(--c-border);
+    }
+    .cs-overview-hero {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+      gap: 64px;
+    }
+    .cs-overview-left {
+      flex: 1 1 0;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .cs-overview-right {
+      flex: 0 0 35%;
+      min-width: 0;
+    }
+    .cs-overview-title {
+      font-family: var(--font-display);
+      font-size: clamp(16px, 1.6vw, 22px);
+      font-weight: 400;
+      letter-spacing: -0.015em;
+      line-height: 1.65;
+      color: var(--c-text);
+    }
+    .pg-nda {
+      display: inline-block;
+      font-family: var(--font-text);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: #6b5200;
+      background: #fdf4a3;
+      border-radius: var(--r-pill);
+      padding: 2px 7px;
+      line-height: 1.6;
+      vertical-align: middle;
+      margin-left: 6px;
+      position: relative;
+      top: -1px;
+    }
+    .cs-overview-desc {
+      font-family: var(--font-text);
+      font-size: clamp(13px, 1vw, 15px);
+      color: var(--c-muted);
+      line-height: 1.75;
+    }
+    .cs-meta-grid {
+      display: flex;
+      flex-direction: column;
+    }
+    .cs-meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      padding: 6px 0;
+    }
+    .cs-meta-row + .cs-meta-row {
+      border-top: 1px solid var(--c-border);
+    }
+    .cs-meta-row-left {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .cs-meta-col-label {
+      font-family: var(--font-text);
+      font-size: clamp(13px, 1vw, 15px);
+      color: var(--c-subtle);
+    }
+    .cs-meta-col-item {
+      font-family: var(--font-display);
+      font-size: clamp(14px, 1.1vw, 16px);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: var(--c-muted);
+    }
+    .cs-overview-banner {
+      margin-top: 48px;
+      border-radius: 0;
+      overflow: hidden;
+      height: 680px;
+      background: var(--c-surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cs-overview-banner img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+    .cs-overview-banner .banner-placeholder {
+      font-family: var(--font-text);
+      font-size: 13px;
+      color: var(--c-subtle);
+    }
+
+    /* ─────────────────────────────────────────────
+       SECTIONS
+    ───────────────────────────────────────────── */
+    .cs-section {
+      padding: 80px 0;
+      border-bottom: 1px solid var(--c-border);
+    }
+    .cs-section:last-child { border-bottom: none; }
+    .cs-section-heading {
+      font-family: var(--font-display);
+      font-size: clamp(16px, 1.6vw, 22px);
+      font-weight: 400;
+      letter-spacing: -0.015em;
+      line-height: 1.65;
+      color: var(--c-text);
+      margin-bottom: 20px;
+    }
+    .cs-section-body {
+      font-family: var(--font-text);
+      font-size: clamp(13px, 1vw, 15px);
+      color: var(--c-muted);
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+    .cs-section-body:last-child { margin-bottom: 0; }
+    .cs-section-body strong {
+      color: var(--c-text);
+      font-weight: 500;
+    }
+    .cs-section-heading strong {
+      font-weight: 500;
+      color: #0070f2;
+    }
+    .cs-subheading {
+      font-family: var(--font-display);
+      font-size: clamp(15px, 1.15vw, 17px);
+      font-weight: 400;
+      letter-spacing: -0.015em;
+      color: var(--c-text);
+      margin-top: 40px;
+      margin-bottom: 12px;
+    }
+    .cs-img {
+      width: 100%;
+      border-radius: 0;
+      overflow: hidden;
+      margin: 32px 0;
+      background: var(--c-surface);
+    }
+    .cs-img img {
+      width: 100%;
+      display: block;
+    }
+
+    /* ─────────────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────────────── */
+    .footer {
+      border-top: 1px solid var(--c-border);
+    }
+    .footer-inner {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 20px var(--pad);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-copy {
+      font-family: var(--font-text);
+      font-size: 12px;
+      color: var(--c-subtle);
+    }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a {
+      font-family: var(--font-text);
+      font-size: 12px;
+      color: var(--c-subtle);
+      transition: color var(--t-fast);
+    }
+    .footer-links a:hover { color: var(--c-muted); }
+
+
+    /* ─────────────────────────────────────────────
+       HAMBURGER MENU
+    ───────────────────────────────────────────── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 32px;
+      height: 32px;
+      background: none;
+      border: none;
+      padding: 0;
+      z-index: 10001;
+      pointer-events: auto !important;
+      cursor: pointer !important;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--c-text);
+      border-radius: 2px;
+      transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
+      transform-origin: center;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    .nav-mobile-menu {
+      display: none;
+      position: fixed;
+      top: var(--nav-h);
+      left: 0; right: 0;
+      background: var(--c-bg);
+      border-bottom: 1px solid var(--c-border);
+      padding: 24px var(--pad);
+      flex-direction: column;
+      gap: 20px;
+      z-index: 9999;
+    }
+    .nav-mobile-menu.open { display: flex; }
+    .nav-mobile-menu a {
+      font-family: var(--font-text);
+      font-size: 15px;
+      color: var(--c-muted);
+      transition: color var(--t-fast);
+    }
+    .nav-mobile-menu a:hover,
+    .nav-mobile-menu a.active { color: var(--c-text); }
+
+    /* ─────────────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────────────── */
+    @media (max-width: 860px) {
+      :root { --pad: 24px; }
+      .sidebar { display: none; }
+      .page-content { padding-left: var(--pad); }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .cs-overview-hero { flex-direction: column; align-items: flex-start; gap: 40px; }
+    }
+    @media (max-width: 560px) {
+      .footer-inner { flex-direction: column; gap: 16px; }
+    }
+
+    /* ─────────────────────────────────────────────
+       THEME TOGGLE
+    ───────────────────────────────────────────── */
+    .theme-toggle {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--c-border);
+      background: var(--c-surface);
+      color: var(--c-muted);
+      z-index: 9000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.25s var(--ease), border-color 0.25s var(--ease), color 0.2s var(--ease);
+      cursor: none !important;
+    }
+    .theme-toggle:hover { color: var(--c-text); }
+    .theme-toggle-label {
+      position: absolute;
+      right: calc(100% + 10px);
+      top: 50%;
+      transform: translateY(-50%) translateX(8px);
+      white-space: nowrap;
+      font-family: var(--font-text);
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--c-muted);
+      background: var(--c-surface);
+      border: 1px solid var(--c-border);
+      border-radius: var(--r-pill);
+      padding: 4px 10px;
+      opacity: 0;
+      transition: opacity var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
+      pointer-events: none;
+    }
+    .theme-toggle:hover .theme-toggle-label { opacity: 1; transform: translateY(-50%) translateX(0); }
+    .theme-toggle-label .label-dark  { display: inline; }
+    .theme-toggle-label .label-light { display: none; }
+    [data-theme="light"] .theme-toggle-label .label-dark  { display: none; }
+    [data-theme="light"] .theme-toggle-label .label-light { display: inline; }
+    .theme-toggle .icon-sun  { display: block; }
+    .theme-toggle .icon-moon { display: none; }
+    [data-theme="light"] .theme-toggle .icon-sun  { display: none; }
+    [data-theme="light"] .theme-toggle .icon-moon { display: block; }
+
+    /* ─────────────────────────────────────────────
+       CURSOR RING
+    ───────────────────────────────────────────── */
+    .cursor-ring {
+      position: fixed;
+      width: 12px;
+      height: 12px;
+      background: #ffffff;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99999;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.2s ease, width 0.25s ease, height 0.25s ease, background 0.2s ease;
+      opacity: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    [data-theme="light"] .cursor-ring { background: #000000; }
+    .cursor-ring.visible { opacity: 1; }
+
+    /* ─────────────────────────────────────────────
+       PAGE ENTRANCE
+    ───────────────────────────────────────────── */
+    .sidebar,
+    .page-content {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 1.2s var(--ease), transform 1.2s var(--ease);
+    }
+    .sidebar.loaded {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.3s;
+    }
+    .page-content.loaded {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.2s;
+    }
+
+    @media (max-width: 860px) {
+      body { cursor: auto; }
+      a, button, [role="button"], * { cursor: auto !important; }
+      .cursor-ring { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Nav ─────────────────────────────────────────────────────────── -->
+  <nav class="nav" id="nav" role="banner">
+    <div class="nav-inner">
+      <a class="nav-logo" href="/" aria-label="noah de guzman home">❋</a>
+      <ul class="nav-links" role="list">
+        <li><a href="/">(Work)</a></li>
+        <li><a href="/about">(About)</a></li>
+        <li><a href="../Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">(Resume)</a></li>
+      </ul>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <nav class="nav-mobile-menu" id="nav-mobile-menu">
+    <a href="/">(Work)</a>
+    <a href="/about">(About)</a>
+    <a href="../Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">(Resume)</a>
+  </nav>
+
+  <!-- ── Sidebar ──────────────────────────────────────────────────────── -->
+  <aside class="sidebar" id="sidebar">
+    <img src="../images/sap-logo.png" alt="SAP" class="sidebar-logo" style="width: 28%; height: auto; margin-bottom: 24px; display: block;" />
+    <nav class="sidebar-nav">
+      <a href="#top" class="active">Overview</a>
+      <a href="#context">Context</a>
+      <a href="#problem">Problem</a>
+      <a href="#goals">Goals</a>
+      <a href="#process">Process</a>
+      <a href="#outcome">Outcome</a>
+      <a href="#reflections">Reflections</a>
+    </nav>
+  </aside>
+
+  <!-- ── Content ──────────────────────────────────────────────────────── -->
+  <main class="page-content" id="main">
+
+
+    <!-- Overview -->
+    <div class="cs-overview" id="overview">
+      <div class="cs-overview-hero">
+        <div class="cs-overview-left">
+          <p style="font-family:var(--font-text); font-size:13px; color:var(--c-subtle);">SAP · 2026</p>
+          <h1 class="cs-overview-title">Unifying Admin Settings across products in Business Data Cloud</h1>
+          <p class="cs-overview-desc">Business Data Cloud brings together SAP Analytics Cloud (SAC), Datasphere (DSP), and BDC under one platform. Differences in how admin settings were structured across products created a noticeable inconsistency for administrators. Collaborating with one other UX designer, I worked across two connected workstreams: one focused on compliance for browser integration and tenant appearance, and one focused on establishing a shared layout standard for admin settings across all products. This project is under NDA, so details shared here are intentionally high-level.</p>
+        </div>
+        <div class="cs-overview-right">
+          <div class="cs-meta-grid">
+            <div class="cs-meta-row">
+              <div class="cs-meta-row-left">
+                <span class="cs-meta-col-label">Platform</span>
+                <span class="cs-meta-col-item">Figma</span>
+              </div>
+            </div>
+            <div class="cs-meta-row">
+              <div class="cs-meta-row-left">
+                <span class="cs-meta-col-label">Tasks</span>
+                <span class="cs-meta-col-item">Cross-platform Alignment</span>
+              </div>
+            </div>
+            <div class="cs-meta-row">
+              <div class="cs-meta-row-left">
+                <span class="cs-meta-col-label">Timeline</span>
+                <span class="cs-meta-col-item">~5 months</span>
+              </div>
+            </div>
+            <div class="cs-meta-row">
+              <div class="cs-meta-row-left">
+                <span class="cs-meta-col-label">Role</span>
+                <span class="cs-meta-col-item">UX Designer</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-overview-banner">
+        <video src="../images/sap-animation2.mp4" autoplay muted loop playsinline style="width:100%; display:block;"></video>
+      </div>
+    </div>
+
+    <!-- Context -->
+    <section class="cs-section" id="context">
+      <p class="cs-section-label">context</p>
+      <h2 class="cs-section-heading">Business Data Cloud unified three products under one platform. The admin experience <strong>needed to follow.</strong></h2>
+      <p class="cs-section-body">Business Data Cloud brings together SAP Analytics Cloud (SAC), Datasphere (DSP), and BDC under one platform. Each product has its own Administration area used by administrators to maintain their tenant, including configuring SSO settings, managing system information, and controlling how the product appears in the browser.</p>
+      <p class="cs-section-body">Differences in admin settings structure across products created a noticeable inconsistency for administrators managing multiple products. Rather than addressing each issue separately, two parallel workstreams were scoped together: one focused on compliance for browser and tenant appearance, and one focused on unifying the admin page layout itself. Running them in parallel meant both problems could be tackled at once, with shared learnings feeding into each.</p>
+    </section>
+
+    <!-- Problem -->
+    <section class="cs-section" id="problem">
+      <p class="cs-section-label">problem</p>
+      <h2 class="cs-section-heading">Two separate compliance and consistency problems, <strong>addressed together</strong>.</h2>
+
+      <h3 class="cs-subheading" style="margin-top:0;">Workstream 1 — Browser integration &amp; tenant appearance</h3>
+      <p class="cs-section-body">Both SAC and DSP had compliance gaps in how they handled browser-level product identity and tenant appearance settings. On top of that, the settings for managing these features lived in different places across products with no shared entry point or interaction pattern, creating an inconsistent experience for administrators.</p>
+
+      <h3 class="cs-subheading">Workstream 2 — Admin page template</h3>
+      <p class="cs-section-body">Across SAC and DSP's administration tabs, there was no consistent way to save changes, no shared layout structure, and no shared component conventions. Each tab had been built independently, and it showed. The goal was to define a single standard that all admin settings tabs could adopt going forward.</p>
+    </section>
+
+    <!-- Goals -->
+    <section class="cs-section" id="goals">
+      <p class="cs-section-label">goals</p>
+      <h2 class="cs-section-heading">Fix compliance, align structure, and give every admin tab <strong>the same foundation.</strong></h2>
+
+      <h3 class="cs-subheading" style="margin-top:0;">Workstream 1</h3>
+      <p class="cs-section-body">Resolve compliance gaps across SAC and DSP and align both products to a shared standard for browser integration and tenant appearance settings. Create a single spec covering both products so development teams spread across multiple countries could understand the full scope. Design a rollout plan that handled existing and new customers differently without breaking either experience.</p>
+
+      <h3 class="cs-subheading">Workstream 2</h3>
+      <p class="cs-section-body">Establish a single layout standard for all admin settings tabs across SAC, DSP, and eventually BDC. Unify save behaviour across every tab, standardize component usage, and produce migration guidelines for teams updating existing tabs to the new standard.</p>
+    </section>
+
+    <!-- Process -->
+    <section class="cs-section" id="process">
+      <p class="cs-section-label">process</p>
+
+      <h3 class="cs-subheading" style="margin-top:0;">Workstream 1 — Auditing and scoping compliance fixes</h3>
+      <p class="cs-section-body">I started by auditing the current state of browser integration and appearance settings across SAC and DSP, mapping where compliance gaps existed and what a compliant version would look like. The audit identified several affected components, all using hardcoded values where SAP's themeable variables were required.</p>
+      <p class="cs-section-body">The design proposal introduced a new settings section that consolidated appearance-related controls into one predictable location. The rollout plan accounted for existing customers separately from new customers to avoid disrupting established workflows. Edge cases around theming and the interaction between different appearance settings were worked through and documented before handoff.</p>
+      <p class="cs-section-body">The spec was structured to cover SAC and DSP together, with clear callouts for which changes applied to which product, so multiple development teams could reference a single document rather than coordinating across separate specs.</p>
+
+      <h3 class="cs-subheading">Workstream 1 — Stakeholder feedback and iteration</h3>
+      <p class="cs-section-body">Feedback from the UXC lead and senior designer shaped several decisions around the rollout plan and layout direction. The spec format was also refined based on feedback, shifting to a structured presentation format so the development lead could follow the flow without navigating the design file directly.</p>
+      <p class="cs-section-body">A follow-up review with the development lead surfaced additional edge cases around save state behaviour and how appearance settings would render under different browser and theme configurations. These were incorporated into the spec before handoff.</p>
+
+      <h3 class="cs-subheading">Workstream 2 — Establishing the layout standard</h3>
+      <p class="cs-section-body">The admin page template work began with a high-level audit of how settings were being saved and displayed across all administration tabs. Multiple inconsistent patterns were in use with no shared convention. The goal was to consolidate these into a single, predictable pattern applied consistently across the page.</p>
+      <p class="cs-section-body">A layout standard was defined based on an established SAP floorplan, giving every admin tab a shared structure for sections, content width, and save behaviour. The footer was standardized to surface a consistent set of actions across all tabs.</p>
+      <p class="cs-section-body">Component usage was also audited across all tabs. Several components were being used outside their intended pattern, and migration guidelines were written to help tab owners apply the new standard correctly, covering layout, content guidelines, responsiveness, and how to handle existing custom elements.</p>
+
+      <h3 class="cs-subheading">Working across teams</h3>
+      <p class="cs-section-body">Both workstreams involved coordinating across UX, User Assistance (UA), project managers, and development, with team members spread across different product areas. I worked with the UA designer to align on content and label standards. Scope changes mid-project, including a project manager transition and phasing decisions around what to include in scope, were incorporated without restarting the work. Regular check-ins with the UXC lead and developers ensured both specs met cross-platform standards and feasible implementation throughout the process.</p>
+    </section>
+
+    <!-- Outcome -->
+    <section class="cs-section" id="outcome">
+      <p class="cs-section-label">outcome</p>
+      <h2 class="cs-section-heading">Both specs completed, handed off to development, and unified <strong>20 tabs across 3 products</strong>.</h2>
+      <p class="cs-section-body">Both specs were completed and handed off to development. Full case study details are available on request.</p>
+    </section>
+
+    <!-- Reflections -->
+    <section class="cs-section" id="reflections">
+      <p class="cs-section-label">reflections</p>
+
+      <h3 class="cs-subheading" style="margin-top:0;">Decisions take time, and that's okay</h3>
+      <p class="cs-section-body">Even small design decisions can involve multiple stakeholders, reviews, and back-and-forths before a direction is locked. Working at enterprise scale taught me to separate the design work from the decision-making process. Keeping specs well-documented meant that when decisions finally landed, implementation could move quickly.</p>
+
+      <h3 class="cs-subheading">How you present work matters as much as the work itself</h3>
+      <p class="cs-section-body">I learned early on that the format you use to present to developers shapes how well they understand the design intent. A Figma file works in a design review, but a structured spec or a live prototype is what actually moves things forward in a dev handoff. Developers respond well to being able to interact with the design directly rather than interpreting static screens. Finding the right format for the right audience became a skill in itself.</p>
+
+      <h3 class="cs-subheading">Leading design conversations and advocating for decisions</h3>
+      <p class="cs-section-body">Working with developers and project managers on a regular basis gave me hands-on experience presenting design rationale and defending decisions in a professional setting. One thing I underestimated early on was assuming stakeholders remembered the full context of the project. In reality, everyone is juggling multiple workstreams, and coming into a review with full context, not just the latest changes, made conversations more productive and helped move decisions forward faster.</p>
+    </section>
+
+  </main>
+
+  <!-- ── Footer ───────────────────────────────────────────────────────── -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-inner">
+      <p class="footer-copy">© 2026 Noah De Guzman — <a href="https://www.linkedin.com/in/noah-de-guzman/" target="_blank" rel="noopener" style="color:var(--c-subtle); transition:color var(--t-fast);">let's connect 🍵</a></p>
+      <ul class="footer-links" role="list">
+        <li><a href="https://www.linkedin.com/in/noah-de-guzman/" target="_blank" rel="noopener">(LinkedIn)</a></li>
+        <li><a href="../Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">(Resume)</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script>
+  (() => {
+    'use strict';
+
+    /* ── Nav entrance ────────────────────────── */
+    window.addEventListener('DOMContentLoaded', () => {
+      requestAnimationFrame(() => {
+        document.getElementById('nav').classList.add('loaded');
+        document.getElementById('sidebar').classList.add('loaded');
+        document.getElementById('main').classList.add('loaded');
+      });
+    });
+
+    /* ── Nav frosted glass on scroll ──────────── */
+    const nav = document.getElementById('nav');
+    window._onScroll = () => {
+      const past = window.scrollY > 60;
+      const st = getComputedStyle(document.documentElement);
+      nav.style.background           = past ? st.getPropertyValue('--c-nav-bg').trim() : 'transparent';
+      nav.style.borderBottom         = past ? `1px solid ${st.getPropertyValue('--c-nav-border').trim()}` : 'none';
+    };
+    window.addEventListener('scroll', window._onScroll, { passive: true });
+    window._onScroll();
+
+    /* ── Sidebar active state on scroll ──────── */
+    const sections = document.querySelectorAll('.cs-section[id], .cs-overview[id]');
+    const navLinks = document.querySelectorAll('.sidebar-nav a');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const id = e.target.id;
+          navLinks.forEach(a => {
+            const href = a.getAttribute('href');
+            const matches = href === '#' + id || (id === 'overview' && href === '#top');
+            a.classList.toggle('active', matches);
+          });
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+
+    sections.forEach(s => observer.observe(s));
+
+    /* ── Hamburger menu ───────────────────────── */
+    window.addEventListener('DOMContentLoaded', () => {
+      const hamburger = document.getElementById('nav-hamburger');
+      const mobileMenu = document.getElementById('nav-mobile-menu');
+      if (!hamburger || !mobileMenu) return;
+      hamburger.addEventListener('click', () => {
+        const open = hamburger.classList.toggle('open');
+        mobileMenu.classList.toggle('open', open);
+      });
+      mobileMenu.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          hamburger.classList.remove('open');
+          mobileMenu.classList.remove('open');
+        });
+      });
+    });
+
+    /* ── Cursor ring ──────────────────────────── */
+    document.addEventListener('DOMContentLoaded', () => {
+      const ring = document.getElementById('cursor-ring');
+      document.addEventListener('mousemove', e => {
+        ring.style.left = e.clientX + 'px';
+        ring.style.top  = e.clientY + 'px';
+        ring.classList.add('visible');
+      }, { passive: true });
+      document.addEventListener('mouseleave', () => ring.classList.remove('visible'));
+    });
+
+  })();
+  </script>
+
+  <div class="cursor-ring" id="cursor-ring"></div>
+  </script>
+
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">
+    <span class="theme-toggle-label"><span class="label-dark">Change to Light mode</span><span class="label-light">Change to Dark mode</span></span>
+    <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+
+  <script>
+  (() => {
+    const root = document.documentElement;
+    const btn  = document.getElementById('theme-toggle');
+    const logo = document.querySelector('.nav-logo');
+    btn.addEventListener('click', () => {
+      document.documentElement.classList.add('theme-transitioning');
+      const isLight = root.getAttribute('data-theme') === 'light';
+      if (isLight) {
+        root.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'dark');
+        logo.classList.remove('spin-ccw');
+        void logo.offsetWidth;
+        logo.classList.add('spin-cw');
+      } else {
+        root.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+        logo.classList.remove('spin-cw');
+        void logo.offsetWidth;
+        logo.classList.add('spin-ccw');
+      }
+      setTimeout(() => document.documentElement.classList.remove('theme-transitioning'), 400);
+      if (window._onScroll) window._onScroll();
+    });
+  })();
+  </script>
+
+
+</body>
+</html>

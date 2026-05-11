@@ -608,7 +608,7 @@
         <div class="cs-overview-left">
           <p style="font-family:var(--font-text); font-size:13px; color:var(--c-subtle);">SAP · 2026</p>
           <h1 class="cs-overview-title">Unifying Admin Settings across products in Business Data Cloud</h1>
-          <p class="cs-overview-desc">Business Data Cloud brings together SAP Analytics Cloud (SAC), Datasphere (DSP), and BDC under one platform. Differences in how admin settings were structured across products created a noticeable inconsistency for administrators. Collaborating with one other UX designer, I worked across two connected workstreams: one focused on compliance for browser integration and tenant appearance, and one focused on establishing a shared layout standard for admin settings across all products. This project is under NDA, so details shared here are intentionally high-level.</p>
+          <p class="cs-overview-desc">Business Data Cloud brings together SAP Analytics Cloud (SAC), Datasphere (DSP), and BDC under one platform. Differences in how admin settings were structured across products created a noticeable inconsistency for administrators. Collaborating with one other UX designer, I worked across two connected workstreams: one focused on compliance for browser integration and tenant appearance, and one focused on establishing a shared layout standard for admin settings across all products. <strong>This project is under NDA, so details shared here are intentionally high-level.</strong></p>
         </div>
         <div class="cs-overview-right">
           <div class="cs-meta-grid">
@@ -648,55 +648,37 @@
     <!-- Context -->
     <section class="cs-section" id="context">
       <p class="cs-section-label">context</p>
-      <h2 class="cs-section-heading">Business Data Cloud unified three products under one platform. The admin experience <strong>needed to follow.</strong></h2>
-      <p class="cs-section-body">Business Data Cloud brings together SAP Analytics Cloud (SAC), Datasphere (DSP), and BDC under one platform. Each product has its own Administration area used by administrators to maintain their tenant, including configuring SSO settings, managing system information, and controlling how the product appears in the browser.</p>
-      <p class="cs-section-body">Differences in admin settings structure across products created a noticeable inconsistency for administrators managing multiple products. Rather than addressing each issue separately, two parallel workstreams were scoped together: one focused on compliance for browser and tenant appearance, and one focused on unifying the admin page layout itself. Running them in parallel meant both problems could be tackled at once, with shared learnings feeding into each.</p>
+      <h2 class="cs-section-heading">A platform bringing multiple products under one roof. The admin experience <strong>needed to follow.</strong></h2>
+      <p class="cs-section-body">SAP's Business Data Cloud brings together multiple products under a single platform. Each product had its own administration area, built independently over time, resulting in inconsistencies across the experience for administrators managing multiple products at once.</p>
+      <p class="cs-section-body">As the UX Designer on this project, I was embedded within a cross-functional team working across UX, development, user assistance, and product management, with team members distributed across multiple countries and product areas.</p>
     </section>
 
     <!-- Problem -->
     <section class="cs-section" id="problem">
       <p class="cs-section-label">problem</p>
-      <h2 class="cs-section-heading">Two separate compliance and consistency problems, <strong>addressed together</strong>.</h2>
-
-      <h3 class="cs-subheading" style="margin-top:0;">Workstream 1 — Browser integration &amp; tenant appearance</h3>
-      <p class="cs-section-body">Both SAC and DSP had compliance gaps in how they handled browser-level product identity and tenant appearance settings. On top of that, the settings for managing these features lived in different places across products with no shared entry point or interaction pattern, creating an inconsistent experience for administrators.</p>
-
-      <h3 class="cs-subheading">Workstream 2 — Admin page template</h3>
-      <p class="cs-section-body">Across SAC and DSP's administration tabs, there was no consistent way to save changes, no shared layout structure, and no shared component conventions. Each tab had been built independently, and it showed. The goal was to define a single standard that all admin settings tabs could adopt going forward.</p>
+      <h2 class="cs-section-heading">Inconsistent admin experiences across products, <strong>addressed in parallel.</strong></h2>
+      <p class="cs-section-body">Administrators working across multiple products encountered different layouts, interaction patterns, and settings structures depending on which product they were in. Two related problems were scoped together and run as parallel workstreams, allowing shared learnings to feed into both without duplicating effort.</p>
     </section>
 
     <!-- Goals -->
     <section class="cs-section" id="goals">
       <p class="cs-section-label">goals</p>
-      <h2 class="cs-section-heading">Fix compliance, align structure, and give every admin tab <strong>the same foundation.</strong></h2>
-
-      <h3 class="cs-subheading" style="margin-top:0;">Workstream 1</h3>
-      <p class="cs-section-body">Resolve compliance gaps across SAC and DSP and align both products to a shared standard for browser integration and tenant appearance settings. Create a single spec covering both products so development teams spread across multiple countries could understand the full scope. Design a rollout plan that handled existing and new customers differently without breaking either experience.</p>
-
-      <h3 class="cs-subheading">Workstream 2</h3>
-      <p class="cs-section-body">Establish a single layout standard for all admin settings tabs across SAC, DSP, and eventually BDC. Unify save behaviour across every tab, standardize component usage, and produce migration guidelines for teams updating existing tabs to the new standard.</p>
+      <h2 class="cs-section-heading">Align structure, standardize components, and give every admin tab <strong>the same foundation.</strong></h2>
+      <p class="cs-section-body">The goal across both workstreams was consistency — bringing admin settings across products into alignment so administrators experienced a single, predictable interface regardless of which product they were in. This meant establishing shared layout standards, unifying interaction patterns, and producing specs detailed enough for development teams across multiple countries to implement independently.</p>
     </section>
 
     <!-- Process -->
     <section class="cs-section" id="process">
       <p class="cs-section-label">process</p>
 
-      <h3 class="cs-subheading" style="margin-top:0;">Workstream 1 — Auditing and scoping compliance fixes</h3>
-      <p class="cs-section-body">I started by auditing the current state of browser integration and appearance settings across SAC and DSP, mapping where compliance gaps existed and what a compliant version would look like. The audit identified several affected components, all using hardcoded values where SAP's themeable variables were required.</p>
-      <p class="cs-section-body">The design proposal introduced a new settings section that consolidated appearance-related controls into one predictable location. The rollout plan accounted for existing customers separately from new customers to avoid disrupting established workflows. Edge cases around theming and the interaction between different appearance settings were worked through and documented before handoff.</p>
-      <p class="cs-section-body">The spec was structured to cover SAC and DSP together, with clear callouts for which changes applied to which product, so multiple development teams could reference a single document rather than coordinating across separate specs.</p>
+      <h3 class="cs-subheading" style="margin-top:0;">Auditing the current state</h3>
+      <p class="cs-section-body">Both workstreams started with an audit of the existing experience, mapping inconsistencies across products and identifying what a unified standard would need to cover. The audit surfaced a range of issues that had accumulated over time as each product built its admin area independently.</p>
 
-      <h3 class="cs-subheading">Workstream 1 — Stakeholder feedback and iteration</h3>
-      <p class="cs-section-body">Feedback from the UXC lead and senior designer shaped several decisions around the rollout plan and layout direction. The spec format was also refined based on feedback, shifting to a structured presentation format so the development lead could follow the flow without navigating the design file directly.</p>
-      <p class="cs-section-body">A follow-up review with the development lead surfaced additional edge cases around save state behaviour and how appearance settings would render under different browser and theme configurations. These were incorporated into the spec before handoff.</p>
-
-      <h3 class="cs-subheading">Workstream 2 — Establishing the layout standard</h3>
-      <p class="cs-section-body">The admin page template work began with a high-level audit of how settings were being saved and displayed across all administration tabs. Multiple inconsistent patterns were in use with no shared convention. The goal was to consolidate these into a single, predictable pattern applied consistently across the page.</p>
-      <p class="cs-section-body">A layout standard was defined based on an established SAP floorplan, giving every admin tab a shared structure for sections, content width, and save behaviour. The footer was standardized to surface a consistent set of actions across all tabs.</p>
-      <p class="cs-section-body">Component usage was also audited across all tabs. Several components were being used outside their intended pattern, and migration guidelines were written to help tab owners apply the new standard correctly, covering layout, content guidelines, responsiveness, and how to handle existing custom elements.</p>
+      <h3 class="cs-subheading">Designing and iterating</h3>
+      <p class="cs-section-body">Design proposals were reviewed iteratively with the UXC lead, senior designer, and development lead. Feedback shaped both the design direction and the format of the specs, which were structured to be navigable by development teams without requiring them to work through the design file directly.</p>
 
       <h3 class="cs-subheading">Working across teams</h3>
-      <p class="cs-section-body">Both workstreams involved coordinating across UX, User Assistance (UA), project managers, and development, with team members spread across different product areas. I worked with the UA designer to align on content and label standards. Scope changes mid-project, including a project manager transition and phasing decisions around what to include in scope, were incorporated without restarting the work. Regular check-ins with the UXC lead and developers ensured both specs met cross-platform standards and feasible implementation throughout the process.</p>
+      <p class="cs-section-body">Both workstreams involved coordinating across UX, user assistance, project management, and development. Scope changes mid-project were incorporated without restarting the work, and regular check-ins ensured the direction remained feasible across all product areas involved.</p>
     </section>
 
     <!-- Outcome -->
