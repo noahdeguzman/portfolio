@@ -296,6 +296,9 @@
       display: block;
     }
 
+    @media (min-width: 1440px) {
+      :root { --pad: 48px; }
+    }
     @media (max-width: 860px) {
       .about-hero { flex-direction: column; align-items: flex-start; gap: 40px; }
       .about-banner { height: 260px; }
@@ -406,6 +409,9 @@
     /* ─────────────────────────────────────────────
        RESPONSIVE
     ───────────────────────────────────────────── */
+    @media (min-width: 1440px) {
+      :root { --pad: 48px; }
+    }
     @media (max-width: 860px) {
       :root { --pad: 24px; }
       .nav-links { display: none; }
@@ -485,6 +491,9 @@
     [data-theme="light"] .cursor-ring { background: #000000; }
     .cursor-ring.visible { opacity: 1; }
 
+    @media (min-width: 1440px) {
+      :root { --pad: 48px; }
+    }
     @media (max-width: 860px) {
       body { cursor: auto; }
       a, button, [role="button"], * { cursor: auto !important; }

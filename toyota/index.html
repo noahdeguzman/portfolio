@@ -162,7 +162,7 @@
     .sidebar {
       position: fixed;
       top: calc(var(--nav-h) + 40px);
-      left: max(0px, calc(50vw - 1000px));
+      left: var(--pad);
       width: 260px;
       height: calc(100vh - var(--nav-h));
       padding: 0 var(--pad);
@@ -473,6 +473,9 @@
     /* ─────────────────────────────────────────────
        RESPONSIVE
     ───────────────────────────────────────────── */
+    @media (min-width: 1440px) {
+      :root { --pad: 48px; }
+    }
     @media (max-width: 860px) {
       :root { --pad: 24px; }
       .sidebar { display: none; }
@@ -576,6 +579,9 @@
     }
 
 
+    @media (min-width: 1440px) {
+      :root { --pad: 48px; }
+    }
     @media (max-width: 860px) {
       body { cursor: auto; }
       a, button, [role="button"], * { cursor: auto !important; }
