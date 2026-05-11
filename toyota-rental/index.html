@@ -304,7 +304,7 @@
       margin-top: 48px;
       border-radius: 0;
       overflow: hidden;
-      height: 520px;
+      height: 680px;
       position: relative;
     }
     .cs-overview-banner img {
@@ -627,8 +627,8 @@
       <div class="cs-overview-hero">
         <div class="cs-overview-left">
           <p style="font-family:var(--font-text); font-size:13px; color:var(--c-subtle);">Toyota · 2024</p>
-          <h1 class="cs-overview-title">Enhancing dealership operations with effortless fleet management</h1>
-          <p class="cs-overview-desc">Toyota is a long-standing client of Invoke, a design and development agency where I completed my co-op in the Summer of 2024. The project focused on the order limiter tool, a redesign of the internal interface used by Dolan Toyota administrators to manage vehicle order limits. I contributed to the design work and supported client presentations throughout the engagement.</p>
+          <h1 class="cs-overview-title">Mobile car rental reservation system</h1>
+          <p class="cs-overview-desc">A mobile-first UX design project for Dolan Toyota's car rental reservation system, completed during my co-op at Invoke in Summer 2024. The project covered the end-to-end reservation flow, from browsing available vehicles to confirming a booking, designed for customers on iOS and Android.</p>
         </div>
         <div class="cs-overview-right">
           <div class="cs-meta-grid">
@@ -641,7 +641,7 @@
             <div class="cs-meta-row">
               <div class="cs-meta-row-left">
                 <span class="cs-meta-col-label">Tasks</span>
-                <span class="cs-meta-col-item">Prototyping, UI Components</span>
+                <span class="cs-meta-col-item">Prototyping, UI Design</span>
               </div>
             </div>
             <div class="cs-meta-row">
@@ -661,89 +661,63 @@
       </div>
 
       <div class="cs-overview-banner">
-        <img src="../images/toyota-img.png" alt="Toyota" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <video src="../images/toyota-rental-video.mov" autoplay muted loop playsinline style="width:100%;height:100%;object-fit:contain;display:block;background:#ffffff;"></video>
       </div>
     </div>
 
     <!-- Context -->
     <section class="cs-section" id="context">
       <p class="cs-section-label">context</p>
-      <h2 class="cs-section-heading">Toyota TMNA oversees all operations in North America. <strong>Invoke helps build the tools that support them.</strong></h2>
-      <p class="cs-section-body">Toyota Motor North America (TMNA) oversees all Toyota operations across the continent. Invoke, a design and development agency, maintains an ongoing partnership with TMNA spanning multiple product engagements. As the junior designer on this project, I was responsible for the prototyping and contributed to design presentations with the client.</p>
-      <p class="cs-section-body">The project team consisted of three members: myself as the junior designer, a senior product designer, and a project manager. We held weekly internal syncs to review progress and align on changes, alongside bi-weekly client sessions with the Toyota team, which was made up of three developers and two project managers. In addition to this engagement, I contributed to a separate Toyota project at Invoke, the mobile version of a Car Rental Reservation System for Dolan Toyota.</p>
+      <h2 class="cs-section-heading">A desktop reservation flow already existed. <strong>My job was to bring it to mobile.</strong></h2>
+      <p class="cs-section-body">Toyota is a long-standing client of Invoke, a design and development agency where I completed my co-op in Summer 2024. Alongside the fleet management project, I worked on a separate engagement: the mobile version of a car rental reservation system for Dolan Toyota.</p>
+      <p class="cs-section-body">The desktop flow had already been designed. The team was small: a senior product designer, a project manager, and me handling the prototyping and UI work. My focus was adapting the existing experience for mobile, rethinking the layout and interactions to suit a smaller screen without losing any of the core functionality.</p>
     </section>
 
     <!-- Problem -->
     <section class="cs-section" id="problem">
       <p class="cs-section-label">problem</p>
-      <h2 class="cs-section-heading">The existing order limiter system has outdated UI and is challenging for new admins to learn. How might we design a more intuitive fleet management system that <strong>empowers administrators to efficiently manage vehicle order limits</strong>?</h2>
-      <p class="cs-section-body">The backend vehicle ordering system Toyota admins relied on had outdated visuals, inconsistent hierarchy, and no clear way to set or view limits alongside order progress. Administrators needed a single interface where all of that information was visible and actionable. The client's request was explicit: the redesign had to be both efficient and aesthetic.</p>
+      <h2 class="cs-section-heading">The reservation system existed on desktop but had no mobile version. How might we adapt the existing flow into an experience that <strong>feels native on a phone</strong>?</h2>
+      <p class="cs-section-body">The desktop design worked well in its context, but translating it directly to mobile would not. A smaller screen, touch-based interaction, and different usage patterns all required rethinking how the flow was structured and how information was presented at each step.</p>
     </section>
 
     <!-- Process -->
     <section class="cs-section" id="process">
       <p class="cs-section-label">process</p>
 
-      <h3 class="cs-subheading" style="margin-top:0;">Auditing the original system</h3>
-      <p class="cs-section-body">The first step was a close look at the existing fleet management system. The original UI had outdated visuals, inconsistent hierarchy, and no clear visual affordances for key actions like creating a new rule. The layout created cognitive overload rather than supporting the task.</p>
-      <p class="cs-section-body">Vehicle data was displayed in a dense, unstructured layout rather than a proper table, making it difficult to compare values across records at a glance. There was no obvious primary action; key functions were buried with no visual hierarchy to guide new admins. Inconsistent spacing and an absence of a layout grid added to the confusion. The dark, automotive consumer branding was also applied directly to the admin tool, prioritizing visual identity over the clarity and efficiency that an admin interface requires.</p>
-      <div class="cs-img cs-img--placeholder" style="display:flex; align-items:center; justify-content:center; min-height:640px;">
-        <img src="../images/old-fleet.avif" alt="Original fleet management system" style="max-width:70%; max-height:70%; width:auto; display:block; border-radius:0; box-shadow: 0 4px 16px rgba(0,0,0,0.18);" />
-      </div>
-
-      <h3 class="cs-subheading">Finding inspiration</h3>
-      <p class="cs-section-body">Before moving into solutions, existing data table and admin dashboard patterns from other products were reviewed to identify conventions worth adapting. Two patterns stood out: a side navigation bar for quick access between admin sections, and a table layout for listing and managing records at a glance. Both directly informed the structural direction of the redesign.</p>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:32px; margin:32px 0;">
-        <img src="../images/fleet-ex1.png" alt="Inspiration example 1" style="width:100%; display:block;" />
-        <img src="../images/fleet-ex2.png" alt="Inspiration example 2" style="width:100%; display:block;" />
-      </div>
-
-      <h3 class="cs-subheading">Workshop and whiteboard sketches</h3>
-      <p class="cs-section-body">The senior product designer and I ran a workshop to sketch out the logic behind creating rules and setting limits. Working directly on a whiteboard helped us visualize the admin's workflow, identify edge cases, and align on a direction before moving into any digital work. The simplicity of sketching made it easy to share ideas, gather feedback, and explore multiple solutions quickly.</p>
-
-      <h3 class="cs-subheading">Designing the table view</h3>
-      <p class="cs-section-body">A table view listing all vehicles with a limit applied was the direction taken. This gave administrators a full overview of all models and series at once, directly supporting the efficiency goal. Expandable rows allowed rule details to be reviewed inline without navigating away. Presenting this version to the client for the first time underscored the importance of walking through the full flow thoroughly, not just the final screens.</p>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:32px; margin:32px 0; align-items:start;">
-        <div style="overflow:hidden; border-radius:0; aspect-ratio:744/483;">
-          <img src="../images/fleet-sketch.png" alt="Fleet lo-fi sketch" style="width:100%; height:100%; object-fit:cover; display:block;" />
-        </div>
-        <img src="../images/fleet-v1.png" alt="Fleet version 1 wireframe" style="width:100%; display:block;" />
-      </div>
-      <h3 class="cs-subheading">Client reviews and feedback</h3>
-      <p class="cs-section-body">Client meetings brought together about seven participants, three from Invoke and two developers and two project leads from Toyota. Each session was used to walk through the current designs and give the Toyota team space to discuss and respond. The project manager documented key points and action items, which were reviewed internally before the next iteration.</p>
-      <p class="cs-section-body">The first review after v1 surfaced a range of functional requirements that hadn't been captured upfront. The client responded positively to elements like the filter, total order counts, and the model description screen, but also raised specific constraints: limits in the current month should be fixed and non-editable, rules with no data should be hidden, and the new rule modal needed dropdown filtering by series and model. This feedback directly shaped what changed between v1 and the final prototype.</p>
-
-      <h3 class="cs-subheading">Creating component sets</h3>
-      <p class="cs-section-body">Component sets were not part of the original scope, but I built them independently after the core design work was done. As the components were already built with auto layout, organizing them into a structured design system required minimal rework. The goal was to make the work easier to maintain and hand off.</p>
-      <div class="cs-img cs-img--placeholder" style="overflow:hidden; max-height:520px; background:#ffffff;">
-        <img src="../images/fleet-components.png" alt="Fleet component sets" style="width:75%; display:block; object-fit:cover; object-position:top; margin:0 auto;" />
-      </div>
-      <h3 class="cs-subheading">Final prototype and handoff</h3>
-      <p class="cs-section-body">Reducing the number of clicks and pages an administrator had to navigate was the core constraint throughout. The final prototype kept all necessary information surfaced and actionable within a single view, with no unnecessary context switching. A UX spec was prepared for handoff covering five main use cases: the current order period flow including in-line edits and table interactions, the order period selector for navigating past and future periods, the future order period flow for editing and setting series and group limits, confirmation modals for destructive actions, and adding a new rule.</p>
+      <h3 class="cs-subheading" style="margin-top:0;">Translating desktop to mobile</h3>
+      <p class="cs-section-body">The desktop flow served as the starting point, but translating it directly to mobile wasn't straightforward. The main landing screen combined a full hero image with an overlaid search bar, date and time pickers laid out horizontally in a single row, and a 3-column vehicle grid below. On mobile, the hero was condensed, the pickers stacked into two rows, and the grid shifted from 3 columns to 2.</p>
       <div class="cs-img">
-        <img src="../images/toyota-banner.avif" alt="Toyota final prototype" style="width:100%; display:block;" />
+        <img src="../images/toyota-ex1.png" alt="Desktop to mobile landing screen comparison" style="width:100%; display:block;" />
       </div>
+      <p class="cs-section-body">The vehicle detail screen presented a bigger challenge. On desktop, vehicle information and the booking summary panel sat side by side in two columns. On mobile, that split had to collapse into a single vertical stack, with a sticky bar at the bottom showing the estimated total and a Reserve button so the primary action was always reachable. The date picker, which was a simple dropdown on desktop, became a full inline calendar on mobile to give users a clearer sense of availability without leaving the screen.</p>
+      <div class="cs-img">
+        <img src="../images/toyota-ex2.png" alt="Desktop to mobile vehicle detail comparison" style="width:100%; display:block;" />
+      </div>
+      <p class="cs-section-body">The customer info and confirmation screens followed the same logic. On desktop, the form sits on the left with the full estimated total breakdown panel always visible on the right. On mobile, that persistent panel disappears. Instead, a sticky bar at the bottom shows just the total and a Reserve button, with a "Details" link that slides up the full breakdown as a sheet when tapped. The information is all still there, just revealed on demand rather than always occupying half the screen.</p>
+      <div class="cs-img">
+        <img src="../images/toyota-ex3.png" alt="Desktop to mobile customer info comparison" style="width:100%; display:block;" />
+      </div>
+
+      <h3 class="cs-subheading">Prototyping and iteration</h3>
+      <p class="cs-section-body">The prototype was built in Figma covering the core reservation flow from start to finish. Iterations were based on internal feedback and client reviews, focusing on reducing friction at each step of the booking process.</p>
     </section>
 
     <!-- Outcome -->
     <section class="cs-section" id="outcome">
       <p class="cs-section-label">outcome</p>
-      <h2 class="cs-section-heading">A modernized fleet management system covering <strong>9 flows across 2 features</strong>, delivered in a 2-week sprint.</h2>
-      <p class="cs-section-body">The fragmented original was replaced with a unified table view where administrators could manage vehicle order limits, review rules, and take action without leaving the main screen.</p>
+      <h2 class="cs-section-heading">A fully adapted mobile reservation flow across <strong>8 screens</strong>, delivered within a 2-week sprint.</h2>
+      <p class="cs-section-body">The desktop flow was successfully translated into a mobile experience across all key screens: the landing page, vehicle selection, vehicle detail, customer info, and booking confirmation. Each screen was rethought for mobile rather than simply resized, with layouts, interactions, and information hierarchy adjusted to suit how people actually use their phones.</p>
     </section>
 
     <!-- Reflections -->
     <section class="cs-section" id="reflections">
       <p class="cs-section-label">reflections</p>
 
-      <h3 class="cs-subheading" style="margin-top:0;">Communicating design decisions</h3>
-      <p class="cs-section-body">Invoke was my first design co-op, and this project was the first time I presented work to project managers, developers, and a client. Leading the client meetings built confidence in walking stakeholders through design decisions and responding to feedback directly, a skill that carried into subsequent projects.</p>
-      <div class="cs-img">
-        <img src="../images/about-images/invoke.jpg" alt="Invoke team" style="width:100%; display:block;" />
-      </div>
+      <h3 class="cs-subheading" style="margin-top:0;">Designing within constraints</h3>
+      <p class="cs-section-body">Having an existing desktop flow to reference made the project more focused, but it also meant every decision had to be deliberate. It wasn't about creating something new; it was about understanding what the desktop design was doing and finding the right mobile equivalent. That kind of constraint pushed me to think more carefully about layout and hierarchy than I might have otherwise.</p>
 
-      <h3 class="cs-subheading">Building practical Figma skills</h3>
-      <p class="cs-section-body">Working on a real product gave me hands-on experience in Figma that went beyond the basics. Building out component sets, using auto layout to construct complex dashboard screens, and creating a working prototype all became skills I developed through this project rather than in isolation.</p>
+      <h3 class="cs-subheading">Progressive disclosure on mobile</h3>
+      <p class="cs-section-body">The biggest takeaway was learning when to hide information and when to surface it. On desktop, showing everything at once works because there's room for it. On mobile, the same approach creates clutter. Patterns like the slide-up details sheet taught me that progressive disclosure isn't just a nice-to-have on mobile; it's often the only way to keep a screen usable.</p>
     </section>
 
   </main>

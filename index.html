@@ -350,6 +350,17 @@
       line-height: 1.6;
       max-width: 80%;
     }
+    .pg-card-logo {
+      height: 20px;
+      width: auto;
+      object-fit: contain;
+      flex-shrink: 0;
+      opacity: 0.85;
+      filter: brightness(0) invert(1);
+    }
+    [data-theme="light"] .pg-card-logo { filter: none; }
+    .pg-card-logo.pg-card-logo-sap { filter: none; }
+    [data-theme="light"] .pg-card-logo.pg-card-logo-sap { filter: none; }
     .pg-tag {
       font-family: var(--font-text);
       font-size: 11px;
@@ -719,8 +730,8 @@
           <div class="pg-overlay-inner">
             <p class="pg-tag"></p>
             <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px;">
-              <p class="pg-name">Unifying Admin Settings across products in Business Data Cloud (SAP)</p>
-              <p class="pg-meta-year" style="flex-shrink:0; padding-top:2px;">2026</p>
+              <p class="pg-name">Unifying Admin Settings across products in Business Data Cloud</p>
+              <img src="images/sap-logo.png" alt="SAP" class="pg-card-logo pg-card-logo-sap" />
             </div>
             <div class="pg-info-row">
               <p class="pg-description">A redesign of the admin settings experience across multiple SAP products within Business Data Cloud, unifying 20 tabs across 3 products into a single consistent pattern.</p>
@@ -739,8 +750,8 @@
           <div class="pg-overlay-inner">
             <p class="pg-tag"></p>
             <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px;">
-              <p class="pg-name">DNA Web UI Kit Design System (SAP) 🔒</p>
-              <p class="pg-meta-year" style="flex-shrink:0; padding-top:2px;">2026</p>
+              <p class="pg-name">DNA Web UI Kit Design System 🔒</p>
+              <img src="images/sap-logo.png" alt="SAP" class="pg-card-logo pg-card-logo-sap" />
             </div>
             <div class="pg-info-row">
               <p class="pg-description">Contributing to the SAP DNA Web UI Kit, a design system used across SAP products to ensure visual consistency, accessibility, and scalability at enterprise scale.</p>
@@ -759,8 +770,8 @@
           <div class="pg-overlay-inner">
             <p class="pg-tag"></p>
             <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px;">
-              <p class="pg-name">Streamlining the Frostbuster submission process for developers (Nokia)</p>
-              <p class="pg-meta-year" style="flex-shrink:0; padding-top:2px;">2025</p>
+              <p class="pg-name">Streamlining the Frostbuster submission process for developers</p>
+              <img src="images/nokia-logo.svg" alt="Nokia" class="pg-card-logo" style="height:13px;" />
             </div>
             <div class="pg-info-row">
               <p class="pg-description">A redesign of the Frostbuster submission flow for developers, removing 12 steps and reducing clicks by 35% through a single guided experience.</p>
@@ -773,17 +784,37 @@
       <a href="/toyota" class="pg-card pg-card-split pg-bg-invoke pg-card-bordered" aria-label="Toyota — fleet management"
          style="transition-delay:0.34s">
         <div class="pg-scene">
-          <img class="pg-cover" src="images/iMac Mockup.jpg" alt="" style="object-position: left top;" />
+          <img class="pg-cover" src="images/toyota-banner.avif" alt="" style="object-position: left top;" />
         </div>
         <div class="pg-overlay">
           <div class="pg-overlay-inner">
             <p class="pg-tag"></p>
             <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px;">
-              <p class="pg-name">Enhancing dealership operations with effortless fleet management (Toyota)</p>
-              <p class="pg-meta-year" style="flex-shrink:0; padding-top:2px;">2024</p>
+              <p class="pg-name">Enhancing dealership operations with effortless fleet management</p>
+              <img src="images/toyota-1-logo 1.png" alt="Toyota" class="pg-card-logo" style="height:15px;" />
             </div>
             <div class="pg-info-row">
-              <p class="pg-description">A fleet management tool designed to streamline dealership operations, helping staff track, manage, and coordinate vehicle inventory with less friction.</p>
+              <p class="pg-description">A fleet management tool redesigned for dealership operations, delivering a full UX spec and prototype across 9 flows and 2 features within a 2-week sprint.</p>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <!-- Toyota Rental — fifth card -->
+      <a href="/toyota-rental" class="pg-card pg-card-split pg-bg-invoke pg-card-bordered" aria-label="Toyota — dealer rental mobile reservation"
+         style="transition-delay:0.42s">
+        <div class="pg-scene" style="background:#ffffff;">
+          <video class="pg-cover" src="images/toyota-rental-video.mov" autoplay muted loop playsinline style="object-fit:contain;"></video>
+        </div>
+        <div class="pg-overlay">
+          <div class="pg-overlay-inner">
+            <p class="pg-tag"></p>
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px;">
+              <p class="pg-name">Mobile car rental reservation system</p>
+              <img src="images/toyota-1-logo 1.png" alt="Toyota" class="pg-card-logo" style="height:15px;" />
+            </div>
+            <div class="pg-info-row">
+              <p class="pg-description">Adapting an existing desktop car rental reservation flow for mobile, translating layouts and interactions for a smaller screen while maintaining full feature parity.</p>
             </div>
           </div>
         </div>
@@ -878,8 +909,8 @@
 
         let bg, textColor;
         if (isDNAKit) {
-          bg        = isLight ? '#000000' : '#ffffff';
-          textColor = isLight ? '#ffffff' : '#000000';
+          bg        = 'rgb(41,151,255)';
+          textColor = '#ffffff';
         } else {
           bg        = isToyota ? 'rgb(235,10,30)' : isNokia ? 'rgb(0,90,255)' : 'rgb(41,151,255)';
           textColor = '#ffffff';
