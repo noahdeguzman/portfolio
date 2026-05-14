@@ -212,6 +212,7 @@
       transition: opacity 1.3s var(--ease) 0.3s, transform 1.3s var(--ease) 0.3s;
     }
     .hero.loaded .hero-sub { opacity: 1; transform: translateY(0); }
+    .hero-sub.hide { opacity: 0 !important; transform: translateY(10px) !important; transition: none !important; }
     .hero-sub a {
       color: var(--c-muted);
       border-bottom: 1px solid var(--c-subtle);
@@ -687,7 +688,6 @@
 </div>
 <div class="cursor-label" id="cursor-label">Go to project</div>
 
-
   <!-- ── Nav ─────────────────────────────────────────────────────────── -->
   <nav class="nav" id="nav" role="banner">
     <div class="nav-inner">
@@ -712,7 +712,7 @@
   <!-- ── Hero ─────────────────────────────────────────────────────────── -->
   <section class="hero" id="hero" aria-label="Introduction">
     <p class="hero-statement">
-      hey! my name is noah de guzman, a user experience designer based in vancouver, bc, driving <span style="color:var(--c-white);">design systems and cross-product services</span> to create scalable user experiences.
+      hey! my name is noah de guzman, a user experience designer based in vancouver, bc, driving <span style="color:var(--c-blue);">design systems</span><span style="color:var(--c-white);"> and </span><span style="color:var(--c-blue);">cross-product services</span> to create scalable user experiences.
     </p>
     <p class="hero-sub">currently @ <a href="https://www.sap.com" target="_blank" rel="noopener">sap</a>, previously @ <a href="https://www.nokia.com" target="_blank" rel="noopener">nokia</a>.</p>
   </section>
@@ -950,6 +950,104 @@
       cursorLabel.classList.remove('visible');
     });
 
+  })();
+  </script>
+
+  <!-- ── Typewriter ───────────────────────────────────────────────────── -->
+  <script>
+  (() => {
+    const SPEED = 28; // ms per character
+
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        const el = document.querySelector('.hero-statement');
+        const sub = document.querySelector('.hero-sub');
+        if (!el) return;
+
+        // Hide sub until typing is done
+        if (sub) sub.classList.add('hide');
+
+        // Snapshot the full inner HTML, then blank the element
+        const fullHTML = el.innerHTML;
+
+        // Build a flat list of {node, char} pairs from the original HTML
+        // by parsing into a temp container
+        const tmp = document.createElement('p');
+        tmp.innerHTML = fullHTML;
+
+        // Flatten all text into segments: [{text, style}]
+        // where style is the inline style of the parent span (or null)
+        const segments = [];
+        tmp.childNodes.forEach(node => {
+          if (node.nodeType === Node.TEXT_NODE) {
+            segments.push({ text: node.textContent, style: null });
+          } else if (node.nodeType === Node.ELEMENT_NODE) {
+            segments.push({ text: node.textContent, style: node.getAttribute('style') });
+          }
+        });
+
+        // Flatten into chars with segment index
+        const chars = [];
+        segments.forEach((seg, si) => {
+          for (const ch of seg.text) chars.push({ ch, si });
+        });
+
+        // Clear element
+        el.innerHTML = '';
+
+        // Build live span nodes for each segment
+        const segNodes = segments.map(seg => {
+          if (seg.style) {
+            const s = document.createElement('span');
+            s.setAttribute('style', seg.style);
+            s.textContent = '';
+            el.appendChild(s);
+            return s;
+          } else {
+            const t = document.createTextNode('');
+            el.appendChild(t);
+            return t;
+          }
+        });
+
+        // Blinking cursor element
+        const cursor = document.createElement('span');
+        cursor.textContent = '|';
+        cursor.style.cssText = 'opacity:1;animation:blink 0.7s step-end infinite;color:var(--c-muted);font-weight:300;';
+        el.appendChild(cursor);
+
+        // Add blink keyframes once
+        if (!document.getElementById('blink-style')) {
+          const style = document.createElement('style');
+          style.id = 'blink-style';
+          style.textContent = '@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}';
+          document.head.appendChild(style);
+        }
+
+        let i = 0;
+        const id = setInterval(() => {
+          if (i >= chars.length) {
+            clearInterval(id);
+            setTimeout(() => {
+              cursor.remove();
+              // Reveal hero-sub with a smooth fade-in
+              if (sub) {
+                sub.classList.remove('hide');
+              }
+            }, 800);
+            return;
+          }
+          const { ch, si } = chars[i];
+          const node = segNodes[si];
+          if (node.nodeType === Node.TEXT_NODE) {
+            node.textContent += ch;
+          } else {
+            node.textContent += ch;
+          }
+          i++;
+        }, SPEED);
+      }, 300);
+    });
   })();
   </script>
 
