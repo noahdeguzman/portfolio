@@ -5,15 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Noah De Guzman</title>
   <link rel="icon" type="image/svg+xml" href="../images/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Inter+Tight:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <script>
     const _s = localStorage.getItem('theme');
     if (_s === 'light' || (!_s && !window.matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.setAttribute('data-theme','light');
   </script>
   <style>
     :root {
-      --font-display: "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --font-display: "Inter Tight", "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
       --font-text:    "SF Pro Text",    "Helvetica Neue", Helvetica, Arial, sans-serif;
-      --font-mono:    "SF Mono", "Fira Mono", "Consolas", monospace;
+      --font-mono:    "Space Mono", "SF Mono", "Fira Mono", "Consolas", monospace;
 
       --c-bg:      #141414;
       --c-surface: #1c1c1e;
@@ -28,7 +31,7 @@
       --c-ring-border: rgba(255,255,255,0.5);
 
       --nav-h:  52px;
-      --pad:    26px;
+      --pad:    16px;
 
       --ease:        cubic-bezier(0.25, 0.46, 0.45, 0.94);
       --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -71,19 +74,6 @@
       
       cursor: none;
     }
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      opacity: 0.08;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-      background-size: 300px 300px;
-    }
-    [data-theme="light"] body::before {
-      opacity: 0.18;
-    }
     * { cursor: none !important; }
     a { text-decoration: none; color: inherit; }
     img { display: block; max-width: 100%; }
@@ -102,8 +92,6 @@
     }
     .nav-inner {
       width: 100%;
-      max-width: 1600px;
-      margin: 0 auto;
       padding: 0 var(--pad);
       display: flex;
       align-items: center;
@@ -111,8 +99,12 @@
       position: relative;
     }
     .nav-logo {
-      font-size: 24px;
-      color: var(--c-white);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      color: var(--c-text);
       opacity: 0;
       transform: translateY(-6px);
       transition: opacity var(--t) var(--ease), transform var(--t) var(--ease);
@@ -120,8 +112,8 @@
     }
     @keyframes spin-cw  { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     @keyframes spin-ccw { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
-    .nav-logo.spin-cw  { animation: spin-cw  0.5s var(--ease) forwards; }
-    .nav-logo.spin-ccw { animation: spin-ccw 0.5s var(--ease) forwards; }
+    .nav-logo.spin-cw  { }
+    .nav-logo.spin-ccw { }
     .nav-links {
       display: flex;
       gap: 28px;
@@ -129,9 +121,11 @@
     .sidebar-logo { filter: brightness(0) invert(1); opacity: 0.85; }
     [data-theme="light"] .sidebar-logo { filter: none; opacity: 0.85; }
     .nav-links a {
-      font-family: var(--font-text);
-      font-size: 13px;
+      font-family: var(--font-mono);
+      font-size: 12px;
       font-weight: 400;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
       color: var(--c-muted);
       opacity: 0;
       transform: translateY(-6px);
@@ -141,6 +135,10 @@
     }
     .nav-links a:hover { color: var(--c-text); }
     .nav-links a.active { color: var(--c-text); }
+    .nav-links a.active::before { content: "["; }
+    .nav-links a.active::after  { content: "]"; }
+    .nav-mobile-menu a.active::before { content: "["; }
+    .nav-mobile-menu a.active::after  { content: "]"; }
     .ext-icon {
       display: inline-block;
       vertical-align: middle;
@@ -154,20 +152,54 @@
     .nav.loaded .nav-logo,
     .nav.loaded .nav-links a { opacity: 1; transform: translateY(0); }
 
+    .nav-linkedin {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--c-text);
+      border: 1px solid var(--c-text);
+      padding: 6px 14px;
+      border-radius: 0;
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: color var(--t-fast) var(--ease),
+                  background var(--t-fast) var(--ease),
+                  opacity var(--t) var(--ease),
+                  transform var(--t) var(--ease);
+      transition-delay: 0.16s;
+      white-space: nowrap;
+    }
+    .nav-linkedin:hover {
+      background: var(--c-text);
+      color: var(--c-bg);
+    }
+    .nav.loaded .nav-linkedin { opacity: 1; transform: translateY(0); }
+
     /* ─────────────────────────────────────────────
        SIDEBAR
     ───────────────────────────────────────────── */
-
+    .page-body {
+      display: flex;
+      align-items: flex-start;
+    }
     .sidebar {
-      position: fixed;
+      position: sticky;
       top: calc(var(--nav-h) + 40px);
-      left: max(0px, calc(50vw - 800px));
-      width: 260px;
-      height: calc(100vh - var(--nav-h));
-      padding: 0 var(--pad);
+      width: 200px;
+      flex-shrink: 0;
+      padding: 40px var(--pad) 0 var(--pad);
       display: flex;
       flex-direction: column;
-      z-index: 100;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 1.2s var(--ease), transform 1.2s var(--ease);
+    }
+    .sidebar.loaded {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.3s;
     }
     .sidebar-nav {
       display: flex;
@@ -175,8 +207,10 @@
       gap: 10px;
     }
     .sidebar-nav a {
-      font-family: var(--font-text);
-      font-size: 13px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
       color: var(--c-subtle);
       transition: color var(--t-fast);
       line-height: 1.4;
@@ -185,25 +219,43 @@
     .sidebar-nav a.active { color: var(--c-text); }
 
     /* ─────────────────────────────────────────────
+       HERO VIDEO
+    ───────────────────────────────────────────── */
+    .cs-hero-video {
+      position: relative;
+      width: 100%;
+      margin-top: var(--nav-h);
+      line-height: 0;
+    }
+    .cs-hero-video video {
+      width: 100%;
+      display: block;
+      max-height: 85vh;
+      object-fit: cover;
+    }
+
+    /* ─────────────────────────────────────────────
        CONTENT
     ───────────────────────────────────────────── */
     .page-content {
-      padding: calc(var(--nav-h) + 40px) var(--pad) 0 calc(260px + var(--pad));
+      flex: 1;
+      min-width: 0;
+      max-width: 1200px;
+      padding: 40px var(--pad) 0 calc(var(--pad) * 8);
       min-height: calc(100svh - 53px);
-      max-width: 1600px;
-      margin: 0 auto;
     }
 
     /* ─────────────────────────────────────────────
        SECTION LABELS
     ───────────────────────────────────────────── */
     .cs-section-label {
-      font-family: var(--font-text);
-      font-size: 13px;
+      font-family: var(--font-mono);
+      font-size: 12px;
       font-weight: 400;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
       color: var(--c-subtle);
       margin-bottom: 12px;
-      text-transform: capitalize;
     }
 
     /* ─────────────────────────────────────────────
@@ -233,7 +285,7 @@
     .cs-overview-title {
       font-family: var(--font-display);
       font-size: clamp(16px, 1.6vw, 22px);
-      font-weight: 400;
+      font-weight: 500;
       letter-spacing: -0.015em;
       line-height: 1.65;
       color: var(--c-text);
@@ -281,16 +333,19 @@
       flex-wrap: wrap;
     }
     .cs-meta-col-label {
-      font-family: var(--font-text);
-      font-size: clamp(13px, 1vw, 15px);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
       color: var(--c-subtle);
     }
     .cs-meta-col-item {
-      font-family: var(--font-display);
-      font-size: clamp(14px, 1.1vw, 16px);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
       font-weight: 400;
-      letter-spacing: -0.01em;
-      color: var(--c-muted);
+      color: var(--c-text);
     }
     .cs-meta-year {
       font-family: var(--font-text);
@@ -372,26 +427,18 @@
       border-top: 1px solid var(--c-border);
     }
     .footer-inner {
-      max-width: 1600px;
-      margin: 0 auto;
       padding: 20px var(--pad);
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
     }
     .footer-copy {
-      font-family: var(--font-text);
+      font-family: var(--font-mono);
       font-size: 12px;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
       color: var(--c-subtle);
     }
-    .footer-links { display: flex; gap: 24px; }
-    .footer-links a {
-      font-family: var(--font-text);
-      font-size: 12px;
-      color: var(--c-subtle);
-      transition: color var(--t-fast);
-    }
-    .footer-links a:hover { color: var(--c-muted); }
 
 
     /* ─────────────────────────────────────────────
@@ -438,8 +485,10 @@
     }
     .nav-mobile-menu.open { display: flex; }
     .nav-mobile-menu a {
-      font-family: var(--font-text);
+      font-family: var(--font-mono);
       font-size: 15px;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
       color: var(--c-muted);
       transition: color var(--t-fast);
     }
@@ -452,13 +501,12 @@
     @media (max-width: 860px) {
       :root { --pad: 24px; }
       .sidebar { display: none; }
-      .page-content { padding-left: var(--pad); }
       .nav-links { display: none; }
+      .nav-linkedin { display: none; }
       .nav-hamburger { display: flex; }
       .cs-overview-hero { flex-direction: column; align-items: flex-start; gap: 40px; }
     }
     @media (max-width: 560px) {
-      .footer-inner { flex-direction: column; gap: 16px; }
     }
 
     /* ─────────────────────────────────────────────
@@ -488,8 +536,10 @@
       top: 50%;
       transform: translateY(-50%) translateX(8px);
       white-space: nowrap;
-      font-family: var(--font-text);
+      font-family: var(--font-mono);
       font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
       font-weight: 400;
       color: var(--c-muted);
       background: var(--c-surface);
@@ -534,17 +584,13 @@
     /* ─────────────────────────────────────────────
        PAGE ENTRANCE
     ───────────────────────────────────────────── */
-    .sidebar,
+    .cs-hero-video,
     .page-content {
       opacity: 0;
       transform: translateY(16px);
       transition: opacity 1.2s var(--ease), transform 1.2s var(--ease);
     }
-    .sidebar.loaded {
-      opacity: 1;
-      transform: translateY(0);
-      transition-delay: 0.3s;
-    }
+    .cs-hero-video.loaded { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
     .page-content.loaded {
       opacity: 1;
       transform: translateY(0);
@@ -564,12 +610,13 @@
   <!-- ── Nav ─────────────────────────────────────────────────────────── -->
   <nav class="nav" id="nav" role="banner">
     <div class="nav-inner">
-      <a class="nav-logo" href="/" aria-label="noah de guzman home">❋</a>
+      <a class="nav-logo" href="/" aria-label="noah de guzman home" data-transition-color="--c-text">Noah De Guzman</a>
       <ul class="nav-links" role="list">
-        <li><a href="/">(Work)</a></li>
-        <li><a href="/about">(About)</a></li>
-        <li><a href="../Noah_DeGuzman_Resume_2026.pdf" target="_blank" rel="noopener">(Resume)</a></li>
+        <li><a href="/" data-transition-color="--c-text">Work</a></li>
+        <li><a href="/about" data-transition-color="--c-text">About</a></li>
+        <li><a href="../Noah_DeGuzman_Resume_2026.pdf" target="_blank" rel="noopener">Resume</a></li>
       </ul>
+      <a href="https://www.linkedin.com/in/noah-de-guzman/" target="_blank" rel="noopener" class="nav-linkedin">LinkedIn</a>
       <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu">
         <span></span><span></span><span></span>
       </button>
@@ -577,11 +624,19 @@
   </nav>
 
   <nav class="nav-mobile-menu" id="nav-mobile-menu">
-    <a href="/">(Work)</a>
-    <a href="/about">(About)</a>
-    <a href="../Noah_DeGuzman_Resume_2026.pdf" target="_blank" rel="noopener">(Resume)</a>
+    <a href="/" data-transition-color="--c-text">Work</a>
+    <a href="/about" data-transition-color="--c-text">About</a>
+    <a href="../Noah_DeGuzman_Resume_2026.pdf" target="_blank" rel="noopener">Resume</a>
+    <a href="https://www.linkedin.com/in/noah-de-guzman/" target="_blank" rel="noopener">LinkedIn</a>
   </nav>
 
+  <!-- ── Hero Video ───────────────────────────────────────────────────── -->
+  <div class="cs-hero-video">
+    <video src="../images/nokia-animation.mp4" autoplay muted loop playsinline></video>
+  </div>
+
+  <!-- ── Sidebar + Content ────────────────────────────────────────────── -->
+  <div class="page-body">
   <!-- ── Sidebar ───────────────────────────────────────────────────────── -->
   <aside class="sidebar" id="sidebar">
     <img src="../images/nokia-logo.svg" alt="Nokia" class="sidebar-logo" style="width: 32%; height: auto; margin-bottom: 24px; display: block;" />
@@ -602,7 +657,7 @@
     <div class="cs-overview" id="overview">
       <div class="cs-overview-hero">
         <div class="cs-overview-left">
-          <p style="font-family:var(--font-text); font-size:13px; color:var(--c-subtle);">Nokia · 2025</p>
+          <p style="font-family:var(--font-mono); font-size:12px; letter-spacing:-0.03em; text-transform:uppercase; color:var(--c-text);">Nokia [2025]</p>
           <h1 class="cs-overview-title">Streamlining the Frostbuster submission process for developers</h1>
           <p class="cs-overview-desc">Frostbuster is a merge request process that allows developers to merge their code within a locked branch during a code freeze. Each request requires approval from a panel of reviewers. A process largely unchanged for 20 years, this project set out to redesign it from the ground up. Presented as my final case study at the end of my 8-month co-op with Nokia. <strong>This project is under NDA, so details shared here are intentionally high-level.</strong></p>
         </div>
@@ -635,10 +690,10 @@
           </div>
         </div>
       </div>
-
-      <div class="cs-overview-banner">
-        <video src="../images/nokia-animation.mp4" autoplay muted loop playsinline style="width:100%; display:block;"></video>
+      <div class="cs-img" style="margin-top: 40px;">
+        <img src="../images/nokia-tn2.png" alt="Nokia Frostbuster" style="width:100%; display:block;" />
       </div>
+      <hr style="border:none; border-top:1px solid var(--c-border); margin: 80px 0 0;" />
     </div>
 
     <!-- Context -->
@@ -675,8 +730,8 @@
       <h3 class="cs-subheading">User workshops and iteration</h3>
       <p class="cs-section-body">One-hour workshops were run with two separate groups: 6 developers and 2 reviewers, conducted both in-person and remotely. Developer feedback confirmed that automation was the most valued feature for reducing error. Reviewer feedback revealed that past 3 days was the most relevant filter range, and that resubmitting due to incorrect fields was a shared frustration. This led to adding an Edit request feature, allowing developers to modify rejected requests without starting over.</p>
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:32px 0;">
-        <div style="overflow:hidden;"><img src="../images/nokia-ws1.png" alt="Nokia workshop 1" style="width:108%; height:108%; object-fit:cover; object-position:right center; margin:-4%;" /></div>
-        <div style="overflow:hidden;"><img src="../images/nokia-ws2.png" alt="Nokia workshop 2" style="width:102%; height:102%; object-fit:cover; margin:-1%;" /></div>
+        <div style="overflow:hidden; border-radius:0; aspect-ratio:4/3;"><img src="../images/nokia-ws1.png" alt="Nokia workshop 1" style="width:100%; height:100%; object-fit:cover; object-position:right center; display:block;" /></div>
+        <div style="overflow:hidden; border-radius:0; aspect-ratio:4/3;"><img src="../images/nokia-ws2.png" alt="Nokia workshop 2" style="width:100%; height:100%; object-fit:cover; display:block;" /></div>
       </div>
     </section>
 
@@ -697,8 +752,8 @@
       <p class="cs-section-body">Collaborating closely with developers, reviewers, designers, and researchers helped define the scope of what was feasible within the timeline. Knowing what we could and could not do made the design work more focused and grounded.</p>
 
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:32px 0;">
-        <div style="overflow:hidden;"><img src="../images/nokia-frost-team.png" alt="Nokia Frostbuster team" style="width:108%; height:108%; object-fit:cover; margin:-4%;" /></div>
-        <div style="overflow:hidden;"><img src="../images/image 3.png" alt="Nokia team" style="width:102%; height:102%; object-fit:cover; margin:-1%;" /></div>
+        <div style="overflow:hidden; border-radius:0; aspect-ratio:4/3;"><img src="../images/nokia-frost-team.png" alt="Nokia Frostbuster team" style="width:100%; height:100%; object-fit:cover; display:block;" /></div>
+        <div style="overflow:hidden; border-radius:0; aspect-ratio:4/3;"><img src="../images/image 3.png" alt="Nokia team" style="width:100%; height:100%; object-fit:cover; display:block;" /></div>
       </div>
 
       <h3 class="cs-subheading">Changing the co-op project experience</h3>
@@ -706,17 +761,13 @@
     </section>
 
   </main>
+  </div><!-- /.page-body -->
 
   <!-- ── Footer ───────────────────────────────────────────────────────── -->
   <footer class="footer" role="contentinfo">
     <div class="footer-inner">
       <p class="footer-copy">© 2026 Noah De Guzman — <a href="https://www.linkedin.com/in/noah-de-guzman/" target="_blank" rel="noopener" style="color:var(--c-subtle); transition:color var(--t-fast);">let's connect 🍵</a></p>
-      <ul class="footer-links" role="list">
-        <li><a href="https://www.linkedin.com/in/noah-de-guzman/" target="_blank" rel="noopener">(LinkedIn)</a></li>
-        <li><a href="../Noah_DeGuzman_Resume_2026.pdf" target="_blank" rel="noopener">(Resume)</a></li>
-      </ul>
     </div>
-    </ul>
   </footer>
 
   <script>
@@ -728,6 +779,7 @@
       requestAnimationFrame(() => {
         document.getElementById('nav').classList.add('loaded');
         document.getElementById('sidebar').classList.add('loaded');
+        document.querySelector('.cs-hero-video').classList.add('loaded');
         document.getElementById('main').classList.add('loaded');
       });
     });
@@ -830,5 +882,6 @@
   </script>
 
 
+  <script src="../transition.js"></script>
 </body>
 </html>
