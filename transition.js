@@ -47,24 +47,21 @@
     return { overlay, cells, cols, rows };
   }
 
-  function buildDelays(cols, rows) {
-    // Each block gets: column_base + symmetric random jitter
-    // The jitter is centered (±JITTER/2) so blocks can appear both
-    // ahead of and behind their column — jagged on both edges.
+  function buildDelays(cols, rows, stagger, jitter) {
     const delays = [];
     for (let c = 0; c < cols; c++) {
       delays[c] = [];
       for (let r = 0; r < rows; r++) {
-        const base  = c * STAGGER;
-        const jitter = (Math.random() - 0.5) * JITTER;
-        delays[c][r] = Math.max(0, base + jitter);
+        const base  = c * stagger;
+        const j = (Math.random() - 0.5) * jitter;
+        delays[c][r] = Math.max(0, base + j);
       }
     }
     return delays;
   }
 
-  function animateCells(cells, cols, rows, targetOpacity, onDone) {
-    const delays = buildDelays(cols, rows);
+  function animateCells(cells, cols, rows, targetOpacity, onDone, stagger, jitter) {
+    const delays = buildDelays(cols, rows, stagger ?? STAGGER, jitter ?? JITTER);
     let maxDelay = 0;
 
     for (let c = 0; c < cols; c++) {
@@ -130,6 +127,23 @@
     requestAnimationFrame(() => requestAnimationFrame(() => {
       overlay.style.pointerEvents = 'none';
       animateCells(cells, cols, rows, '0', () => overlay.remove());
+    }));
+  });
+
+  /* ── Back/forward: bfcache restore ──────────────────────────────────── */
+  window.addEventListener('pageshow', e => {
+    if (!e.persisted) return;
+    const existing = document.getElementById('px-overlay');
+    if (existing) existing.remove();
+    const { overlay, cells, cols, rows } = makeGrid('#ffffff');
+    for (let c = 0; c < cols; c++)
+      for (let r = 0; r < rows; r++)
+        cells[c][r].style.opacity = '1';
+    overlay.style.pointerEvents = 'all';
+    document.body.appendChild(overlay);
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      overlay.style.pointerEvents = 'none';
+      animateCells(cells, cols, rows, '0', () => overlay.remove(), 45, 140);
     }));
   });
 
