@@ -425,30 +425,19 @@
     ───────────────────────────────────────────── */
     .nav-hamburger {
       display: none;
-      flex-direction: column;
-      justify-content: center;
-      gap: 5px;
-      width: 32px;
-      height: 32px;
       background: none;
       border: none;
       padding: 0;
       z-index: 10001;
       pointer-events: auto !important;
       cursor: pointer !important;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      color: var(--c-text);
     }
-    .nav-hamburger span {
-      display: block;
-      width: 22px;
-      height: 1.5px;
-      background: var(--c-text);
-      border-radius: 2px;
-      transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
-      transform-origin: center;
-    }
-    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
-    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
     .nav-mobile-menu {
       display: none;
@@ -512,9 +501,7 @@
         <li><a href="../Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">Resume</a></li>
       </ul>
       <a href="https://www.linkedin.com/in/noah-de-guzman/" target="_blank" rel="noopener" class="nav-linkedin">LinkedIn</a>
-      <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
-      </button>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu">[MENU]</button>
     </div>
   </nav>
 
@@ -712,11 +699,13 @@
       hamburger.addEventListener('click', () => {
         const open = hamburger.classList.toggle('open');
         mobileMenu.classList.toggle('open', open);
+        hamburger.textContent = open ? '[CLOSE]' : '[MENU]';
       });
       mobileMenu.querySelectorAll('a').forEach(a => {
         a.addEventListener('click', () => {
           hamburger.classList.remove('open');
           mobileMenu.classList.remove('open');
+          hamburger.textContent = '[MENU]';
         });
       });
     });
