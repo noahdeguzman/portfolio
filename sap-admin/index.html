@@ -8,10 +8,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Inter+Tight:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <script>
-    const _s = localStorage.getItem('theme');
-    if (_s === 'light' || (!_s && !window.matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.setAttribute('data-theme','light');
-  </script>
   <style>
     :root {
       --font-display: "Inter Tight", "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -40,18 +36,6 @@
       --r-pill: 980px;
     }
 
-    [data-theme="light"] {
-      --c-bg:      #fafafa;
-      --c-surface: #ffffff;
-      --c-border:  rgba(0,0,0,0.1);
-      --c-text:    #1d1d1f;
-      --c-muted:   #515154;
-      --c-subtle:  #86868b;
-
-      --c-nav-bg:      #fafafa;
-      --c-nav-border:  rgba(0,0,0,0.1);
-      --c-ring-border: rgba(0,0,0,0.35);
-    }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html {
@@ -59,11 +43,6 @@
       -moz-osx-font-smoothing: grayscale;
       scroll-behavior: smooth;
       overflow-x: hidden;
-    }
-    .theme-transitioning *,
-    .theme-transitioning *::before,
-    .theme-transitioning *::after {
-      transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease !important;
     }
 
     body {
@@ -73,9 +52,7 @@
       font-size: 17px;
       line-height: 1.5;
 
-      cursor: none;
     }
-    * { cursor: none !important; }
     a { text-decoration: none; color: inherit; }
     img { display: block; max-width: 100%; }
     ul { list-style: none; }
@@ -109,18 +86,26 @@
       opacity: 0;
       transform: translateY(-6px);
       transition: opacity var(--t) var(--ease), transform var(--t) var(--ease);
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+    }
+    .nav-logo img {
+      height: 56px;
+      width: auto;
+      display: block;
     }
     @keyframes spin-cw  { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     @keyframes spin-ccw { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
     .nav-logo.spin-cw  { }
     .nav-logo.spin-ccw { }
     .nav-links {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
       gap: 28px;
     }
     .sidebar-logo { opacity: 0.9; }
-    [data-theme="light"] .sidebar-logo { opacity: 0.9; }
     .nav-links a {
       font-family: var(--font-mono);
       font-size: 12px;
@@ -184,6 +169,9 @@
     .page-body {
       display: flex;
       align-items: flex-start;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
     }
     .sidebar {
       position: sticky;
@@ -241,8 +229,7 @@
     .page-content {
       flex: 1;
       min-width: 0;
-      max-width: 1200px;
-      padding: 40px var(--pad) 0 calc(var(--pad) * 8);
+      padding: 40px var(--pad) 0 calc(var(--pad) * 3);
       min-height: calc(100svh - 53px);
     }
 
@@ -426,19 +413,21 @@
     ───────────────────────────────────────────── */
     .footer {
       border-top: 1px solid var(--c-border);
+      margin: 0 var(--pad);
     }
     .footer-inner {
-      padding: 20px var(--pad);
+      padding: 20px 0;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
     }
     .footer-copy {
       font-family: var(--font-mono);
-      font-size: 12px;
-      letter-spacing: -0.03em;
+      font-size: 11px;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      color: var(--c-subtle);
+      color: #fff;
+      text-decoration: none;
     }
 
 
@@ -499,6 +488,7 @@
     /* ─────────────────────────────────────────────
        RESPONSIVE
     ───────────────────────────────────────────── */
+    @media (max-width: 560px) { .footer-inner { flex-direction: column; gap: 16px; } }
     @media (max-width: 860px) {
       :root { --pad: 24px; }
       .sidebar { display: none; }
@@ -508,103 +498,16 @@
       .cs-overview-hero { flex-direction: column; align-items: flex-start; gap: 40px; }
     }
 
-    /* ─────────────────────────────────────────────
-       THEME TOGGLE
-    ───────────────────────────────────────────── */
-    .theme-toggle {
-      position: fixed;
-      bottom: 28px;
-      right: 28px;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      border: 1px solid var(--c-border);
-      background: var(--c-surface);
-      color: var(--c-muted);
-      z-index: 9000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.25s var(--ease), border-color 0.25s var(--ease), color 0.2s var(--ease);
-      cursor: none !important;
-    }
-    .theme-toggle:hover { color: var(--c-text); }
-    .theme-toggle-label {
-      position: absolute;
-      right: calc(100% + 10px);
-      top: 50%;
-      transform: translateY(-50%) translateX(8px);
-      white-space: nowrap;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: -0.03em;
-      font-weight: 400;
-      color: var(--c-muted);
-      background: var(--c-surface);
-      border: 1px solid var(--c-border);
-      border-radius: var(--r-pill);
-      padding: 4px 10px;
-      opacity: 0;
-      transition: opacity var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
-      pointer-events: none;
-    }
-    .theme-toggle:hover .theme-toggle-label { opacity: 1; transform: translateY(-50%) translateX(0); }
-    .theme-toggle-label .label-dark  { display: inline; }
-    .theme-toggle-label .label-light { display: none; }
-    [data-theme="light"] .theme-toggle-label .label-dark  { display: none; }
-    [data-theme="light"] .theme-toggle-label .label-light { display: inline; }
-    .theme-toggle .icon-sun  { display: block; }
-    .theme-toggle .icon-moon { display: none; }
-    [data-theme="light"] .theme-toggle .icon-sun  { display: none; }
-    [data-theme="light"] .theme-toggle .icon-moon { display: block; }
-
-    /* ─────────────────────────────────────────────
-       CURSOR RING
-    ───────────────────────────────────────────── */
-    .cursor-ring {
-      position: fixed;
-      width: 12px;
-      height: 12px;
-      background: #ffffff;
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 99999;
-      transform: translate(-50%, -50%);
-      transition: opacity 0.2s ease, width 0.25s ease, height 0.25s ease, background 0.2s ease;
-      opacity: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    [data-theme="light"] .cursor-ring { background: #000000; }
-    .cursor-ring.visible { opacity: 1; }
 
     /* ─────────────────────────────────────────────
        PAGE ENTRANCE
     ───────────────────────────────────────────── */
     .cs-hero-video,
     .page-content {
-      opacity: 0;
-      transform: translateY(16px);
-      transition: opacity 1.2s var(--ease), transform 1.2s var(--ease);
-    }
-    .cs-hero-video.loaded {
       opacity: 1;
-      transform: translateY(0);
-      transition-delay: 0.1s;
-    }
-    .page-content.loaded {
-      opacity: 1;
-      transform: translateY(0);
-      transition-delay: 0.2s;
+      transform: none;
     }
 
-    @media (max-width: 860px) {
-      body { cursor: auto; }
-      a, button, [role="button"], * { cursor: auto !important; }
-      .cursor-ring { display: none !important; }
-    }
   </style>
 </head>
 <body>
@@ -612,7 +515,7 @@
   <!-- ── Nav ─────────────────────────────────────────────────────────── -->
   <nav class="nav" id="nav" role="banner">
     <div class="nav-inner">
-      <a class="nav-logo" href="/" aria-label="noah de guzman home" data-transition-color="--c-text">Noah De Guzman</a>
+      <a class="nav-logo" href="/" aria-label="noah de guzman home" data-transition-color="--c-text"><img src="../images/logo.svg" alt="noah de guzman" /></a>
       <ul class="nav-links" role="list">
         <li><a href="/" data-transition-color="--c-text">Work</a></li>
         <li><a href="/about" data-transition-color="--c-text">About</a></li>
@@ -703,7 +606,7 @@
 
     <!-- Context -->
     <section class="cs-section" id="context">
-      <p class="cs-section-label">context</p>
+      <p class="cs-section-label">// context</p>
       <h2 class="cs-section-heading">A platform bringing multiple products under one roof. The admin experience <strong>needed to follow.</strong></h2>
       <p class="cs-section-body">SAP's Business Data Cloud brings together multiple products under a single platform. Each product had its own administration area, built independently over time, resulting in inconsistencies across the experience for administrators managing multiple products at once.</p>
       <p class="cs-section-body">As the UX Designer on this project, I was embedded within a cross-functional team working across UX, development, user assistance, and product management, with team members distributed across multiple countries and product areas.</p>
@@ -711,21 +614,21 @@
 
     <!-- Problem -->
     <section class="cs-section" id="problem">
-      <p class="cs-section-label">problem</p>
+      <p class="cs-section-label">// problem</p>
       <h2 class="cs-section-heading">Inconsistent admin experiences across products, <strong>addressed in parallel.</strong></h2>
       <p class="cs-section-body">Administrators working across multiple products encountered different layouts, interaction patterns, and settings structures depending on which product they were in. Two related problems were scoped together and run as parallel workstreams, allowing shared learnings to feed into both without duplicating effort.</p>
     </section>
 
     <!-- Goals -->
     <section class="cs-section" id="goals">
-      <p class="cs-section-label">goals</p>
+      <p class="cs-section-label">// goals</p>
       <h2 class="cs-section-heading">Align structure, standardize components, and give every admin tab <strong>the same foundation.</strong></h2>
       <p class="cs-section-body">The goal across both workstreams was consistency — bringing admin settings across products into alignment so administrators experienced a single, predictable interface regardless of which product they were in. This meant establishing shared layout standards, unifying interaction patterns, and producing specs detailed enough for development teams across multiple countries to implement independently.</p>
     </section>
 
     <!-- Process -->
     <section class="cs-section" id="process">
-      <p class="cs-section-label">process</p>
+      <p class="cs-section-label">// process</p>
 
       <h3 class="cs-subheading" style="margin-top:0;">Auditing the current state</h3>
       <p class="cs-section-body">Both workstreams started with an audit of the existing experience, mapping inconsistencies across products and identifying what a unified standard would need to cover. The audit surfaced a range of issues that had accumulated over time as each product built its admin area independently.</p>
@@ -739,14 +642,14 @@
 
     <!-- Outcome -->
     <section class="cs-section" id="outcome">
-      <p class="cs-section-label">outcome</p>
+      <p class="cs-section-label">// outcome</p>
       <h2 class="cs-section-heading">Both specs completed, handed off to development, and unified <strong>20 tabs across 3 products</strong>.</h2>
       <p class="cs-section-body">Both specs were completed and handed off to development. Full case study details are available on request.</p>
     </section>
 
     <!-- Reflections -->
     <section class="cs-section" id="reflections">
-      <p class="cs-section-label">reflections</p>
+      <p class="cs-section-label">// reflections</p>
 
       <h3 class="cs-subheading" style="margin-top:0;">Decisions take time, and that's okay</h3>
       <p class="cs-section-body">Even small design decisions can involve multiple stakeholders, reviews, and back-and-forths before a direction is locked. Working at enterprise scale taught me to separate the design work from the decision-making process. Keeping specs well-documented meant that when decisions finally landed, implementation could move quickly.</p>
@@ -765,7 +668,9 @@
   <!-- ── Footer ───────────────────────────────────────────────────────── -->
   <footer class="footer" role="contentinfo">
     <div class="footer-inner">
-      <p class="footer-copy">© 2026 Noah De Guzman — <a href="https://www.linkedin.com/in/noah-de-guzman/" target="_blank" rel="noopener" style="color:var(--c-subtle); transition:color var(--t-fast);">let's connect 🍵</a></p>
+      <p class="footer-copy"><span style="font-size:14px;vertical-align:middle;">©</span> 2026 Noah De Guzman</p>
+      <p class="footer-copy" style="text-align:center;">LOCATED IN VANCOUVER, BRITISH COLUMBIA // 49.2827° N, 123.1207° W</p>
+      <a href="https://instagram.com/noah.dgz/" target="_blank" rel="noopener" class="footer-copy" style="text-decoration:none;">FOLLOW ME ON <span style="text-decoration:underline;text-underline-offset:4px;">INSTAGRAM</span></a>
     </div>
   </footer>
 
@@ -830,55 +735,12 @@
       });
     });
 
-    /* ── Cursor ring ──────────────────────────── */
-    document.addEventListener('DOMContentLoaded', () => {
-      const ring = document.getElementById('cursor-ring');
-      document.addEventListener('mousemove', e => {
-        ring.style.left = e.clientX + 'px';
-        ring.style.top  = e.clientY + 'px';
-        ring.classList.add('visible');
-      }, { passive: true });
-      document.addEventListener('mouseleave', () => ring.classList.remove('visible'));
-    });
-
   })();
   </script>
 
-  <div class="cursor-ring" id="cursor-ring"></div>
   </script>
 
-  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">
-    <span class="theme-toggle-label"><span class="label-dark">Change to Light mode</span><span class="label-light">Change to Dark mode</span></span>
-    <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-    <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-  </button>
 
-  <script>
-  (() => {
-    const root = document.documentElement;
-    const btn  = document.getElementById('theme-toggle');
-    const logo = document.querySelector('.nav-logo');
-    btn.addEventListener('click', () => {
-      document.documentElement.classList.add('theme-transitioning');
-      const isLight = root.getAttribute('data-theme') === 'light';
-      if (isLight) {
-        root.removeAttribute('data-theme');
-        localStorage.setItem('theme', 'dark');
-        logo.classList.remove('spin-ccw');
-        void logo.offsetWidth;
-        logo.classList.add('spin-cw');
-      } else {
-        root.setAttribute('data-theme', 'light');
-        localStorage.setItem('theme', 'light');
-        logo.classList.remove('spin-cw');
-        void logo.offsetWidth;
-        logo.classList.add('spin-ccw');
-      }
-      setTimeout(() => document.documentElement.classList.remove('theme-transitioning'), 400);
-      if (window._onScroll) window._onScroll();
-    });
-  })();
-  </script>
 
 
   <script src="../transition.js"></script>
