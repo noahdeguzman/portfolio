@@ -89,11 +89,7 @@
       display: inline-flex;
       align-items: center;
     }
-    .nav-logo img {
-      height: 56px;
-      width: auto;
-      display: block;
-    }
+    .nav-logo img { height: 28px; width: auto; display: block; }
     @keyframes spin-cw  { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     @keyframes spin-ccw { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
     .nav-logo.spin-cw  { }
@@ -237,13 +233,24 @@
        SECTION LABELS
     ───────────────────────────────────────────── */
     .cs-section-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
       font-family: var(--font-mono);
       font-size: 12px;
       font-weight: 400;
       letter-spacing: -0.03em;
       text-transform: uppercase;
-      color: var(--c-subtle);
+      color: var(--c-text);
       margin-bottom: 12px;
+    }
+    .cs-section-label::before {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: #00E997;
+      flex-shrink: 0;
     }
 
     /* ─────────────────────────────────────────────
@@ -587,7 +594,7 @@
 
     <!-- Context -->
     <section class="cs-section" id="context">
-      <p class="cs-section-label">// context</p>
+      <p class="cs-section-label">context</p>
       <h2 class="cs-section-heading">A desktop reservation flow already existed. <strong>My job was to bring it to mobile.</strong></h2>
       <p class="cs-section-body">Toyota is a long-standing client of Invoke, a design and development agency where I completed my co-op in Summer 2024. Alongside the fleet management project, I worked on a separate engagement: the mobile version of a car rental reservation system for Dolan Toyota.</p>
       <p class="cs-section-body">The desktop flow had already been designed. The team was small: a senior product designer, a project manager, and me handling the prototyping and UI work. My focus was adapting the existing experience for mobile, rethinking the layout and interactions to suit a smaller screen without losing any of the core functionality.</p>
@@ -595,14 +602,14 @@
 
     <!-- Problem -->
     <section class="cs-section" id="problem">
-      <p class="cs-section-label">// problem</p>
+      <p class="cs-section-label">problem</p>
       <h2 class="cs-section-heading">The reservation system existed on desktop but had no mobile version. How might we adapt the existing flow into an experience that <strong>feels native on a phone</strong>?</h2>
       <p class="cs-section-body">The desktop design worked well in its context, but translating it directly to mobile would not. A smaller screen, touch-based interaction, and different usage patterns all required rethinking how the flow was structured and how information was presented at each step.</p>
     </section>
 
     <!-- Process -->
     <section class="cs-section" id="process">
-      <p class="cs-section-label">// process</p>
+      <p class="cs-section-label">process</p>
 
       <h3 class="cs-subheading" style="margin-top:0;">Translating desktop to mobile</h3>
       <p class="cs-section-body">The desktop flow served as the starting point, but translating it directly to mobile wasn't straightforward. The main landing screen combined a full hero image with an overlaid search bar, date and time pickers laid out horizontally in a single row, and a 3-column vehicle grid below. On mobile, the hero was condensed, the pickers stacked into two rows, and the grid shifted from 3 columns to 2.</p>
@@ -624,14 +631,14 @@
 
     <!-- Outcome -->
     <section class="cs-section" id="outcome">
-      <p class="cs-section-label">// outcome</p>
+      <p class="cs-section-label">outcome</p>
       <h2 class="cs-section-heading">A fully adapted mobile reservation flow across <strong>8 screens</strong>, delivered within a 2-week sprint.</h2>
       <p class="cs-section-body">The desktop flow was successfully translated into a mobile experience across all key screens: the landing page, vehicle selection, vehicle detail, customer info, and booking confirmation. Each screen was rethought for mobile rather than simply resized, with layouts, interactions, and information hierarchy adjusted to suit how people actually use their phones.</p>
     </section>
 
     <!-- Reflections -->
     <section class="cs-section" id="reflections">
-      <p class="cs-section-label">// reflections</p>
+      <p class="cs-section-label">reflections</p>
 
       <h3 class="cs-subheading" style="margin-top:0;">Designing within constraints</h3>
       <p class="cs-section-body">Having an existing desktop flow to reference made the project more focused, but it also meant every decision had to be deliberate. It wasn't about creating something new; it was about understanding what the desktop design was doing and finding the right mobile equivalent. That kind of constraint pushed me to think more carefully about layout and hierarchy than I might have otherwise.</p>

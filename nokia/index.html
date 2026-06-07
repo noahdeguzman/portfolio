@@ -89,11 +89,7 @@
       display: inline-flex;
       align-items: center;
     }
-    .nav-logo img {
-      height: 56px;
-      width: auto;
-      display: block;
-    }
+    .nav-logo img { height: 28px; width: auto; display: block; }
     @keyframes spin-cw  { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     @keyframes spin-ccw { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
     .nav-logo.spin-cw  { }
@@ -237,13 +233,24 @@
        SECTION LABELS
     ───────────────────────────────────────────── */
     .cs-section-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
       font-family: var(--font-mono);
       font-size: 12px;
       font-weight: 400;
       letter-spacing: -0.03em;
       text-transform: uppercase;
-      color: var(--c-subtle);
+      color: var(--c-text);
       margin-bottom: 12px;
+    }
+    .cs-section-label::before {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: #00E997;
+      flex-shrink: 0;
     }
 
     /* ─────────────────────────────────────────────
@@ -544,7 +551,7 @@
 
   <!-- ── Sidebar ──────────────────────────────────────────────────────── -->
   <aside class="sidebar" id="sidebar">
-    <img src="../images/nokia-logo.svg" alt="Nokia" class="sidebar-logo" style="width: 32%; height: auto; margin-bottom: 24px; display: block;" />
+    <img src="../images/nokia-logo.svg" alt="Nokia" class="sidebar-logo" style="width: 44%; height: auto; margin-bottom: 24px; display: block;" />
     <nav class="sidebar-nav">
       <a href="#overview" class="active">Overview</a>
       <a href="#context">Context</a>
@@ -602,7 +609,7 @@
 
     <!-- Context -->
     <section class="cs-section" id="context">
-      <p class="cs-section-label">// context</p>
+      <p class="cs-section-label">context</p>
       <h2 class="cs-section-heading">A critical internal tool, largely untouched for two decades. <strong>Two distinct user groups. One broken process.</strong></h2>
       <p class="cs-section-body">Frostbuster is triggered when a CVS or GIT branch is locked during a code freeze but a fix is still required. Developers submit a request for branch access using the Frostbuster form, and once approved by a panel of reviewers, they can merge their code into the specific release branch. Access expires at midnight EST on the day the request was made.</p>
       <p class="cs-section-body"><strong>NSP Developers</strong> are the primary users. They work on fixes for code they own, provide details for raised Jira tickets, submit Frostbuster tickets, and merge their requests once approved. <strong>Reviewers</strong> (a panel of 3-4 approvers) evaluate the risk of each defect fix and approve or decline access. QAs also play a supporting role, creating and verifying the Jira tickets that trigger the process.</p>
@@ -611,7 +618,7 @@
 
     <!-- Problem -->
     <section class="cs-section" id="problem">
-      <p class="cs-section-label">// problem</p>
+      <p class="cs-section-label">problem</p>
       <h2 class="cs-section-heading">Developers face an inefficient process when implementing necessary code changes after a code freeze, resulting in excessive effort for both developers and reviewers. How might we <strong>reduce the manual effort and time</strong> it takes to submit and process a Frostbuster request?</h2>
       <p class="cs-section-body">A UX-Lite survey of 33 developers scored the current Frostbuster experience at <strong>60.60 out of 100</strong>, indicating the process works but has clear room for improvement. Ease of use scored 3.3/5 and usefulness scored 3.6/5, confirming that while the process is necessary, it creates friction.</p>
       <p class="cs-section-body">The overall pain point was excessive manual effort spread across multiple tools and sites. Four specific issues were identified: a stream dropdown with 70+ options causing frequent selection errors and rejections; developers needing to navigate to a separate Confluence page to copy 10-20 questions and paste them into Jira; a Frostbuster table cluttered with unused columns that reviewers largely ignored; and date sorting by month/day instead of year/month that made it hard to find recent requests.</p>
@@ -619,7 +626,7 @@
 
     <!-- Process -->
     <section class="cs-section" id="process">
-      <p class="cs-section-label">// process</p>
+      <p class="cs-section-label">process</p>
 
       <h3 class="cs-subheading" style="margin-top:0;">Research and discovery</h3>
       <p class="cs-section-body">Research began with a survey of 33 developers to measure perceived ease-of-use and collect open feedback, alongside walkthroughs of the existing Frostbuster tool with 2 reviewers and 1 developer. This gave a dual perspective on where the process broke down for each user group before any design work began.</p>
@@ -641,7 +648,7 @@
 
     <!-- Outcome -->
     <section class="cs-section" id="outcome">
-      <p class="cs-section-label">// outcome</p>
+      <p class="cs-section-label">outcome</p>
       <h2 class="cs-section-heading">A redesigned Frostbuster that <strong>removed 12 steps and reduced clicks by 35%</strong>.</h2>
       <p class="cs-section-body">Comparing the current and redesigned developer flows, the new experience reduced the submission process from 34 steps to 22, removing 12 steps and cutting clicks by 35%. The redesign consolidated information scattered across multiple tools into a single, guided flow with automation handling the most error-prone parts of the process.</p>
       <p class="cs-section-body">Next steps include usability testing with a coded prototype, a follow-up UX-Lite survey targeting a score of 4/5 on both ease and usefulness, and longer-term work to streamline automations, refine template questions with reviewers and QA, and update support resources.</p>
@@ -649,7 +656,7 @@
 
     <!-- Reflections -->
     <section class="cs-section" id="reflections">
-      <p class="cs-section-label">// reflections</p>
+      <p class="cs-section-label">reflections</p>
 
       <h3 class="cs-subheading" style="margin-top:0;">The impact of collaboration</h3>
       <p class="cs-section-body">This project was an example of what a research-driven design process can look like when UX research and UX design work closely together. Having research directly inform each design decision created accountability, ensuring that every change addressed a real, documented user pain point rather than assumption.</p>

@@ -89,11 +89,7 @@
       display: inline-flex;
       align-items: center;
     }
-    .nav-logo img {
-      height: 56px;
-      width: auto;
-      display: block;
-    }
+    .nav-logo img { height: 28px; width: auto; display: block; }
     @keyframes spin-cw  { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     @keyframes spin-ccw { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
     .nav-logo.spin-cw  { }
@@ -237,13 +233,24 @@
        SECTION LABELS
     ───────────────────────────────────────────── */
     .cs-section-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
       font-family: var(--font-mono);
       font-size: 12px;
       font-weight: 400;
       letter-spacing: -0.03em;
       text-transform: uppercase;
-      color: var(--c-subtle);
+      color: var(--c-text);
       margin-bottom: 12px;
+    }
+    .cs-section-label::before {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: #00E997;
+      flex-shrink: 0;
     }
 
     /* ─────────────────────────────────────────────
@@ -586,7 +593,7 @@
 
     <!-- Context -->
     <section class="cs-section" id="context">
-      <p class="cs-section-label">// context</p>
+      <p class="cs-section-label">context</p>
       <h2 class="cs-section-heading">Toyota TMNA oversees all operations in North America. <strong>Invoke helps build the tools that support them.</strong></h2>
       <p class="cs-section-body">Toyota Motor North America (TMNA) oversees all Toyota operations across the continent. Invoke, a design and development agency, maintains an ongoing partnership with TMNA spanning multiple product engagements. As the junior designer on this project, I was responsible for the prototyping and contributed to design presentations with the client.</p>
       <p class="cs-section-body">The project team consisted of three members: myself as the junior designer, a senior product designer, and a project manager. We held weekly internal syncs to review progress and align on changes, alongside bi-weekly client sessions with the Toyota team, which was made up of three developers and two project managers. In addition to this engagement, I contributed to a separate Toyota project at Invoke, the mobile version of a Car Rental Reservation System for Dolan Toyota.</p>
@@ -594,14 +601,14 @@
 
     <!-- Problem -->
     <section class="cs-section" id="problem">
-      <p class="cs-section-label">// problem</p>
+      <p class="cs-section-label">problem</p>
       <h2 class="cs-section-heading">The existing order limiter system has outdated UI and is challenging for new admins to learn. How might we design a more intuitive fleet management system that <strong>empowers administrators to efficiently manage vehicle order limits</strong>?</h2>
       <p class="cs-section-body">The backend vehicle ordering system Toyota admins relied on had outdated visuals, inconsistent hierarchy, and no clear way to set or view limits alongside order progress. Administrators needed a single interface where all of that information was visible and actionable. The client's request was explicit: the redesign had to be both efficient and aesthetic.</p>
     </section>
 
     <!-- Process -->
     <section class="cs-section" id="process">
-      <p class="cs-section-label">// process</p>
+      <p class="cs-section-label">process</p>
 
       <h3 class="cs-subheading" style="margin-top:0;">Auditing the original system</h3>
       <p class="cs-section-body">The first step was a close look at the existing fleet management system. The original UI had outdated visuals, inconsistent hierarchy, and no clear visual affordances for key actions like creating a new rule. The layout created cognitive overload rather than supporting the task.</p>
@@ -646,14 +653,14 @@
 
     <!-- Outcome -->
     <section class="cs-section" id="outcome">
-      <p class="cs-section-label">// outcome</p>
+      <p class="cs-section-label">outcome</p>
       <h2 class="cs-section-heading">A modernized fleet management system covering <strong>9 flows across 2 features</strong>, delivered in 4 weeks.</h2>
       <p class="cs-section-body">The fragmented original was replaced with a unified table view where administrators could manage vehicle order limits, review rules, and take action without leaving the main screen.</p>
     </section>
 
     <!-- Reflections -->
     <section class="cs-section" id="reflections">
-      <p class="cs-section-label">// reflections</p>
+      <p class="cs-section-label">reflections</p>
 
       <h3 class="cs-subheading" style="margin-top:0;">Communicating design decisions</h3>
       <p class="cs-section-body">Invoke was my first design co-op, and this project was the first time I presented work to project managers, developers, and a client. Leading the client meetings built confidence in walking stakeholders through design decisions and responding to feedback directly, a skill that carried into subsequent projects.</p>
