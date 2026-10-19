@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" style="background:#141414">
+<html lang="en" style="background:#ffffff">
 <head>
+  <meta name="color-scheme" content="light" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Noah De Guzman</title>
@@ -17,19 +18,19 @@
       --font-text:    "SF Pro Text",    "Helvetica Neue", Helvetica, Arial, sans-serif;
       --font-mono:    "Space Mono", "SF Mono", "Fira Mono", "Consolas", monospace;
 
-      --c-bg:      #141414;
-      --c-surface: #1c1c1e;
-      --c-border:  rgba(255,255,255,0.1);
-      --c-text:    #f5f5f7;
-      --c-muted:   #a1a1a6;
-      --c-subtle:  #6e6e73;
-      --c-blue:    #2997ff;
-      --c-green:   #30d158;
+      --c-bg:      #ffffff;
+      --c-surface: #f5f5f7;
+      --c-border:  rgba(0,0,0,0.1);
+      --c-text:    #141414;
+      --c-muted:   #6e6e73;
+      --c-subtle:  #a1a1a6;
+      --c-blue:    #0071e3;
+      --c-green:   #1a9e4a;
       --c-white:   #ffffff;
 
-      --c-nav-bg:      #141414;
-      --c-nav-border:  rgba(255,255,255,0.1);
-      --c-ring-border: rgba(255,255,255,0.5);
+      --c-nav-bg:      #ffffff;
+      --c-nav-border:  rgba(0,0,0,0.1);
+      --c-ring-border: rgba(0,0,0,0.5);
 
       --nav-h:     52px;
       --r-card:    0px;
@@ -312,7 +313,7 @@
       opacity: 0;
       transform: scale(0.92);
       transition: opacity 0.2s var(--ease), transform 0.2s var(--ease);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
     }
     .hover-preview.visible {
       opacity: 1;
@@ -339,7 +340,7 @@
       font-size: 11px;
       letter-spacing: 0.04em;
       text-transform: uppercase;
-      color: #fff;
+      color: var(--c-text);
       text-decoration: none;
     }
     .footer-copy a { color: var(--c-subtle); transition: color var(--t-fast); }
@@ -412,7 +413,7 @@
   <!-- ── Nav ─────────────────────────────────────────────────────────── -->
   <nav class="nav" id="nav" role="banner">
     <div class="nav-inner">
-      <a class="nav-logo" href="/" aria-label="noah de guzman home" data-transition-color="--c-text"><img src="../images/logo.svg" alt="noah de guzman" /></a>
+      <a class="nav-logo" href="/" aria-label="noah de guzman home" data-transition-color="--c-text"><img src="../images/logo-dark.svg" alt="noah de guzman" /></a>
       <ul class="nav-links" role="list">
         <li><a href="/" data-transition-color="--c-text">Work</a></li>
         <li><a href="/about" class="active">About</a></li>
