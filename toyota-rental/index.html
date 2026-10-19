@@ -473,6 +473,8 @@
     }
 
 
+    .cs-video-panel { background: var(--c-surface); padding: 40px 80px; }
+    @media (max-width: 860px) { .cs-video-panel { padding: 16px; } }
     /* ─────────────────────────────────────────────
        PAGE ENTRANCE
     ───────────────────────────────────────────── */
@@ -569,8 +571,8 @@
         </div>
       </div>
 
-      <div class="cs-img" style="margin-top: 40px;">
-        <video src="../images/toyota-rental-video.mp4" autoplay muted loop playsinline style="width:100%; display:block;"></video>
+      <div class="cs-img cs-video-panel" style="margin-top: 40px;">
+        <video src="../images/toyota-rental-video.mp4" autoplay muted loop playsinline style="width:100%; display:block; mix-blend-mode: multiply;"></video>
       </div>
     </div>
 
