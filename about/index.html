@@ -244,6 +244,18 @@
       color: var(--c-muted);
       flex-shrink: 0;
     }
+    .contact-row { color: inherit; }
+    .contact-value {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: -0.03em;
+      color: var(--c-text);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-color: var(--c-border);
+      transition: text-decoration-color var(--t-fast) var(--ease);
+    }
+    .contact-row:hover .contact-value { text-decoration-color: currentColor; }
     .about-desc {
       flex: 1 1 0;
       min-width: 0;
@@ -435,7 +447,7 @@
       <div class="about-desc">
         <p class="about-desc-heading">A small glimpse into my life.</p>
         <p class="about-desc-body">Hey there! I'm Noah, thanks for stopping by! I design scalable, intuitive experiences for complex products. I studied Interactive Arts and Technology at Simon Fraser University with a concentration in design, and have since worked at Invoke, Nokia, and SAP across product design, design systems, and cross-platform UX.</p>
-        <p class="about-desc-body">Outside of work, I'm usually on the volleyball court, hunting down new food spots online, filming cinematic vlogs, or taking my dog Kobe on new adventures around the Lower Mainland. Always open for a chat, connect with me on LinkedIn!</p>
+        <p class="about-desc-body">Outside of work, I'm usually on the volleyball court, hunting down new food spots online, filming cinematic vlogs, or taking my dog Kobe on new adventures around the Lower Mainland. Always open for a chat, connect with me on <a href="https://www.linkedin.com/in/noah-de-guzman/" target="_blank" rel="noopener" style="color:var(--c-text);text-decoration:underline;text-underline-offset:3px;">LinkedIn</a> or say hi at <a href="mailto:noahdeguzman21@gmail.com" style="color:var(--c-text);text-decoration:underline;text-underline-offset:3px;">noahdeguzman21@gmail.com</a>!</p>
       </div>
       <div class="history">
         <div class="history-section">
@@ -461,6 +473,17 @@
             </div>
             <span class="history-year">2024</span>
           </div>
+        </div>
+        <div class="history-section">
+          <h2 style="display:flex;align-items:center;gap:8px;"><span style="display:inline-block;width:6px;height:6px;background:#00E997;flex-shrink:0;"></span>Contact</h2>
+          <a class="history-row contact-row" href="https://www.linkedin.com/in/noah-de-guzman/" target="_blank" rel="noopener">
+            <span class="history-company">LinkedIn</span>
+            <span class="contact-value">/in/noah-de-guzman ↗</span>
+          </a>
+          <a class="history-row contact-row" href="mailto:noahdeguzman21@gmail.com">
+            <span class="history-company">Email</span>
+            <span class="contact-value">noahdeguzman21@gmail.com</span>
+          </a>
         </div>
       </div>
     </div>
