@@ -237,15 +237,17 @@
     .cs-section-label {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 0;
       font-family: var(--font-mono);
       font-size: 12px;
       font-weight: 400;
       letter-spacing: -0.03em;
       text-transform: uppercase;
-      color: var(--c-text);
+      color: #eb0a1e;
       margin-bottom: 12px;
     }
+    .cs-section-label::before { content: '['; }
+    .cs-section-label::after  { content: ']'; }
 
     /* ─────────────────────────────────────────────
        OVERVIEW
