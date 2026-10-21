@@ -543,9 +543,12 @@
 
     <div class="section-label" style="margin-top: 96px;"><span style="display:inline-block;width:6px;height:6px;background:#00E997;flex-shrink:0;"></span><span class="section-label-text">Visual Concepts [2]</span></div>
     <div class="project-grid visual-grid" style="grid-template-columns: 1fr 1fr 1fr;">
-      <a href="/toyota" class="pg-card pg-toyota-1" aria-label="Toyota — fleet management" data-transition-color="#EB0A1E">
+      <a href="/toyota" class="pg-card pg-toyota-1" id="toyota-card" aria-label="Toyota — fleet management" data-transition-color="#EB0A1E">
         <div class="pg-scene">
           <img class="pg-cover" src="images/iMac Mockup.png" alt="Toyota — fleet management" style="width: 102%; height: 102%; object-position: right center;" />
+          <div id="toyota-hover-preview" class="preview-wrap" style="position:absolute;width:400px;pointer-events:none;opacity:0;transition:opacity 0.25s cubic-bezier(0.25,0.46,0.45,0.94),transform 0.25s cubic-bezier(0.25,0.46,0.45,0.94);transform:translate(-50%,-50%) scale(0.94);z-index:10;">
+            <img src="images/toyota-hover.jpg" alt="" style="width:100%;display:block;" />
+          </div>
         </div>
         <div class="pg-overlay">
           <div class="pg-overlay-col-left"><span class="pg-company">Toyota [2024]</span></div>
@@ -768,6 +771,17 @@
       const rect = nokiaCard.querySelector('.pg-scene').getBoundingClientRect();
       nokiaPreview.style.left = (e.clientX - rect.left) + 'px';
       nokiaPreview.style.top  = (e.clientY - rect.top)  + 'px';
+    });
+
+    /* ── Toyota fleet hover preview ──────────── */
+    const toyotaCard    = document.getElementById('toyota-card');
+    const toyotaPreview = document.getElementById('toyota-hover-preview');
+    toyotaCard.addEventListener('mouseenter', () => { toyotaPreview.style.opacity = '1'; toyotaPreview.style.transform = 'translate(-50%,-50%) scale(1)'; });
+    toyotaCard.addEventListener('mouseleave', () => { toyotaPreview.style.opacity = '0'; toyotaPreview.style.transform = 'translate(-50%,-50%) scale(0.94)'; });
+    toyotaCard.addEventListener('mousemove', e => {
+      const rect = toyotaCard.querySelector('.pg-scene').getBoundingClientRect();
+      toyotaPreview.style.left = (e.clientX - rect.left) + 'px';
+      toyotaPreview.style.top  = (e.clientY - rect.top)  + 'px';
     });
 
     /* ── Toyota Rental hover preview ─────────── */
