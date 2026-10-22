@@ -511,9 +511,6 @@
 
     .footer-contact a { color: var(--c-text) !important; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--c-border); transition: text-decoration-color 0.2s ease; }
     .footer-contact a:hover { text-decoration-color: currentColor; }
-    .ph-img { border: 1.5px dashed rgba(0,0,0,0.18); background: var(--c-surface); aspect-ratio: 16 / 9; display: flex; align-items: center; justify-content: center; text-align: center; padding: 24px; font-family: var(--font-mono); font-size: 12px; letter-spacing: -0.03em; text-transform: uppercase; color: var(--c-muted); margin-top: 32px; }
-    .ph-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    @media (max-width: 860px) { .ph-row { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -636,27 +633,15 @@
 
       <h3 class="cs-subheading" style="margin-top:0;">Auditing the current state</h3>
       <p class="cs-section-body">Both workstreams started with an audit of the existing experience, mapping inconsistencies across products and identifying what a unified standard would need to cover. The audit surfaced a range of issues that had accumulated over time as each product built its admin area independently.</p>
-      <div class="ph-img">[Image: audit: the same setting side by side in Analytics Cloud and Datasphere, showing the inconsistencies]</div>
 
       <h3 class="cs-subheading">Workstream 1: browser integration and appearance, in three scopes</h3>
       <p class="cs-section-body"><strong>System information bar.</strong> The bar that tells users which system they're in used hard-coded hex colors. I moved it to design tokens so it follows the theme, and presented an old-versus-new comparison to the team.</p>
-      <div class="ph-img">[Image: system information bar: hard-coded colors vs design tokens]</div>
       <p class="cs-section-body"><strong>Browser tab icon.</strong> SAP's icon became the default, with a custom option kept for customers who want their own. To avoid surprising anyone, I planned a rollout where existing customers keep their current icon and new customers start with the SAP default. I also designed for an edge case: a light-themed app open in a dark-mode browser, where the icon still needs to be visible.</p>
-      <div class="ph-img">[Image: browser tab icon: default vs custom flow, and the light app / dark browser edge case]</div>
       <p class="cs-section-body"><strong>Settings layout.</strong> I explored several layouts for the appearance settings and we chose an object page floorplan. I also moved the "Default Appearance" settings so both products keep them in the same place.</p>
-      <div class="ph-row">
-        <div class="ph-img">[Image: layout options you explored]</div>
-        <div class="ph-img">[Image: chosen object page floorplan]</div>
-      </div>
 
       <h3 class="cs-subheading">Workstream 2: unifying every admin tab</h3>
       <p class="cs-section-body">The new floorplan then became the standard for every admin tab across Analytics Cloud, Datasphere, and Business Data Cloud, so admins don't need to relearn each tab. We phased it: admin settings first, then configuration settings and a search across tabs. I wrote guidelines for text and input field lengths and turned the layout into a page template for the DNA Web UI Kit, so future tabs start consistent.</p>
       <p class="cs-section-body">One decision came up repeatedly: toggles versus checkboxes. Toggles suggest a change saves instantly, but the new layout uses save and cancel buttons, so I switched those settings to checkboxes.</p>
-      <div class="ph-row">
-        <div class="ph-img">[Image: admin tab before]</div>
-        <div class="ph-img">[Image: admin tab after, on the new floorplan]</div>
-      </div>
-      <div class="ph-img">[Image: toggles vs checkboxes with save and cancel]</div>
 
       <h3 class="cs-subheading">Designing and iterating</h3>
       <p class="cs-section-body">Design proposals were reviewed iteratively with the UXC lead, senior designer, and development lead. With the user assistance team, I refined labels so each one said what it does. For example, a toggle became "Display system information," and "Information" stayed spelled out rather than abbreviated. Feedback also shaped the format of the specs, which were structured to be navigable by development teams without requiring them to work through the design file directly.</p>
