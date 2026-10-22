@@ -131,10 +131,8 @@
     }
     .nav-links a:hover { color: var(--c-text); }
     .nav-links a.active { color: var(--c-text); }
-    .nav-links a.active::before { content: '['; }
-    .nav-links a.active::after  { content: ']'; }
-    .nav-mobile-menu a.active::before { content: '['; }
-    .nav-mobile-menu a.active::after  { content: ']'; }
+    .nav-links a.active::before,
+    .nav-mobile-menu a.active::before { content: ""; display: inline-block; width: 6px; height: 6px; background: #00E997; margin-right: 8px; vertical-align: middle; position: relative; top: -1px; }
     .ext-icon {
       display: inline-block;
       vertical-align: middle;
