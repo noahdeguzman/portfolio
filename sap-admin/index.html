@@ -726,13 +726,15 @@
       hamburger.addEventListener('click', () => {
         const open = hamburger.classList.toggle('open');
         mobileMenu.classList.toggle('open', open);
-        hamburger.textContent = open ? '[CLOSE]' : '[MENU]';
+        hamburger.textContent = open ? '✕' : '[MENU]';
+        hamburger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        hamburger.style.fontSize = open ? '20px' : '';
       });
       mobileMenu.querySelectorAll('a').forEach(a => {
         a.addEventListener('click', () => {
           hamburger.classList.remove('open');
           mobileMenu.classList.remove('open');
-          hamburger.textContent = '[MENU]';
+          hamburger.textContent = '[MENU]'; hamburger.style.fontSize = '';
         });
       });
     });
