@@ -452,7 +452,8 @@
 
     .footer-contact a { color: var(--c-text) !important; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--c-border); transition: text-decoration-color 0.2s ease; }
     .footer-contact a:hover { text-decoration-color: currentColor; }
-  </style>
+      @media (hover: none), (pointer: coarse) { .preview-wrap { display: none !important; } }
+</style>
 </head>
 <body>
 
@@ -753,6 +754,8 @@
 
   <script>
   (() => {
+    /* Hover previews only on devices with a real pointer (not touch) */
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
     /* ── SAP hover preview ────────────────────── */
     const sapCard    = document.getElementById('sap-card');
     const sapPreview = document.getElementById('sap-hover-preview');
