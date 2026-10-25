@@ -436,7 +436,10 @@
     .film-bento .film-tall .film-media { aspect-ratio: 9 / 16; flex: none; }
     .film-bento .film-card:not(.film-tall) .film-media { flex: 1; min-height: 0; aspect-ratio: auto; }
     .film-bento .film-media video { height: 100%; aspect-ratio: auto; }
-    @media (max-width: 860px) { .film-bento { grid-template-columns: 1fr; grid-template-rows: none; } .film-bento .film-tall { grid-row: auto; } .film-bento .film-card:not(.film-tall) .film-media { flex: none; aspect-ratio: 16 / 9; } }
+    .film-bento-b { grid-template-columns: 17fr 6fr; grid-template-rows: auto; margin-top: 48px; align-items: start; }
+    .film-bento-b .film-tall { grid-row: auto; }
+    .film-bento-b .film-card:not(.film-tall) .film-media { flex: none; aspect-ratio: 16 / 9; }
+    @media (max-width: 860px) { .film-bento { grid-template-columns: 1fr; grid-template-rows: none; } .film-bento .film-tall { grid-row: auto; } .film-bento-b { margin-top: 32px; } .film-bento .film-card:not(.film-tall) .film-media { flex: none; aspect-ratio: 16 / 9; } }
     .film-desc { font-family: var(--font-text); font-size: clamp(13px, 1vw, 15px); line-height: 1.6; color: var(--c-muted); margin: 0; }
     #main.page-content, .film-grid-wrap { width: 100%; max-width: 1312px; margin-left: auto; margin-right: auto; box-sizing: border-box; }
     .cs-sound-btn { position: absolute; right: 12px; bottom: 12px; width: 36px; height: 36px; border: none; border-radius: 50%; background: rgba(20,20,20,0.7); color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s ease; }
@@ -445,8 +448,6 @@
     .cs-sound-btn .i-sound { display: none; }
     .cs-sound-btn.is-on .i-sound { display: block; }
     .cs-sound-btn.is-on .i-muted { display: none; }
-    .film-wide { margin-top: 48px; }
-    .film-wide .film-media video { aspect-ratio: 16 / 9; }
 </style>
 </head>
 <body>
@@ -520,7 +521,8 @@
         <p class="film-meta">// Game UI experimentation · 159K views</p>
       </article>
     </div>
-    <article class="film-card film-wide">
+    <div class="film-bento film-bento-b">
+      <article class="film-card">
         <div class="cs-video film-media">
           <video src="../images/film/day-in-the-life-sap.mp4" poster="../images/film/day-in-the-life-sap.webp" autoplay muted loop playsinline disablepictureinpicture disableremoteplayback aria-label="Day in the Life at SAP, UX design intern edition"></video>
           <button type="button" class="cs-sound-btn" aria-label="Turn sound on">
@@ -530,7 +532,19 @@
         </div>
         <p class="film-title">Day in the Life at SAP</p>
         <p class="film-meta">// UX intern edition · 49K views</p>
-    </article>
+      </article>
+      <article class="film-card film-tall">
+        <div class="cs-video film-media">
+          <video src="../images/film/europe-movie.mp4" poster="../images/film/europe-movie.webp" autoplay muted loop playsinline disablepictureinpicture disableremoteplayback aria-label="Turning my trip to Europe into a movie"></video>
+          <button type="button" class="cs-sound-btn" aria-label="Turn sound on">
+            <svg class="i-muted" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 9l5 6M21 9l-5 6" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+            <svg class="i-sound" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+          </button>
+        </div>
+        <p class="film-title"><span class="ph">[Title]</span></p>
+        <p class="film-meta">// <span class="ph">[Caption] · [Views]</span></p>
+      </article>
+    </div>
   </section>
 
   <!-- ── Footer ───────────────────────────────────────────────────────── -->
