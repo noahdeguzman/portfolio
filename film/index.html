@@ -430,12 +430,6 @@
     @media (max-width: 860px) { .film-grid { grid-template-columns: 1fr; } .film-grid-wrap { padding-top: 0; } }
     .cs-video { position: relative; }
     .cs-video video { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; background: var(--c-surface); pointer-events: none; }
-    .cs-video-btn { position: absolute; right: 12px; bottom: 12px; width: 36px; height: 36px; border: none; border-radius: 50%; background: rgba(20,20,20,0.7); color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s ease; }
-    .cs-video-btn:hover { background: rgba(20,20,20,0.9); }
-    .cs-video-btn:focus-visible { outline: 2px solid #00E997; outline-offset: 2px; }
-    .cs-video-btn .i-play { display: none; }
-    .cs-video-btn.is-paused .i-play { display: block; }
-    .cs-video-btn.is-paused .i-pause { display: none; }
     .film-bento { display: grid; grid-template-columns: 9fr 14fr; grid-template-rows: 1fr 1fr; gap: 32px 24px; }
     .film-bento .film-tall { grid-row: 1 / span 2; }
     .film-bento .film-card { display: flex; flex-direction: column; min-height: 0; }
@@ -445,7 +439,7 @@
     @media (max-width: 860px) { .film-bento { grid-template-columns: 1fr; grid-template-rows: none; } .film-bento .film-tall { grid-row: auto; } .film-bento .film-card:not(.film-tall) .film-media { flex: none; aspect-ratio: 16 / 9; } }
     .film-desc { font-family: var(--font-text); font-size: clamp(13px, 1vw, 15px); line-height: 1.6; color: var(--c-muted); margin: 0; }
     #main.page-content, .film-grid-wrap { width: 100%; max-width: 1312px; margin-left: auto; margin-right: auto; box-sizing: border-box; }
-    .cs-sound-btn { position: absolute; right: 56px; bottom: 12px; width: 36px; height: 36px; border: none; border-radius: 50%; background: rgba(20,20,20,0.7); color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s ease; }
+    .cs-sound-btn { position: absolute; right: 12px; bottom: 12px; width: 36px; height: 36px; border: none; border-radius: 50%; background: rgba(20,20,20,0.7); color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s ease; }
     .cs-sound-btn:hover { background: rgba(20,20,20,0.9); }
     .cs-sound-btn:focus-visible { outline: 2px solid #00E997; outline-offset: 2px; }
     .cs-sound-btn .i-sound { display: none; }
@@ -498,10 +492,6 @@
             <svg class="i-muted" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 9l5 6M21 9l-5 6" stroke="currentColor" stroke-width="2" fill="none"/></svg>
             <svg class="i-sound" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" stroke="currentColor" stroke-width="2" fill="none"/></svg>
           </button>
-          <button type="button" class="cs-video-btn" aria-label="Pause video">
-            <svg class="i-pause" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><rect x="6" y="5" width="4" height="14" fill="currentColor"/><rect x="14" y="5" width="4" height="14" fill="currentColor"/></svg>
-            <svg class="i-play" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M7 5v14l12-7z" fill="currentColor"/></svg>
-          </button>
         </div>
         <p class="film-title">You're Not Behind, You're Exactly Where You Need to Be</p>
         <p class="film-meta">// Featured on @lifeatsap · 13K views</p>
@@ -513,10 +503,6 @@
             <svg class="i-muted" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 9l5 6M21 9l-5 6" stroke="currentColor" stroke-width="2" fill="none"/></svg>
             <svg class="i-sound" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" stroke="currentColor" stroke-width="2" fill="none"/></svg>
           </button>
-          <button type="button" class="cs-video-btn" aria-label="Pause video">
-            <svg class="i-pause" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><rect x="6" y="5" width="4" height="14" fill="currentColor"/><rect x="14" y="5" width="4" height="14" fill="currentColor"/></svg>
-            <svg class="i-play" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M7 5v14l12-7z" fill="currentColor"/></svg>
-          </button>
         </div>
         <p class="film-title">Spending 48 Hours in Amsterdam (Contiki European Discovery)</p>
         <p class="film-meta">// Traveling Europe in 12 days · 2K views</p>
@@ -527,10 +513,6 @@
           <button type="button" class="cs-sound-btn" aria-label="Turn sound on">
             <svg class="i-muted" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 9l5 6M21 9l-5 6" stroke="currentColor" stroke-width="2" fill="none"/></svg>
             <svg class="i-sound" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" stroke="currentColor" stroke-width="2" fill="none"/></svg>
-          </button>
-          <button type="button" class="cs-video-btn" aria-label="Pause video">
-            <svg class="i-pause" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><rect x="6" y="5" width="4" height="14" fill="currentColor"/><rect x="14" y="5" width="4" height="14" fill="currentColor"/></svg>
-            <svg class="i-play" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M7 5v14l12-7z" fill="currentColor"/></svg>
           </button>
         </div>
         <p class="film-title">Minecraft IRL: Swiss Alps</p>
@@ -600,27 +582,24 @@
 
   <script>
   (() => {
-    document.querySelectorAll('.cs-video').forEach(wrap => {
-      const v = wrap.querySelector('video'), btn = wrap.querySelector('.cs-video-btn');
-      if (!v || !btn) return;
-      const sync = () => { btn.classList.toggle('is-paused', v.paused); btn.setAttribute('aria-label', v.paused ? 'Play video' : 'Pause video'); };
-      btn.addEventListener('click', () => { v.paused ? v.play() : v.pause(); });
-      const snd = wrap.querySelector('.cs-sound-btn');
-      if (snd) snd.addEventListener('click', () => {
+    const wraps = document.querySelectorAll('.cs-video');
+    wraps.forEach(wrap => {
+      const v = wrap.querySelector('video'), snd = wrap.querySelector('.cs-sound-btn');
+      if (!v) return;
+      const pr = v.play(); if (pr && pr.catch) pr.catch(() => {});
+      if (!snd) return;
+      snd.addEventListener('click', () => {
         const turnOn = v.muted;
         // only one video plays sound at a time
-        document.querySelectorAll('.cs-video').forEach(other => {
+        wraps.forEach(other => {
           const ov = other.querySelector('video'), ob = other.querySelector('.cs-sound-btn');
           if (ov && ov !== v) { ov.muted = true; if (ob) { ob.classList.remove('is-on'); ob.setAttribute('aria-label', 'Turn sound on'); } }
         });
         v.muted = !turnOn;
-        if (turnOn && v.paused) { const pr = v.play(); if (pr && pr.catch) pr.catch(() => {}); }
+        if (turnOn && v.paused) { const p2 = v.play(); if (p2 && p2.catch) p2.catch(() => {}); }
         snd.classList.toggle('is-on', turnOn);
         snd.setAttribute('aria-label', turnOn ? 'Turn sound off' : 'Turn sound on');
       });
-      v.addEventListener('play', sync); v.addEventListener('pause', sync);
-      const p = v.play(); if (p && p.catch) p.catch(sync);
-      sync();
     });
   })();
   </script>
