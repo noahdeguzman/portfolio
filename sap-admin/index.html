@@ -608,7 +608,7 @@
     <section class="cs-section" id="context">
       <p class="cs-section-label">context</p>
       <h2 class="cs-section-heading">A platform bringing multiple products under one roof. The admin experience <strong>needed to follow.</strong></h2>
-      <p class="cs-section-body">SAP's Business Data Cloud brings together multiple products under a single platform. Each product had its own administration area, built independently over time, resulting in inconsistencies across the experience for administrators managing multiple products at once.</p>
+      <p class="cs-section-body">SAP's Business Data Cloud brings together multiple products under a single platform. Each product had its own administration area, built independently over time. Datasphere was built after Analytics Cloud and reused its components to ship quickly, and different teams owned different sections of the settings. The result was settings that looked and behaved differently between products, with some options, like security settings, appearing in more than one place.</p>
       <p class="cs-section-body">As the UX Designer on this project, I was embedded within a cross-functional team working across UX, development, user assistance, and product management, with team members distributed across multiple countries and product areas.</p>
     </section>
 
@@ -616,14 +616,15 @@
     <section class="cs-section" id="problem">
       <p class="cs-section-label">problem</p>
       <h2 class="cs-section-heading">Inconsistent admin experiences across products, <strong>addressed in parallel.</strong></h2>
-      <p class="cs-section-body">Administrators working across multiple products encountered different layouts, interaction patterns, and settings structures depending on which product they were in. Two related problems were scoped together and run as parallel workstreams, allowing shared learnings to feed into both without duplicating effort.</p>
+      <p class="cs-section-body">Administrators working across multiple products encountered different layouts, interaction patterns, and settings structures depending on which product they were in. Some settings also fell short of SAP's internal UX consistency standards: Datasphere showed its own icon as the browser tab icon instead of SAP's, and both products used hard-coded custom colors instead of themeable design tokens.</p>
+      <p class="cs-section-body">Two related problems were scoped together and run as parallel workstreams, allowing shared learnings to feed into both without duplicating effort.</p>
     </section>
 
     <!-- Goals -->
     <section class="cs-section" id="goals">
       <p class="cs-section-label">goals</p>
       <h2 class="cs-section-heading">Align structure, standardize components, and give every admin tab <strong>the same foundation.</strong></h2>
-      <p class="cs-section-body">The goal across both workstreams was consistency — bringing admin settings across products into alignment so administrators experienced a single, predictable interface regardless of which product they were in. This meant establishing shared layout standards, unifying interaction patterns, and producing specs detailed enough for development teams across multiple countries to implement independently.</p>
+      <p class="cs-section-body">The goal across both workstreams was consistency: bringing admin settings across products into alignment so administrators experienced a single, predictable interface regardless of which product they were in. This meant meeting the consistency standards, establishing shared layout standards, unifying interaction patterns, and producing one set of specs detailed enough for development teams across multiple countries to implement independently.</p>
     </section>
 
     <!-- Process -->
@@ -633,8 +634,17 @@
       <h3 class="cs-subheading" style="margin-top:0;">Auditing the current state</h3>
       <p class="cs-section-body">Both workstreams started with an audit of the existing experience, mapping inconsistencies across products and identifying what a unified standard would need to cover. The audit surfaced a range of issues that had accumulated over time as each product built its admin area independently.</p>
 
+      <h3 class="cs-subheading">Workstream 1: browser integration and appearance, in three scopes</h3>
+      <p class="cs-section-body"><strong>System information bar.</strong> The bar that tells users which system they're in used hard-coded hex colors. I moved it to design tokens so it follows the theme. The component itself is covered in the <a href="/sap-dna/" style="color:inherit;text-decoration:underline;">DNA Web UI Kit case study</a>.</p>
+      <p class="cs-section-body"><strong>Browser tab icon.</strong> SAP's icon became the default, with a custom option kept for customers who want their own. To avoid surprising anyone, I planned a rollout where existing customers keep their current icon and new customers start with the SAP default. I also designed for an edge case: a light-themed app open in a dark-mode browser, where the icon still needs to be visible.</p>
+      <p class="cs-section-body"><strong>Settings layout.</strong> I explored several layouts for the appearance settings and we chose an object page floorplan. I also moved the "Default Appearance" settings so both products keep them in the same place.</p>
+
+      <h3 class="cs-subheading">Workstream 2: unifying every admin tab</h3>
+      <p class="cs-section-body">The new floorplan then became the standard for every admin tab across Analytics Cloud, Datasphere, and Business Data Cloud, so admins don't need to relearn each tab. We phased it: admin settings first, then configuration settings and a search across tabs. I wrote guidelines for text and input field lengths and turned the layout into a page template for the DNA Web UI Kit, so future tabs start consistent.</p>
+      <p class="cs-section-body">One decision came up repeatedly: toggles versus checkboxes. Toggles suggest a change saves instantly, but the new layout uses save and cancel buttons, so I switched those settings to checkboxes.</p>
+
       <h3 class="cs-subheading">Designing and iterating</h3>
-      <p class="cs-section-body">Design proposals were reviewed iteratively with the UXC lead, senior designer, and development lead. Feedback shaped both the design direction and the format of the specs, which were structured to be navigable by development teams without requiring them to work through the design file directly.</p>
+      <p class="cs-section-body">Design proposals were reviewed iteratively with the UXC lead, senior designer, and development lead. With the user assistance team, I refined labels so each one said what it does. Feedback also shaped the format of the specs, which were structured to be navigable by development teams without requiring them to work through the design file directly.</p>
 
       <h3 class="cs-subheading">Working across teams</h3>
       <p class="cs-section-body">Both workstreams involved coordinating across UX, user assistance, project management, and development. Scope changes mid-project were incorporated without restarting the work, and regular check-ins ensured the direction remained feasible across all product areas involved.</p>
@@ -644,7 +654,7 @@
     <section class="cs-section" id="outcome">
       <p class="cs-section-label">outcome</p>
       <h2 class="cs-section-heading">Both specs completed, handed off to development, and unified <strong>20 tabs across 3 products</strong>.</h2>
-      <p class="cs-section-body">Both specs were completed and handed off to development. Full case study details are available on request.</p>
+      <p class="cs-section-body">Both specs were completed and handed off to development. The settings now meet the consistency standards, the system information bar uses design tokens, and the floorplan and guidelines live in the DNA Web UI Kit for future tabs. Full case study details are available on request.</p>
     </section>
 
     <!-- Reflections -->
@@ -656,6 +666,9 @@
 
       <h3 class="cs-subheading">How you present work matters as much as the work itself</h3>
       <p class="cs-section-body">I learned early on that the format you use to present to developers shapes how well they understand the design intent. A Figma file works in a design review, but a structured spec or a live prototype is what actually moves things forward in a dev handoff. Developers respond well to being able to interact with the design directly rather than interpreting static screens. Finding the right format for the right audience became a skill in itself.</p>
+
+      <h3 class="cs-subheading">A spec should work without you in the room</h3>
+      <p class="cs-section-body">Early feedback was to build each spec so that anyone opening it cold would have enough context to understand it without me presenting. That changed how I wrote them: context first, then the decision, then the details, in the order a developer would need them.</p>
 
       <h3 class="cs-subheading">Leading design conversations and advocating for decisions</h3>
       <p class="cs-section-body">Working with developers and project managers on a regular basis gave me hands-on experience presenting design rationale and defending decisions in a professional setting. One thing I underestimated early on was assuming stakeholders remembered the full context of the project. In reality, everyone is juggling multiple workstreams, and coming into a review with full context, not just the latest changes, made conversations more productive and helped move decisions forward faster.</p>
