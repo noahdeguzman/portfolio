@@ -442,11 +442,6 @@
     .film-bento .film-tall .film-media { aspect-ratio: 9 / 16; flex: none; }
     .film-bento .film-card:not(.film-tall) .film-media { flex: 1; min-height: 0; aspect-ratio: auto; }
     .film-bento .film-media video { height: 100%; aspect-ratio: auto; }
-    .cs-sound-btn { position: absolute; right: 56px; bottom: 12px; width: 36px; height: 36px; border: none; border-radius: 50%; background: rgba(20,20,20,0.7); color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; }
-    .cs-sound-btn:hover { background: rgba(20,20,20,0.9); }
-    .cs-sound-btn .i-sound { display: none; }
-    .cs-sound-btn.is-on .i-sound { display: block; }
-    .cs-sound-btn.is-on .i-muted { display: none; }
     @media (max-width: 860px) { .film-bento { grid-template-columns: 1fr; grid-template-rows: none; } .film-bento .film-tall { grid-row: auto; } .film-bento .film-card:not(.film-tall) .film-media { flex: none; aspect-ratio: 16 / 9; } }
 </style>
 </head>
@@ -492,10 +487,6 @@
       <article class="film-card film-tall">
         <div class="cs-video film-media">
           <video src="../images/film/lifeatsap.mp4" poster="../images/film/lifeatsap.webp" autoplay muted loop playsinline disablepictureinpicture disableremoteplayback aria-label="On feeling behind in life, video featured on Life at SAP"></video>
-          <button type="button" class="cs-sound-btn" aria-label="Turn sound on">
-            <svg class="i-muted" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 9l5 6M21 9l-5 6" stroke="currentColor" stroke-width="2" fill="none"/></svg>
-            <svg class="i-sound" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" stroke="currentColor" stroke-width="2" fill="none"/></svg>
-          </button>
           <button type="button" class="cs-video-btn" aria-label="Pause video">
             <svg class="i-pause" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><rect x="6" y="5" width="4" height="14" fill="currentColor"/><rect x="14" y="5" width="4" height="14" fill="currentColor"/></svg>
             <svg class="i-play" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M7 5v14l12-7z" fill="currentColor"/></svg>
@@ -589,8 +580,6 @@
       if (!v || !btn) return;
       const sync = () => { btn.classList.toggle('is-paused', v.paused); btn.setAttribute('aria-label', v.paused ? 'Play video' : 'Pause video'); };
       btn.addEventListener('click', () => { v.paused ? v.play() : v.pause(); });
-      const snd = wrap.querySelector('.cs-sound-btn');
-      if (snd) snd.addEventListener('click', () => { v.muted = !v.muted; if (!v.muted && v.paused) v.play(); snd.classList.toggle('is-on', !v.muted); snd.setAttribute('aria-label', v.muted ? 'Turn sound on' : 'Turn sound off'); });
       v.addEventListener('play', sync); v.addEventListener('pause', sync);
       const p = v.play(); if (p && p.catch) p.catch(sync);
       sync();
