@@ -445,6 +445,12 @@
     @media (max-width: 860px) { .film-bento { grid-template-columns: 1fr; grid-template-rows: none; } .film-bento .film-tall { grid-row: auto; } .film-bento .film-card:not(.film-tall) .film-media { flex: none; aspect-ratio: 16 / 9; } }
     .film-desc { font-family: var(--font-text); font-size: clamp(13px, 1vw, 15px); line-height: 1.6; color: var(--c-muted); margin: 0; }
     #main.page-content, .film-grid-wrap { width: 100%; max-width: 1312px; margin-left: auto; margin-right: auto; box-sizing: border-box; }
+    .cs-sound-btn { position: absolute; right: 56px; bottom: 12px; width: 36px; height: 36px; border: none; border-radius: 50%; background: rgba(20,20,20,0.7); color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s ease; }
+    .cs-sound-btn:hover { background: rgba(20,20,20,0.9); }
+    .cs-sound-btn:focus-visible { outline: 2px solid #00E997; outline-offset: 2px; }
+    .cs-sound-btn .i-sound { display: none; }
+    .cs-sound-btn.is-on .i-sound { display: block; }
+    .cs-sound-btn.is-on .i-muted { display: none; }
 </style>
 </head>
 <body>
@@ -488,6 +494,10 @@
       <article class="film-card film-tall">
         <div class="cs-video film-media">
           <video src="../images/film/lifeatsap.mp4" poster="../images/film/lifeatsap.webp" autoplay muted loop playsinline disablepictureinpicture disableremoteplayback aria-label="You're Not Behind, You're Exactly Where You Need to Be, video featured on Life at SAP"></video>
+          <button type="button" class="cs-sound-btn" aria-label="Turn sound on">
+            <svg class="i-muted" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 9l5 6M21 9l-5 6" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+            <svg class="i-sound" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+          </button>
           <button type="button" class="cs-video-btn" aria-label="Pause video">
             <svg class="i-pause" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><rect x="6" y="5" width="4" height="14" fill="currentColor"/><rect x="14" y="5" width="4" height="14" fill="currentColor"/></svg>
             <svg class="i-play" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M7 5v14l12-7z" fill="currentColor"/></svg>
@@ -499,6 +509,10 @@
       <article class="film-card">
         <div class="cs-video film-media">
           <video src="../images/film/amsterdam.mp4" poster="../images/film/amsterdam.webp" autoplay muted loop playsinline disablepictureinpicture disableremoteplayback aria-label="Spending 48 Hours in Amsterdam preview"></video>
+          <button type="button" class="cs-sound-btn" aria-label="Turn sound on">
+            <svg class="i-muted" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 9l5 6M21 9l-5 6" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+            <svg class="i-sound" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+          </button>
           <button type="button" class="cs-video-btn" aria-label="Pause video">
             <svg class="i-pause" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><rect x="6" y="5" width="4" height="14" fill="currentColor"/><rect x="14" y="5" width="4" height="14" fill="currentColor"/></svg>
             <svg class="i-play" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M7 5v14l12-7z" fill="currentColor"/></svg>
@@ -510,6 +524,10 @@
       <article class="film-card">
         <div class="cs-video film-media">
           <video src="../images/film/minecraft-alps.mp4" poster="../images/film/minecraft-alps.webp" autoplay muted loop playsinline disablepictureinpicture disableremoteplayback aria-label="Minecraft IRL: Swiss Alps"></video>
+          <button type="button" class="cs-sound-btn" aria-label="Turn sound on">
+            <svg class="i-muted" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 9l5 6M21 9l-5 6" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+            <svg class="i-sound" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+          </button>
           <button type="button" class="cs-video-btn" aria-label="Pause video">
             <svg class="i-pause" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><rect x="6" y="5" width="4" height="14" fill="currentColor"/><rect x="14" y="5" width="4" height="14" fill="currentColor"/></svg>
             <svg class="i-play" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M7 5v14l12-7z" fill="currentColor"/></svg>
@@ -587,6 +605,19 @@
       if (!v || !btn) return;
       const sync = () => { btn.classList.toggle('is-paused', v.paused); btn.setAttribute('aria-label', v.paused ? 'Play video' : 'Pause video'); };
       btn.addEventListener('click', () => { v.paused ? v.play() : v.pause(); });
+      const snd = wrap.querySelector('.cs-sound-btn');
+      if (snd) snd.addEventListener('click', () => {
+        const turnOn = v.muted;
+        // only one video plays sound at a time
+        document.querySelectorAll('.cs-video').forEach(other => {
+          const ov = other.querySelector('video'), ob = other.querySelector('.cs-sound-btn');
+          if (ov && ov !== v) { ov.muted = true; if (ob) { ob.classList.remove('is-on'); ob.setAttribute('aria-label', 'Turn sound on'); } }
+        });
+        v.muted = !turnOn;
+        if (turnOn && v.paused) { const pr = v.play(); if (pr && pr.catch) pr.catch(() => {}); }
+        snd.classList.toggle('is-on', turnOn);
+        snd.setAttribute('aria-label', turnOn ? 'Turn sound off' : 'Turn sound on');
+      });
       v.addEventListener('play', sync); v.addEventListener('pause', sync);
       const p = v.play(); if (p && p.catch) p.catch(sync);
       sync();
