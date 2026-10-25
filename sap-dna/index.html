@@ -539,7 +539,7 @@
     .cs-index a { color: var(--c-text); text-decoration: none; font-weight: 500; flex-shrink: 0; }
     .cs-index a:hover { color: #0070F2; }
     .cs-index .cs-desc { color: var(--c-muted); text-align: right; }
-    @media (max-width: 600px) { .cs-index li { flex-direction: column; gap: 2px; } .cs-index .cs-tag { align-self: flex-start; margin-left: 0; } .cs-index .cs-desc { text-align: left; margin-left: 0; } }
+    @media (max-width: 600px) { .cs-index li { flex-wrap: wrap; justify-content: flex-start; align-items: baseline; gap: 4px 10px; } .cs-index .cs-tag { align-self: baseline; margin-left: 0; } .cs-index .cs-desc { flex-basis: 100%; text-align: left; margin-left: 0; } }
 </style>
 </head>
 <body>
