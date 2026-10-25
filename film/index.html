@@ -428,6 +428,14 @@
     .film-title { font-family: var(--font-text); font-size: 15px; color: var(--c-text); margin: 14px 0 4px; }
     .film-meta { font-family: var(--font-mono); font-size: 12px; letter-spacing: -0.03em; text-transform: uppercase; color: var(--c-muted); margin: 0; }
     @media (max-width: 860px) { .film-grid { grid-template-columns: 1fr; } .film-grid-wrap { padding-top: 64px; } }
+    .cs-video { position: relative; }
+    .cs-video video { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; background: var(--c-surface); pointer-events: none; }
+    .cs-video-btn { position: absolute; right: 12px; bottom: 12px; width: 36px; height: 36px; border: none; border-radius: 50%; background: rgba(20,20,20,0.7); color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s ease; }
+    .cs-video-btn:hover { background: rgba(20,20,20,0.9); }
+    .cs-video-btn:focus-visible { outline: 2px solid #00E997; outline-offset: 2px; }
+    .cs-video-btn .i-play { display: none; }
+    .cs-video-btn.is-paused .i-play { display: block; }
+    .cs-video-btn.is-paused .i-pause { display: none; }
 </style>
 </head>
 <body>
@@ -470,9 +478,15 @@
     <div class="film-label"><span></span>Selected work</div>
     <div class="film-grid">
       <article class="film-card">
-        <div class="ph-img">[Video or thumbnail 1]</div>
-        <p class="film-title"><span class="ph">[Title]</span></p>
-        <p class="film-meta"><span class="ph">// [Shot, edited, graded] · [Year]</span></p>
+        <div class="cs-video">
+          <video src="../images/film/amsterdam.mp4" poster="../images/film/amsterdam.webp" autoplay muted loop playsinline disablepictureinpicture disableremoteplayback aria-label="Spending 48 Hours in Amsterdam preview"></video>
+          <button type="button" class="cs-video-btn" aria-label="Pause video">
+            <svg class="i-pause" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><rect x="6" y="5" width="4" height="14" fill="currentColor"/><rect x="14" y="5" width="4" height="14" fill="currentColor"/></svg>
+            <svg class="i-play" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M7 5v14l12-7z" fill="currentColor"/></svg>
+          </button>
+        </div>
+        <p class="film-title">Spending 48 Hours in Amsterdam</p>
+        <p class="film-meta">// Contiki European Discovery · <span class="ph">[Shot, edited, graded] · [Year]</span></p>
       </article>
       <article class="film-card">
         <div class="ph-img">[Video or thumbnail 2]</div>
@@ -551,5 +565,18 @@
 
   <script src="../transition.js"></script>
 
+  <script>
+  (() => {
+    document.querySelectorAll('.cs-video').forEach(wrap => {
+      const v = wrap.querySelector('video'), btn = wrap.querySelector('.cs-video-btn');
+      if (!v || !btn) return;
+      const sync = () => { btn.classList.toggle('is-paused', v.paused); btn.setAttribute('aria-label', v.paused ? 'Play video' : 'Pause video'); };
+      btn.addEventListener('click', () => { v.paused ? v.play() : v.pause(); });
+      v.addEventListener('play', sync); v.addEventListener('pause', sync);
+      const p = v.play(); if (p && p.catch) p.catch(sync);
+      sync();
+    });
+  })();
+  </script>
 </body>
 </html>
