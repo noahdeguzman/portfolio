@@ -443,6 +443,7 @@
     .film-bento .film-card:not(.film-tall) .film-media { flex: 1; min-height: 0; aspect-ratio: auto; }
     .film-bento .film-media video { height: 100%; aspect-ratio: auto; }
     @media (max-width: 860px) { .film-bento { grid-template-columns: 1fr; grid-template-rows: none; } .film-bento .film-tall { grid-row: auto; } .film-bento .film-card:not(.film-tall) .film-media { flex: none; aspect-ratio: 16 / 9; } }
+    .film-desc { font-family: var(--font-text); font-size: clamp(13px, 1vw, 15px); line-height: 1.6; color: var(--c-muted); margin: 0; }
 </style>
 </head>
 <body>
@@ -492,7 +493,7 @@
           </button>
         </div>
         <p class="film-title">You're Not Behind, You're Exactly Where You Need to Be</p>
-        <p class="film-meta">// Featured on @lifeatsap · <span class="ph">[Your role] · [Year]</span></p>
+        <p class="film-desc">If you're feeling stuck or behind in life, just understand that everybody has their own timeline. You're not behind, and you're not alone.</p>
       </article>
       <article class="film-card">
         <div class="cs-video film-media">
@@ -503,7 +504,7 @@
           </button>
         </div>
         <p class="film-title">Spending 48 Hours in Amsterdam</p>
-        <p class="film-meta">// Contiki European Discovery · <span class="ph">[Shot, edited, graded] · [Year]</span></p>
+        <p class="film-meta">// Contiki European Discovery</p>
       </article>
       <article class="film-card">
         <div class="cs-video film-media">
@@ -514,7 +515,7 @@
           </button>
         </div>
         <p class="film-title">Minecraft IRL: Swiss Alps</p>
-        <p class="film-meta">// Game UI experimentation · <span class="ph">[Year]</span></p>
+        <p class="film-meta">// Game UI experimentation</p>
       </article>
     </div>
   </section>
