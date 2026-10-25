@@ -523,9 +523,12 @@
         </div>
       </a>
       <!-- ── SAP DNA ────────────────────────────── -->
-      <a href="/sap-dna" class="pg-card pg-sap-2" aria-label="SAP DNA Web UI Kit — Design System" data-transition-color="#C9E8FF">
+      <a href="/sap-dna" class="pg-card pg-sap-2" id="dna-card" aria-label="SAP DNA Web UI Kit — Design System" data-transition-color="#C9E8FF">
         <div class="pg-scene">
           <img class="pg-cover" src="images/sap-ds-tn.png" alt="SAP Design System" />
+          <div id="dna-hover-preview" class="preview-wrap" style="position:absolute;width:400px;aspect-ratio:16/9;overflow:hidden;pointer-events:none;opacity:0;transition:opacity 0.25s cubic-bezier(0.25,0.46,0.45,0.94),transform 0.25s cubic-bezier(0.25,0.46,0.45,0.94);transform:translate(-50%,-50%) scale(0.94);z-index:10;">
+            <img src="images/dna/kit-cover.webp" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" />
+          </div>
         </div>
         <div class="pg-overlay">
           <div class="pg-overlay-col-left"><span class="pg-company">SAP [2026]</span></div>
@@ -782,6 +785,17 @@
       const rect = toyotaCard.querySelector('.pg-scene').getBoundingClientRect();
       toyotaPreview.style.left = (e.clientX - rect.left) + 'px';
       toyotaPreview.style.top  = (e.clientY - rect.top)  + 'px';
+    });
+
+    /* ── DNA hover preview ─────────── */
+    const dnaCard    = document.getElementById('dna-card');
+    const dnaPreview = document.getElementById('dna-hover-preview');
+    dnaCard.addEventListener('mouseenter', () => { dnaPreview.style.opacity = '1'; dnaPreview.style.transform = 'translate(-50%,-50%) scale(1)'; });
+    dnaCard.addEventListener('mouseleave', () => { dnaPreview.style.opacity = '0'; dnaPreview.style.transform = 'translate(-50%,-50%) scale(0.94)'; });
+    dnaCard.addEventListener('mousemove', e => {
+      const rect = dnaCard.querySelector('.pg-scene').getBoundingClientRect();
+      dnaPreview.style.left = (e.clientX - rect.left) + 'px';
+      dnaPreview.style.top  = (e.clientY - rect.top)  + 'px';
     });
 
     /* ── Toyota Rental hover preview ─────────── */
