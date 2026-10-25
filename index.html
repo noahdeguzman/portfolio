@@ -494,6 +494,9 @@
       <a href="/sap-admin" class="pg-card pg-sap-1" id="sap-card" aria-label="SAP — admin settings" data-transition-color="#7858FF">
         <div class="pg-scene">
           <img class="pg-cover" src="images/sap-admin-tn.png" alt="SAP Admin Settings" style="object-fit: cover; object-position: center center;" />
+          <div id="sap-hover-preview" class="preview-wrap" style="position:absolute;width:400px;pointer-events:none;opacity:0;transition:opacity 0.25s cubic-bezier(0.25,0.46,0.45,0.94),transform 0.25s cubic-bezier(0.25,0.46,0.45,0.94);transform:translate(-50%,-50%) scale(0.94);z-index:10;">
+            <video src="images/sap-animation.mp4" muted loop playsinline style="width:100%;display:block;"></video>
+          </div>
         </div>
         <div class="pg-overlay">
           <div class="pg-overlay-col-left"><span class="pg-company">SAP [2026]</span></div>
@@ -508,6 +511,9 @@
       <a href="/nokia" class="pg-card pg-nokia" id="nokia-card" aria-label="Nokia — Frostbuster" data-transition-color="#1E5EF6">
         <div class="pg-scene">
           <img class="pg-cover" src="images/nokia-tn.png" alt="Nokia — Frostbuster" style="object-fit: cover; object-position: center center;" />
+          <div id="nokia-hover-preview" class="preview-wrap" style="position:absolute;width:400px;pointer-events:none;opacity:0;transition:opacity 0.25s cubic-bezier(0.25,0.46,0.45,0.94),transform 0.25s cubic-bezier(0.25,0.46,0.45,0.94);transform:translate(-50%,-50%) scale(0.94);z-index:10;">
+            <video src="images/nokia-animation.mp4" muted loop playsinline style="width:100%;display:block;"></video>
+          </div>
         </div>
         <div class="pg-overlay">
           <div class="pg-overlay-col-left"><span class="pg-company">Nokia [2025]</span></div>
@@ -521,6 +527,9 @@
       <a href="/sap-dna" class="pg-card pg-sap-2" id="dna-card" aria-label="SAP DNA Web UI Kit — Design System" data-transition-color="#C9E8FF">
         <div class="pg-scene">
           <img class="pg-cover" src="images/sap-ds-tn.png" alt="SAP Design System" />
+          <div id="dna-hover-preview" class="preview-wrap" style="position:absolute;width:400px;aspect-ratio:16/9;overflow:hidden;pointer-events:none;opacity:0;transition:opacity 0.25s cubic-bezier(0.25,0.46,0.45,0.94),transform 0.25s cubic-bezier(0.25,0.46,0.45,0.94);transform:translate(-50%,-50%) scale(0.94);z-index:10;">
+            <img src="images/dna/kit-cover.webp" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" />
+          </div>
         </div>
         <div class="pg-overlay">
           <div class="pg-overlay-col-left"><span class="pg-company">SAP [2026]</span></div>
@@ -539,6 +548,9 @@
       <a href="/toyota" class="pg-card pg-toyota-1" id="toyota-card" aria-label="Toyota — fleet management" data-transition-color="#EB0A1E">
         <div class="pg-scene">
           <img class="pg-cover" src="images/iMac Mockup.png" alt="Toyota — fleet management" style="width: 102%; height: 102%; object-position: right center;" />
+          <div id="toyota-hover-preview" class="preview-wrap" style="position:absolute;width:400px;aspect-ratio:16/9;overflow:hidden;pointer-events:none;opacity:0;transition:opacity 0.25s cubic-bezier(0.25,0.46,0.45,0.94),transform 0.25s cubic-bezier(0.25,0.46,0.45,0.94);transform:translate(-50%,-50%) scale(0.94);z-index:10;">
+            <img src="images/toyota-banner.avif" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" />
+          </div>
         </div>
         <div class="pg-overlay">
           <div class="pg-overlay-col-left"><span class="pg-company">Toyota [2024]</span></div>
@@ -551,6 +563,9 @@
       <a href="/toyota-rental" class="pg-card pg-toyota-2" id="toyota-rental-card" aria-label="Toyota — dealer rental mobile reservation" data-transition-color="#EB0A1E">
         <div class="pg-scene" style="background:#ffffff;">
           <img class="pg-cover" src="images/toyota-mobile-tn.png" alt="Toyota — dealer rental mobile reservation" style="object-fit: cover; object-position: center center;" />
+          <div id="toyota-rental-hover-preview" class="preview-wrap" style="position:absolute;width:240px;pointer-events:none;opacity:0;transition:opacity 0.25s cubic-bezier(0.25,0.46,0.45,0.94),transform 0.25s cubic-bezier(0.25,0.46,0.45,0.94);transform:translate(-50%,-50%) scale(0.94);z-index:10;overflow:hidden;">
+            <video src="images/toyota-rental-video.mp4" muted loop playsinline style="width:240%;display:block;margin-left:-70%;"></video>
+          </div>
         </div>
         <div class="pg-overlay">
           <div class="pg-overlay-col-left"><span class="pg-company">Toyota [2024]</span></div>
@@ -736,6 +751,67 @@
   })();
   </script>
 
+  <script>
+  (() => {
+    /* ── SAP hover preview ────────────────────── */
+    const sapCard    = document.getElementById('sap-card');
+    const sapPreview = document.getElementById('sap-hover-preview');
+    const sapVideo   = sapPreview.querySelector('video');
+    sapCard.addEventListener('mouseenter', () => { sapVideo.currentTime = 0; sapVideo.play(); sapPreview.style.opacity = '1'; sapPreview.style.transform = 'translate(-50%,-50%) scale(1)'; });
+    sapCard.addEventListener('mouseleave', () => { sapPreview.style.opacity = '0'; sapPreview.style.transform = 'translate(-50%,-50%) scale(0.94)'; sapVideo.pause(); });
+    sapCard.addEventListener('mousemove', e => {
+      const rect = sapCard.querySelector('.pg-scene').getBoundingClientRect();
+      sapPreview.style.left = (e.clientX - rect.left) + 'px';
+      sapPreview.style.top  = (e.clientY - rect.top)  + 'px';
+    });
+
+    /* ── Nokia hover preview ──────────────────── */
+    const nokiaCard    = document.getElementById('nokia-card');
+    const nokiaPreview = document.getElementById('nokia-hover-preview');
+    const nokiaVideo   = nokiaPreview.querySelector('video');
+    nokiaCard.addEventListener('mouseenter', () => { nokiaVideo.currentTime = 0; nokiaVideo.play(); nokiaPreview.style.opacity = '1'; nokiaPreview.style.transform = 'translate(-50%,-50%) scale(1)'; });
+    nokiaCard.addEventListener('mouseleave', () => { nokiaPreview.style.opacity = '0'; nokiaPreview.style.transform = 'translate(-50%,-50%) scale(0.94)'; nokiaVideo.pause(); });
+    nokiaCard.addEventListener('mousemove', e => {
+      const rect = nokiaCard.querySelector('.pg-scene').getBoundingClientRect();
+      nokiaPreview.style.left = (e.clientX - rect.left) + 'px';
+      nokiaPreview.style.top  = (e.clientY - rect.top)  + 'px';
+    });
+
+    /* ── Toyota fleet hover preview ──────────── */
+    const toyotaCard    = document.getElementById('toyota-card');
+    const toyotaPreview = document.getElementById('toyota-hover-preview');
+    toyotaCard.addEventListener('mouseenter', () => { toyotaPreview.style.opacity = '1'; toyotaPreview.style.transform = 'translate(-50%,-50%) scale(1)'; });
+    toyotaCard.addEventListener('mouseleave', () => { toyotaPreview.style.opacity = '0'; toyotaPreview.style.transform = 'translate(-50%,-50%) scale(0.94)'; });
+    toyotaCard.addEventListener('mousemove', e => {
+      const rect = toyotaCard.querySelector('.pg-scene').getBoundingClientRect();
+      toyotaPreview.style.left = (e.clientX - rect.left) + 'px';
+      toyotaPreview.style.top  = (e.clientY - rect.top)  + 'px';
+    });
+
+    /* ── DNA hover preview ─────────── */
+    const dnaCard    = document.getElementById('dna-card');
+    const dnaPreview = document.getElementById('dna-hover-preview');
+    dnaCard.addEventListener('mouseenter', () => { dnaPreview.style.opacity = '1'; dnaPreview.style.transform = 'translate(-50%,-50%) scale(1)'; });
+    dnaCard.addEventListener('mouseleave', () => { dnaPreview.style.opacity = '0'; dnaPreview.style.transform = 'translate(-50%,-50%) scale(0.94)'; });
+    dnaCard.addEventListener('mousemove', e => {
+      const rect = dnaCard.querySelector('.pg-scene').getBoundingClientRect();
+      dnaPreview.style.left = (e.clientX - rect.left) + 'px';
+      dnaPreview.style.top  = (e.clientY - rect.top)  + 'px';
+    });
+
+    /* ── Toyota Rental hover preview ─────────── */
+    const toyotaRentalCard    = document.getElementById('toyota-rental-card');
+    const toyotaRentalPreview = document.getElementById('toyota-rental-hover-preview');
+    const toyotaRentalVideo   = toyotaRentalPreview.querySelector('video');
+    toyotaRentalCard.addEventListener('mouseenter', () => { toyotaRentalVideo.currentTime = 0; toyotaRentalVideo.play(); toyotaRentalPreview.style.opacity = '1'; toyotaRentalPreview.style.transform = 'translate(-50%,-50%) scale(1)'; });
+    toyotaRentalCard.addEventListener('mouseleave', () => { toyotaRentalPreview.style.opacity = '0'; toyotaRentalPreview.style.transform = 'translate(-50%,-50%) scale(0.94)'; toyotaRentalVideo.pause(); });
+    toyotaRentalCard.addEventListener('mousemove', e => {
+      const rect = toyotaRentalCard.querySelector('.pg-scene').getBoundingClientRect();
+      toyotaRentalPreview.style.left = (e.clientX - rect.left) + 'px';
+      toyotaRentalPreview.style.top  = (e.clientY - rect.top)  + 'px';
+    });
+  })();
+  </script>
 
   <script src="transition.js"></script>
 </body>
