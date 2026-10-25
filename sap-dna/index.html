@@ -514,6 +514,11 @@
     .footer-contact a:hover { text-decoration-color: currentColor; }
     .ph { background: #fdf4a3; color: #6b5200; padding: 0 4px; border-radius: 3px; }
     .ph-img { border: 1.5px dashed rgba(0,0,0,0.18); background: var(--c-surface); aspect-ratio: 16 / 9; display: flex; align-items: center; justify-content: center; text-align: center; padding: 24px; font-family: var(--font-mono); font-size: 12px; letter-spacing: -0.03em; text-transform: uppercase; color: var(--c-muted); margin-top: 32px; }
+    .cs-img { display:block; width:100%; height:auto; border:1px solid var(--c-border); margin-top:32px; }
+    .cs-img-panel { margin-top:32px; background:var(--c-surface); border:1px solid var(--c-border); display:flex; align-items:center; justify-content:center; padding:40px 24px; }
+    .cs-img-panel img { width:100%; max-width:303px; height:auto; display:block; }
+    .cs-img-panel + .cs-img-panel, .ph-row .cs-img-panel { margin-top:32px; }
+    .cs-caption { font-family: var(--font-mono); font-size:11px; letter-spacing:-0.03em; text-transform:uppercase; color:var(--c-muted); margin-top:10px; }
     .ph-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     @media (max-width: 860px) { .ph-row { grid-template-columns: 1fr; } }
   </style>
@@ -584,7 +589,7 @@
           </div>
         </div>
       </div>
-      <div class="ph-img">[Image: overview of the components you contributed, redrawn or blurred]</div>
+      <img class="cs-img" src="../images/dna/kit-cover.webp" alt="DNA Web UI Kit v1.3 release cover" loading="lazy" />
       <hr style="border:none; border-top:1px solid var(--c-border); margin: 80px 0 0;" />
     </div>
 
@@ -617,7 +622,7 @@
       <h3 class="cs-subheading" style="margin-top:0;">Creation Item: one spec across three products</h3>
       <p class="cs-section-body">Creation items are the large "Create" tiles users see when starting something new. I rebuilt the base set so the "Create" header became a boolean property, added BDC variants, and moved all three products onto the same grid list item spec, with the correct list tokens and a 16px corner radius. I also cleaned up layer names and added accessibility annotations.</p>
       <p class="cs-section-body">Two questions came up along the way. On color, I learned the item colors are chosen to stand apart from each other at a glance, not because they look harmonious, so I wrote that into the guidance. On keyboard navigation, UI5 and the Fiori keyboard guidelines disagreed on what the up and down arrows should do. I raised it with the DNA accessibility advocates, and we landed on left and right moving through items in order, with up and down moving between rows.</p>
-      <div class="ph-img">[Image: Creation Item before and after, across BDC, SAC and DSP]</div>
+      <img class="cs-img" src="../images/dna/creation-item.webp" alt="Creation Item pattern with Create header and colored item tiles" loading="lazy" />
 
       <h3 class="cs-subheading">Page Switcher: deciding whether to build at all</h3>
       <p class="cs-section-body">Some toolbars had their own custom pagination. Before designing anything, I collected every instance across the products and asked the kit owners whether designers should reuse the existing pagination component or whether the kit needed something new. We agreed on a Page Switcher subcomponent, which I designed with text properties for the current and total pages, a variant for active and disabled arrows, and documented logic, such as disabling the left arrow on the first page.</p>
@@ -625,12 +630,16 @@
       <h3 class="cs-subheading">Switch Group: designing so designers don't detach</h3>
       <p class="cs-section-body">Designers were detaching the Switch Group whenever they needed more switches. I rebuilt it with slots, so a group can hold up to five switches with the Switch set as the preferred item, and added a guideline showing how to add more without detaching.</p>
       <div class="ph-row">
-        <div class="ph-img">[Image: Page Switcher states]</div>
-        <div class="ph-img">[Image: Switch Group with slots]</div>
+        <div><div class="cs-img-panel"><img src="../images/dna/page-switcher.webp" alt="Page Switcher in app toolbars" loading="lazy" /></div><p class="cs-caption">Page Switcher in the app toolbar</p></div>
+        <div><div class="cs-img-panel"><img src="../images/dna/switch-group.webp" alt="Switch Group with slotted switches" loading="lazy" /></div><p class="cs-caption">Switch Group, rebuilt with slots</p></div>
       </div>
+      <p class="cs-section-body" style="margin-top:32px;">Both shipped in v1.3 of the kit.</p>
 
       <h3 class="cs-subheading">Smaller contributions</h3>
       <p class="cs-section-body">I also rebuilt the BDC App Start Page from SAC components, with interchangeable table and toolbar subcomponents, moved the System Information Bar from hard-coded hex values to design tokens and got approval to add it to the kit, and designed new chart icons, including a sunburst chart, stream graph, and word cloud.</p>
+      <img class="cs-img" src="../images/dna/app-start-page.webp" alt="Application Start Page template built from shared components" loading="lazy" />
+      <div class="cs-img-panel"><img src="../images/dna/chart-icons.webp" alt="New chart icons" loading="lazy" /></div>
+      <p class="cs-caption">New chart icons</p>
     </section>
 
     <!-- AI workflow -->
