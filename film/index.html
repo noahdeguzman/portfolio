@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en" style="background:#ffffff">
+<head>
+  <meta name="color-scheme" content="light" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cinematic videography and editing by Noah De Guzman, a UX designer and creator in Vancouver, BC." />
+  <link rel="canonical" href="https://www.noahdeguzman.com/film/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Noah De Guzman" />
+  <meta property="og:title" content="Film — Noah De Guzman" />
+  <meta property="og:description" content="Cinematic videography and editing by Noah De Guzman, a UX designer and creator in Vancouver, BC." />
+  <meta property="og:url" content="https://www.noahdeguzman.com/film/" />
+  <meta property="og:image" content="https://www.noahdeguzman.com/images/og-image.png?v=2" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Film — Noah De Guzman" />
+  <meta name="twitter:description" content="Noah De Guzman is a UX designer in Vancouver, BC, with experience at SAP, Nokia, and Invoke across product design, design systems, and cross-platform UX." />
+  <meta name="twitter:image" content="https://www.noahdeguzman.com/images/og-image.png?v=2" />
+  <title>Film — Noah De Guzman</title>
+  <link rel="icon" type="image/svg+xml" href="../images/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Inter+Tight:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* ─────────────────────────────────────────────
+       TOKENS
+    ───────────────────────────────────────────── */
+    :root {
+      --font-display: "Inter Tight", "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --font-text:    -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Arial, sans-serif;
+      --font-mono:    "Space Mono", "SF Mono", "Fira Mono", "Consolas", monospace;
+
+      --c-bg:      #ffffff;
+      --c-surface: #f5f5f7;
+      --c-border:  rgba(0,0,0,0.1);
+      --c-text:    #141414;
+      --c-muted:   #6e6e73;
+      --c-subtle:  #a1a1a6;
+      --c-blue:    #0071e3;
+      --c-green:   #1a9e4a;
+      --c-white:   #ffffff;
+
+      --c-nav-bg:      #ffffff;
+      --c-nav-border:  rgba(0,0,0,0.1);
+      --c-ring-border: rgba(0,0,0,0.5);
+
+      --nav-h:     52px;
+      --r-card:    0px;
+      --r-pill:    980px;
+      --pad:       16px;
+
+      --ease:        cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --t:           0.45s;
+      --t-fast:      0.2s;
+    }
+
+    /* ─────────────────────────────────────────────
+       RESET
+    ───────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      scroll-behavior: smooth; overflow-x: hidden;
+    }
+
+    body {
+      font-family: var(--font-text);
+      letter-spacing: -0.01em;
+      background: var(--c-bg);
+      color: var(--c-text);
+      font-size: 17px;
+      line-height: 1.5;
+      display: flex;
+      flex-direction: column;
+      min-height: 100svh;
+    }
+    body::before { display: none; }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+    ul { list-style: none; }
+
+    /* ─────────────────────────────────────────────
+       NAV
+    ───────────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      z-index: 9000;
+      display: flex;
+      align-items: center;
+    }
+    .nav-inner {
+      width: 100%;
+      padding: 0 var(--pad);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
+    .nav-logo {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      color: var(--c-text);
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: opacity var(--t) var(--ease), transform var(--t) var(--ease);
+      display: inline-flex;
+      align-items: center;
+    }
+    .nav-logo img { height: 28px; width: auto; display: block; }
+    .nav-links {
+      margin-left: auto;
+      display: flex;
+      gap: 28px;
+    }
+    .nav-links a {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      color: var(--c-muted);
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: color var(--t-fast) var(--ease),
+                  opacity var(--t) var(--ease),
+                  transform var(--t) var(--ease);
+    }
+    .nav-links a:hover { color: var(--c-text); }
+    .nav-links a.active { color: var(--c-text); }
+    .nav-links a.active::before,
+    .nav-mobile-menu a.active::before { content: ""; display: inline-block; width: 6px; height: 6px; background: #00E997; margin-right: 8px; vertical-align: middle; position: relative; top: -1px; }
+    .nav-linkedin {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--c-text);
+      border: 1px solid var(--c-text);
+      padding: 6px 14px;
+      border-radius: 0;
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: color var(--t-fast) var(--ease),
+                  background var(--t-fast) var(--ease),
+                  opacity var(--t) var(--ease),
+                  transform var(--t) var(--ease);
+      transition-delay: 0.16s;
+      white-space: nowrap;
+    }
+    .nav-linkedin:hover { background: var(--c-text); color: var(--c-bg); }
+    .nav.loaded .nav-linkedin { opacity: 1; transform: translateY(0); }
+    .ext-icon {
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 4px;
+      margin-bottom: 3px;
+      opacity: 0.5;
+    }
+    .nav-links a:nth-child(1) { transition-delay: 0.04s; }
+    .nav-links a:nth-child(2) { transition-delay: 0.08s; }
+    .nav-links a:nth-child(3) { transition-delay: 0.12s; }
+    .nav.loaded .nav-logo,
+    .nav.loaded .nav-links a { opacity: 1; transform: translateY(0); }
+
+    /* ─────────────────────────────────────────────
+       CONTENT
+    ───────────────────────────────────────────── */
+    .page-content {
+      padding: calc(var(--nav-h) + 80px) var(--pad) 48px;
+    }
+
+    /* ─────────────────────────────────────────────
+       ABOUT HERO
+    ───────────────────────────────────────────── */
+    .about-hero {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+      gap: 64px;
+    }
+    .history {
+      flex: 0 0 45%;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.75s var(--ease) 0.5s, transform 0.75s var(--ease) 0.5s;
+    }
+    .about-hero.loaded .about-desc-heading,
+    .about-hero.loaded .about-desc-body,
+    .about-hero.loaded .history { opacity: 1; transform: translateY(0); }
+    .about-words {
+      flex: 0 0 45%;
+      min-width: 0;
+    }
+    /* ─────────────────────────────────────────────
+       HISTORY
+    ───────────────────────────────────────────── */
+    .history-section h2 {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: -0.03em;
+      color: var(--c-text);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .history-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      padding: 6px 0;
+    }
+    .history-row + .history-row {
+      border-top: 1px solid var(--c-border);
+    }
+    .history-left {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .history-company {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      color: var(--c-text);
+    }
+    .history-role {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      color: var(--c-subtle);
+    }
+    .history-year {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      color: var(--c-muted);
+      flex-shrink: 0;
+    }
+    .about-desc {
+      flex: 1 1 0;
+      min-width: 0;
+      padding-bottom: 0.1em;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .about-desc-heading {
+      font-family: var(--font-display);
+      font-size: clamp(20px, 2.2vw, 36px);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      text-transform: none;
+      color: var(--c-text);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.75s var(--ease) 0.15s, transform 0.75s var(--ease) 0.15s;
+    }
+    .about-desc-body {
+      font-family: var(--font-text);
+      font-size: clamp(13px, 1vw, 15px);
+      color: var(--c-muted);
+      line-height: 1.75;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.75s var(--ease) 0.35s, transform 0.75s var(--ease) 0.35s;
+    }
+
+    /* ─────────────────────────────────────────────
+       HERO VIDEO
+    ───────────────────────────────────────────── */
+    .about-hero-video {
+      position: relative;
+      width: 100%;
+      margin-top: 0;
+      line-height: 0;
+      flex: 1;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 1.2s var(--ease), transform 1.2s var(--ease);
+    }
+    .about-hero-video.loaded { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
+    .about-hero-video video {
+      width: 100%;
+      display: block;
+      max-height: 85vh;
+      object-fit: cover;
+    }
+
+    @media (max-width: 860px) {
+      .about-hero { flex-direction: column; align-items: flex-start; gap: 40px; }
+      .about-hero-video video { max-height: 50vh; }
+    }
+
+
+
+    .hover-preview {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      border-radius: 0;
+      overflow: hidden;
+      width: 340px;
+      opacity: 0;
+      transform: scale(0.92);
+      transition: opacity 0.2s var(--ease), transform 0.2s var(--ease);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    }
+    .hover-preview.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .hover-preview img {
+      width: 100%;
+      display: block;
+    }
+
+
+    .footer {
+      border-top: 1px solid var(--c-border);
+      margin: 0 var(--pad);
+    }
+    .footer-inner {
+      padding: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--c-text);
+      text-decoration: none;
+    }
+    .footer-copy a { color: var(--c-subtle); transition: color var(--t-fast); }
+    .footer-copy a:hover { color: var(--c-muted); }
+
+
+    /* ─────────────────────────────────────────────
+       HAMBURGER MENU
+    ───────────────────────────────────────────── */
+    .nav-hamburger {
+      display: none;
+      background: none;
+      border: none;
+      padding: 0;
+      z-index: 10001;
+      pointer-events: auto !important;
+      cursor: pointer !important;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      color: var(--c-text);
+    }
+
+    .nav-mobile-menu {
+      display: none;
+      position: fixed;
+      top: var(--nav-h);
+      left: 0; right: 0;
+      background: var(--c-bg);
+      border-bottom: 1px solid var(--c-border);
+      padding: 24px var(--pad);
+      flex-direction: column;
+      gap: 20px;
+      z-index: 9999;
+    }
+    .nav-mobile-menu.open { display: flex; }
+    .nav-mobile-menu a {
+      font-family: var(--font-mono);
+      font-size: 15px;
+      color: var(--c-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      transition: color var(--t-fast);
+    }
+    .nav-mobile-menu a:hover,
+    .nav-mobile-menu a.active { color: var(--c-text); }
+
+    /* ─────────────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────────────── */
+    @media (max-width: 860px) {
+      :root { --pad: 24px; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-linkedin { display: none; }
+      .history { flex: 1 1 100%; width: 100%; }
+    }
+    @media (max-width: 560px) {
+      .footer-inner { flex-direction: column; gap: 16px; }
+    }
+
+
+    .footer-contact a { color: var(--c-text) !important; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--c-border); transition: text-decoration-color 0.2s ease; }
+    .footer-contact a:hover { text-decoration-color: currentColor; }
+      .ph { background: #fdf4a3; color: #6b5200; padding: 0 4px; border-radius: 3px; text-transform: none; }
+    .ph-img { border: 1.5px dashed rgba(0,0,0,0.18); background: var(--c-surface); aspect-ratio: 16 / 9; display: flex; align-items: center; justify-content: center; text-align: center; padding: 24px; font-family: var(--font-mono); font-size: 12px; letter-spacing: -0.03em; text-transform: uppercase; color: var(--c-muted); }
+    .film-grid-wrap { padding: 96px var(--pad) 48px; }
+    .film-label { font-family: var(--font-mono); font-size: 12px; letter-spacing: -0.03em; text-transform: uppercase; color: var(--c-text); display: flex; align-items: center; gap: 8px; margin-bottom: 24px; }
+    .film-label span { width: 6px; height: 6px; background: #00E997; display: inline-block; }
+    .film-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px 24px; }
+    .film-title { font-family: var(--font-text); font-size: 15px; color: var(--c-text); margin: 14px 0 4px; }
+    .film-meta { font-family: var(--font-mono); font-size: 12px; letter-spacing: -0.03em; text-transform: uppercase; color: var(--c-muted); margin: 0; }
+    @media (max-width: 860px) { .film-grid { grid-template-columns: 1fr; } .film-grid-wrap { padding-top: 64px; } }
+</style>
+</head>
+<body>
+
+
+  <!-- ── Nav ─────────────────────────────────────────────────────────── -->
+  <nav class="nav" id="nav" role="banner">
+    <div class="nav-inner">
+      <a class="nav-logo" href="/" aria-label="noah de guzman home" data-transition-color="--c-text"><img src="../images/logo-dark.svg" alt="noah de guzman" /></a>
+      <ul class="nav-links" role="list">
+        <li><a href="/" data-transition-color="--c-text">Work</a></li>
+        <li><a href="/about" data-transition-color="#00E997">About</a></li>
+        <li><a href="/film" class="active">Film</a></li>
+        <li><a href="../Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">Resume</a></li>
+      </ul>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu">[MENU]</button>
+    </div>
+  </nav>
+
+  <nav class="nav-mobile-menu" id="nav-mobile-menu">
+    <a href="/" data-transition-color="--c-text">Work</a>
+    <a href="/about" data-transition-color="#00E997">About</a>
+    <a href="/film" class="active">Film</a>
+    <a href="../Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+    <a href="https://www.linkedin.com/in/noah-de-guzman/" target="_blank" rel="noopener">LinkedIn</a>
+  </nav>
+
+  <!-- ── Content ──────────────────────────────────────────────────────── -->
+  <main class="page-content" id="main" aria-label="Film">
+    <div class="about-hero" id="about-hero">
+      <div class="about-desc">
+        <p class="about-desc-heading">Film.</p>
+        <p class="about-desc-body">Outside of product design, I shoot and edit cinematic vlogs and short films. The same instincts carry into my design work: framing what matters, pacing a story, and knowing what to cut.</p>
+      </div>
+      <div class="history">
+        <div class="history-section">
+          <h2 style="display:flex;align-items:center;gap:8px;"><span style="display:inline-block;width:6px;height:6px;background:#00E997;flex-shrink:0;"></span>Toolkit</h2>
+          <div class="history-row"><div class="history-left"><span class="history-company">Camera</span><span class="history-role">Sony ZV-E1, shooting S-Log3</span></div></div>
+          <div class="history-row"><div class="history-left"><span class="history-company">Edit &amp; color</span><span class="history-role">DaVinci Resolve</span></div></div>
+          <div class="history-row"><div class="history-left"><span class="history-company">Platforms</span><span class="history-role">Instagram, TikTok</span></div></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ── Reel ─────────────────────────────────────────────────────────── -->
+  <div class="about-hero-video" id="about-hero-video">
+    <video src="../images/portfolio-reel.mp4" autoplay muted loop playsinline preload="auto"></video>
+  </div>
+
+  <!-- ── Work ─────────────────────────────────────────────────────────── -->
+  <section class="film-grid-wrap" aria-label="Selected films">
+    <div class="film-label"><span></span>Selected work</div>
+    <div class="film-grid">
+      <article class="film-card">
+        <div class="ph-img">[Video or thumbnail 1]</div>
+        <p class="film-title"><span class="ph">[Title]</span></p>
+        <p class="film-meta"><span class="ph">// [Shot, edited, graded] · [Year]</span></p>
+      </article>
+      <article class="film-card">
+        <div class="ph-img">[Video or thumbnail 2]</div>
+        <p class="film-title"><span class="ph">[Title]</span></p>
+        <p class="film-meta"><span class="ph">// [Shot, edited, graded] · [Year]</span></p>
+      </article>
+      <article class="film-card">
+        <div class="ph-img">[Video or thumbnail 3]</div>
+        <p class="film-title"><span class="ph">[Title]</span></p>
+        <p class="film-meta"><span class="ph">// [Shot, edited, graded] · [Year]</span></p>
+      </article>
+      <article class="film-card">
+        <div class="ph-img">[Video or thumbnail 4]</div>
+        <p class="film-title"><span class="ph">[Title]</span></p>
+        <p class="film-meta"><span class="ph">// [Shot, edited, graded] · [Year]</span></p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ── Footer ───────────────────────────────────────────────────────── -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-inner">
+      <p class="footer-copy"><span style="font-size:14px;vertical-align:middle;">©</span> 2026 Noah De Guzman</p>
+      <p class="footer-copy" style="text-align:center;">CURRENTLY DESIGNING IN VANCOUVER, BC</p>
+      <p class="footer-copy footer-contact" style="text-align:right;"><a href="mailto:noahdeguzman21@gmail.com">EMAIL</a> // <a href="https://www.linkedin.com/in/noah-de-guzman/" target="_blank" rel="noopener">LINKEDIN</a></p>
+    </div>
+  </footer>
+
+  <script>
+  (() => {
+    'use strict';
+
+    /* ── Entrance ─────────────────────────────── */
+    window.addEventListener('DOMContentLoaded', () => {
+      requestAnimationFrame(() => {
+        document.getElementById('nav').classList.add('loaded');
+        document.getElementById('about-hero-video').classList.add('loaded');
+        document.getElementById('about-hero').classList.add('loaded');
+      });
+    });
+
+    /* ── Nav frosted glass on scroll ──────────── */
+    const nav = document.getElementById('nav');
+    window._onScroll = () => {
+      const past = window.scrollY > 60;
+      const st = getComputedStyle(document.documentElement);
+      nav.style.background           = past ? st.getPropertyValue('--c-nav-bg').trim() : 'transparent';
+      nav.style.backdropFilter       = past ? 'saturate(180%) blur(20px)' : '';
+      nav.style.webkitBackdropFilter = past ? 'saturate(180%) blur(20px)' : '';
+      nav.style.borderBottom         = past ? `1px solid ${st.getPropertyValue('--c-nav-border').trim()}` : 'none';
+    };
+    window.addEventListener('scroll', window._onScroll, { passive: true });
+    window._onScroll();
+
+    /* ── Hamburger menu ───────────────────────── */
+    window.addEventListener('DOMContentLoaded', () => {
+      const hamburger = document.getElementById('nav-hamburger');
+      const mobileMenu = document.getElementById('nav-mobile-menu');
+      hamburger.addEventListener('click', () => {
+        const open = hamburger.classList.toggle('open');
+        mobileMenu.classList.toggle('open', open);
+        hamburger.textContent = open ? '✕' : '[MENU]';
+        hamburger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        hamburger.style.fontSize = open ? '20px' : '';
+      });
+      mobileMenu.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          hamburger.classList.remove('open');
+          mobileMenu.classList.remove('open');
+          hamburger.textContent = '[MENU]'; hamburger.style.fontSize = '';
+        });
+      });
+    });
+
+  })();
+  </script>
+
+  <script src="../transition.js"></script>
+
+</body>
+</html>
