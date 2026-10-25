@@ -420,7 +420,8 @@
     .footer-contact a:hover { text-decoration-color: currentColor; }
       .ph { background: #fdf4a3; color: #6b5200; padding: 0 4px; border-radius: 3px; text-transform: none; }
     .ph-img { border: 1.5px dashed rgba(0,0,0,0.18); background: var(--c-surface); aspect-ratio: 16 / 9; display: flex; align-items: center; justify-content: center; text-align: center; padding: 24px; font-family: var(--font-mono); font-size: 12px; letter-spacing: -0.03em; text-transform: uppercase; color: var(--c-muted); }
-    .film-grid-wrap { padding: 96px var(--pad) 48px; }
+    .film-grid-wrap { padding: 72px var(--pad) 48px; }
+    #about-hero .about-desc { max-width: 720px; }
     .film-label { font-family: var(--font-mono); font-size: 12px; letter-spacing: -0.03em; text-transform: uppercase; color: var(--c-text); display: flex; align-items: center; gap: 8px; margin-bottom: 24px; }
     .film-label span { width: 6px; height: 6px; background: #00E997; display: inline-block; }
     .film-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px 24px; }
@@ -461,21 +462,8 @@
         <p class="about-desc-heading">Film.</p>
         <p class="about-desc-body">Outside of product design, I shoot and edit cinematic vlogs and short films. The same instincts carry into my design work: framing what matters, pacing a story, and knowing what to cut.</p>
       </div>
-      <div class="history">
-        <div class="history-section">
-          <h2 style="display:flex;align-items:center;gap:8px;"><span style="display:inline-block;width:6px;height:6px;background:#00E997;flex-shrink:0;"></span>Toolkit</h2>
-          <div class="history-row"><div class="history-left"><span class="history-company">Camera</span><span class="history-role">Sony ZV-E1, shooting S-Log3</span></div></div>
-          <div class="history-row"><div class="history-left"><span class="history-company">Edit &amp; color</span><span class="history-role">DaVinci Resolve</span></div></div>
-          <div class="history-row"><div class="history-left"><span class="history-company">Platforms</span><span class="history-role">Instagram, TikTok</span></div></div>
-        </div>
-      </div>
     </div>
   </main>
-
-  <!-- ── Reel ─────────────────────────────────────────────────────────── -->
-  <div class="about-hero-video" id="about-hero-video">
-    <video src="../images/portfolio-reel.mp4" autoplay muted loop playsinline preload="auto"></video>
-  </div>
 
   <!-- ── Work ─────────────────────────────────────────────────────────── -->
   <section class="film-grid-wrap" aria-label="Selected films">
@@ -521,7 +509,6 @@
     window.addEventListener('DOMContentLoaded', () => {
       requestAnimationFrame(() => {
         document.getElementById('nav').classList.add('loaded');
-        document.getElementById('about-hero-video').classList.add('loaded');
         document.getElementById('about-hero').classList.add('loaded');
       });
     });
