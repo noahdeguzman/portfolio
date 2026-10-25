@@ -445,6 +445,8 @@
     .cs-sound-btn .i-sound { display: none; }
     .cs-sound-btn.is-on .i-sound { display: block; }
     .cs-sound-btn.is-on .i-muted { display: none; }
+    .film-wide { margin-top: 48px; }
+    .film-wide .film-media video { aspect-ratio: 16 / 9; }
 </style>
 </head>
 <body>
@@ -518,6 +520,17 @@
         <p class="film-meta">// Game UI experimentation · 159K views</p>
       </article>
     </div>
+    <article class="film-card film-wide">
+        <div class="cs-video film-media">
+          <video src="../images/film/day-in-the-life-sap.mp4" poster="../images/film/day-in-the-life-sap.webp" autoplay muted loop playsinline disablepictureinpicture disableremoteplayback aria-label="Day in the Life at SAP, UX design intern edition"></video>
+          <button type="button" class="cs-sound-btn" aria-label="Turn sound on">
+            <svg class="i-muted" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 9l5 6M21 9l-5 6" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+            <svg class="i-sound" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+          </button>
+        </div>
+        <p class="film-title">Day in the Life at SAP</p>
+        <p class="film-meta">// UX intern edition · 49K views</p>
+    </article>
   </section>
 
   <!-- ── Footer ───────────────────────────────────────────────────────── -->
