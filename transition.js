@@ -6,8 +6,7 @@
   'use strict';
 
   const BLOCK   = 120;   // px per square
-  const DEFAULT_COLOR = '#141414';
-  const WIPE_COLOR = '#141414';
+  const DEFAULT_COLOR = '#cc0000';
   const STAGGER = 35;    // ms per column (controls wave speed)
   const JITTER  = 120;   // ms random spread — creates ragged edges both sides
 
@@ -93,8 +92,11 @@
 
     e.preventDefault();
 
-    // every wipe is black (per-link data-transition-color is ignored)
-    const color = WIPE_COLOR;
+    const raw   = a.dataset.transitionColor || DEFAULT_COLOR;
+    // resolve theme-aware tokens at click time
+    const color = raw === '--c-text'
+      ? getComputedStyle(document.documentElement).getPropertyValue('--c-text').trim()
+      : raw;
     const { overlay, cells, cols, rows } = makeGrid(color);
     overlay.style.pointerEvents = 'all';
     document.body.appendChild(overlay);
