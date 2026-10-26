@@ -514,11 +514,6 @@
     .footer-contact a { color: var(--c-text) !important; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--c-border); transition: text-decoration-color 0.2s ease; }
     .footer-contact a:hover { text-decoration-color: currentColor; }
       /* ── XP bar (reading progress, one segment per section) ── */
-    .nda-card { border: 1px solid var(--c-border); padding: clamp(24px, 3vw, 40px); }
-    .nda-card-tag { font-family: var(--font-mono); font-size: 12px; letter-spacing: -0.03em; text-transform: uppercase; color: var(--c-text); display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
-    .nda-card-tag::before { content: ""; width: 6px; height: 6px; background: #7858FF; }
-    .nda-card-btn { display: inline-block; margin-top: 8px; padding: 12px 18px; background: var(--c-text); color: #fff; font-family: var(--font-mono); font-size: 12px; letter-spacing: -0.03em; text-transform: uppercase; text-decoration: none; transition: background .2s; }
-    .nda-card-btn:hover { background: #7858FF; }
     .xp-bar { position: fixed; top: var(--nav-h); left: 0; right: 0; height: 4px; z-index: 8999; pointer-events: none; display: flex; gap: 2px; background: #fff; --xp: #7858FF;  opacity: 0; transform: translateY(-4px); transition: opacity .2s ease, transform .2s ease; }
     .xp-bar.on { opacity: 1; transform: none; }
     .xp-seg { flex: 1 1 0; min-width: 6px; height: 100%; background: rgba(0,0,0,0.06); overflow: hidden; }
@@ -658,12 +653,7 @@
     <!-- Full case study -->
     <section class="cs-section" id="full-case-study">
       <p class="cs-section-label">full case study</p>
-      <div class="nda-card">
-        <p class="nda-card-tag">// Under NDA</p>
-        <h2 class="cs-section-heading" style="margin-bottom:16px;">The full story lives in <strong>my case study deck.</strong></h2>
-        <p class="cs-section-body">This project is under NDA, so what's shared here is intentionally high-level. My full case study covers the process, design decisions, and specs in detail, and I'm happy to walk you through it.</p>
-        <a class="nda-card-btn" href="mailto:noahdeguzman21@gmail.com?subject=SAP%20Admin%20Settings%20case%20study">Contact me for the full details →</a>
-      </div>
+      <p class="cs-section-body">This project is under NDA, so what's shared here is intentionally high-level. For the full case study, including the process, design decisions, and specs, <a href="mailto:noahdeguzman21@gmail.com?subject=SAP%20Admin%20Settings%20case%20study" style="color:var(--c-text);text-decoration:underline;">get in touch</a> and I'm happy to walk you through it.</p>
     </section>
 
   </main>
