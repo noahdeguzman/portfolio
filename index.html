@@ -453,6 +453,10 @@
     .footer-contact a { color: var(--c-text) !important; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--c-border); transition: text-decoration-color 0.2s ease; }
     .footer-contact a:hover { text-decoration-color: currentColor; }
       @media (hover: none), (pointer: coarse) { .preview-wrap { display: none !important; } }
+    .status-dot { display: inline-block; width: 6px; height: 6px; background: #00E997; flex-shrink: 0; position: relative; }
+    .status-dot::after { content: ""; position: absolute; inset: 0; background: #00E997; animation: status-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite; }
+    @keyframes status-ping { 0% { transform: scale(1); opacity: 0.7; } 75%, 100% { transform: scale(2.6); opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) { .status-dot::after { animation: none; display: none; } }
 </style>
 </head>
 <body>
@@ -481,7 +485,7 @@
 
   <!-- ── Hero ─────────────────────────────────────────────────────────── -->
   <section class="hero" id="hero" aria-label="Introduction">
-    <div class="section-label" style="margin-bottom: 16px; padding: 0;"><span style="display:inline-block;width:6px;height:6px;background:#00E997;flex-shrink:0;"></span><span class="section-label-text">HI, I'M NOAH</span></div>
+    <div class="section-label" style="margin-bottom: 16px; padding: 0;"><span class="status-dot" aria-hidden="true"></span><span class="section-label-text">NOAH IS ONLINE</span></div>
     <p class="hero-statement">Designer, creator, storyteller.<br>Crafting experiences people come&nbsp;back&nbsp;to.</p>
     <p class="hero-sub">// UX DESIGNER, PREVIOUSLY @ <a href="https://www.sap.com" target="_blank" rel="noopener" style="color:inherit;border-bottom:1px solid currentColor;">SAP</a>, <a href="https://www.nokia.com/" target="_blank" rel="noopener" style="color:inherit;border-bottom:1px solid currentColor;">Nokia</a></p>
   </section>
