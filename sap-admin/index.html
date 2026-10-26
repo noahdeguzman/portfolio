@@ -709,13 +709,15 @@
           });
         }
       });
+      if (typeof atEndActive === 'function') atEndActive();
     }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
 
     sections.forEach(s => observer.observe(s));
-    window.addEventListener('scroll', () => {
+    const atEndActive = () => {
       if (window.scrollY >= document.documentElement.scrollHeight - window.innerHeight - 2)
         navLinks.forEach((a, i) => a.classList.toggle('active', i === navLinks.length - 1));
-    }, { passive: true });
+    };
+    window.addEventListener('scroll', () => setTimeout(atEndActive, 60), { passive: true });
 
     /* ── Hamburger menu ───────────────────────── */
     window.addEventListener('DOMContentLoaded', () => {
