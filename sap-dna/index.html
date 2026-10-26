@@ -540,11 +540,16 @@
     .cs-index a:hover { color: #0070F2; }
     .cs-index .cs-desc { color: var(--c-muted); text-align: right; }
     @media (max-width: 600px) { .cs-index li { flex-wrap: wrap; justify-content: flex-start; align-items: baseline; gap: 4px 10px; } .cs-index .cs-tag { align-self: baseline; margin-left: 0; } .cs-index .cs-desc { flex-basis: 100%; text-align: left; margin-left: 0; } }
+    /* ── XP bar (reading progress) ── */
+    .xp-bar { position: fixed; top: var(--nav-h); left: 0; right: 0; height: 4px; z-index: 8999; pointer-events: none; background: rgba(0,0,0,0.06); }
+    .xp-fill { height: 100%; width: 0; background: #00E997; transition: width 0.1s linear; }
+    .xp-bar::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(to right, transparent 0, transparent 38px, #fff 38px, #fff 40px); }
 </style>
 </head>
 <body>
 
   <!-- ── Nav ─────────────────────────────────────────────────────────── -->
+  <div class="xp-bar" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="xp-fill"></div></div>
   <nav class="nav" id="nav" role="banner">
     <div class="nav-inner">
       <a class="nav-logo" href="/" aria-label="noah de guzman home" data-transition-color="--c-text"><img src="../images/logo-dark.svg" alt="noah de guzman" /></a>
@@ -838,6 +843,23 @@
       const p = v.play(); if (p && p.catch) p.catch(sync);
       sync();
     });
+  })();
+  </script>
+  <script>
+  (() => {
+    const bar = document.querySelector('.xp-bar'), fill = bar && bar.querySelector('.xp-fill');
+    if (!fill) return;
+    let ticking = false;
+    const update = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = max > 0 ? Math.min(100, Math.max(0, (window.scrollY / max) * 100)) : 0;
+      fill.style.width = pct + '%';
+      bar.setAttribute('aria-valuenow', Math.round(pct));
+      ticking = false;
+    };
+    window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    window.addEventListener('resize', update);
+    update();
   })();
   </script>
 </body>
