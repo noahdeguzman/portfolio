@@ -113,6 +113,9 @@
   window.addEventListener('DOMContentLoaded', () => {
     if (!sessionStorage.getItem('px-transition')) return;
     sessionStorage.removeItem('px-transition');
+    // Always start a newly opened page at the top
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    if (!location.hash) window.scrollTo(0, 0);
     const color = sessionStorage.getItem('px-color') || DEFAULT_COLOR;
     sessionStorage.removeItem('px-color');
 
