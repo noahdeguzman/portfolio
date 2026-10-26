@@ -457,54 +457,9 @@
     .status-dot::after { content: ""; position: absolute; inset: 0; background: #00E997; animation: status-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite; }
     @keyframes status-ping { 0% { transform: scale(1); opacity: 0.7; } 75%, 100% { transform: scale(2.6); opacity: 0; } }
     @media (prefers-reduced-motion: reduce) { .status-dot::after { animation: none; display: none; } }
-    /* ── First-visit loader ── */
-    .site-loader { position: fixed; inset: 0; z-index: 100000; pointer-events: all; overflow: hidden; }
-    .no-loader .site-loader { display: none; }
-    .ld-sq { position: absolute; left: 50%; top: 50%; width: var(--s, 40px); height: var(--s, 40px); margin: calc(var(--s, 40px) / -2) 0 0 calc(var(--s, 40px) / -2); box-shadow: 0 0 0 250vmax #00E997; transform: translateY(-100vh); will-change: transform; }
 </style>
-  <script>try{if(sessionStorage.getItem('loader-seen')||sessionStorage.getItem('px-transition'))document.documentElement.classList.add('no-loader');}catch(e){}</script>
 </head>
 <body>
-  <div class="site-loader" id="site-loader" aria-hidden="true"><div class="ld-sq"></div></div>
-  <script>
-  (() => {
-    const el = document.getElementById('site-loader');
-    if (!el || document.documentElement.classList.contains('no-loader')) { if (el) el.remove(); return; }
-    try { sessionStorage.setItem('loader-seen', '1'); } catch (e) {}
-    const root = document.documentElement; root.style.overflow = 'hidden';
-    const sq = el.querySelector('.ld-sq');
-    const S = innerWidth < 640 ? 32 : 44; sq.style.setProperty('--s', S + 'px');
-    let done = false;
-    const finish = () => {
-      if (done) return; done = true;
-      el.remove(); root.style.overflow = '';
-    };
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !sq.animate) {
-      sq.style.transform = 'none';
-      setTimeout(() => { el.style.transition = 'opacity .3s'; el.style.opacity = '0'; setTimeout(finish, 320); }, 500);
-      return;
-    }
-    const drop = 'translateY(-' + (innerHeight / 2 + S) + 'px)';
-    // 1) fall in from above, bounce, settle (with a little squash on each landing)
-    const fall = sq.animate([
-      { transform: drop, easing: 'cubic-bezier(.55,0,1,.45)' },
-      { offset: .42, transform: 'translateY(0) scale(1.25,.72)', easing: 'cubic-bezier(0,.55,.45,1)' },
-      { offset: .62, transform: 'translateY(-' + S * 1.6 + 'px) scale(.92,1.08)', easing: 'cubic-bezier(.55,0,1,.45)' },
-      { offset: .78, transform: 'translateY(0) scale(1.12,.86)', easing: 'cubic-bezier(0,.55,.45,1)' },
-      { offset: .88, transform: 'translateY(-' + S * .45 + 'px) scale(1)', easing: 'cubic-bezier(.55,0,1,.45)' },
-      { offset: .95, transform: 'translateY(0) scale(1.04,.96)' },
-      { transform: 'translateY(0) scale(1)' }
-    ], { duration: 1150, fill: 'forwards' });
-    // 2) beat, then zoom the window open until the page fills the screen
-    fall.onfinish = () => setTimeout(() => {
-      const k = Math.hypot(innerWidth, innerHeight) / S * 1.1;
-      const z = sq.animate([{ transform: 'scale(1)' }, { transform: 'scale(' + k + ')' }],
-        { duration: 650, easing: 'cubic-bezier(.7,0,.84,0)', fill: 'forwards' });
-      z.onfinish = finish;
-    }, 180);
-    setTimeout(finish, 5000);
-  })();
-  </script>
 
 
 
