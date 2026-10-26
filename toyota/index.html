@@ -493,17 +493,17 @@
 
     .footer-contact a { color: var(--c-text) !important; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--c-border); transition: text-decoration-color 0.2s ease; }
     .footer-contact a:hover { text-decoration-color: currentColor; }
-      /* ── XP bar (reading progress) ── */
-    .xp-bar { position: fixed; top: var(--nav-h); left: 0; right: 0; height: 4px; z-index: 8999; pointer-events: none; background: rgba(0,0,0,0.06); }
-    .xp-fill { height: 100%; width: 0; background: #00E997; transition: width 0.1s linear; }
-    .xp-bar::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(to right, transparent 0, transparent 38px, #fff 38px, #fff 40px); }
+      /* ── XP bar (reading progress, one segment per section) ── */
+    .xp-bar { position: fixed; top: var(--nav-h); left: 0; right: 0; height: 4px; z-index: 8999; pointer-events: none; display: flex; gap: 2px; background: #fff; --xp: #EB0A1E; }
+    .xp-seg { flex: 1; height: 100%; background: rgba(0,0,0,0.06); overflow: hidden; }
+    .xp-seg i { display: block; height: 100%; width: 0; background: var(--xp); }
 </style>
 </head>
 <body>
   </script>
 
   <!-- ── Nav ─────────────────────────────────────────────────────────── -->
-  <div class="xp-bar" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="xp-fill"></div></div>
+  <div class="xp-bar" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
   <nav class="nav" id="nav" role="banner">
     <div class="nav-inner">
       <a class="nav-logo" href="/" aria-label="noah de guzman home" data-transition-color="--c-text"><img src="../images/logo-dark.svg" alt="noah de guzman" /></a>
@@ -760,18 +760,33 @@
   <script src="../transition.js"></script>
   <script>
   (() => {
-    const bar = document.querySelector('.xp-bar'), fill = bar && bar.querySelector('.xp-fill');
-    if (!fill) return;
+    const bar = document.querySelector('.xp-bar');
+    if (!bar) return;
+    const targets = [...document.querySelectorAll('.sidebar-nav a[href^="#"]')]
+      .map(a => document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+    if (!targets.length) return;
+    const fills = targets.map(() => { const seg = document.createElement('span'); seg.className = 'xp-seg'; const f = document.createElement('i'); seg.appendChild(f); bar.appendChild(seg); return f; });
     let ticking = false;
     const update = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight;
-      const pct = max > 0 ? Math.min(100, Math.max(0, (window.scrollY / max) * 100)) : 0;
-      fill.style.width = pct + '%';
-      bar.setAttribute('aria-valuenow', Math.round(pct));
+      const atEnd = window.scrollY >= max - 2;
+      const line = window.scrollY + window.innerHeight * 0.3;
+      const tops = targets.map(t => t.getBoundingClientRect().top + window.scrollY);
+      const endOfLast = document.documentElement.scrollHeight - window.innerHeight * 0.7;
+      let total = 0;
+      fills.forEach((f, i) => {
+        const start = i === 0 ? 0 : tops[i];
+        const end = i < tops.length - 1 ? tops[i + 1] : endOfLast;
+        const pct = atEnd ? 1 : Math.min(1, Math.max(0, (line - start) / Math.max(1, end - start)));
+        f.style.width = (pct * 100) + '%';
+        total += pct;
+      });
+      bar.setAttribute('aria-valuenow', Math.round(total / fills.length * 100));
       ticking = false;
     };
     window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
     window.addEventListener('resize', update);
+    window.addEventListener('load', update);
     update();
   })();
   </script>
