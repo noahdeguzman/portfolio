@@ -541,9 +541,9 @@
     .cs-index .cs-desc { color: var(--c-muted); text-align: right; }
     @media (max-width: 600px) { .cs-index li { flex-wrap: wrap; justify-content: flex-start; align-items: baseline; gap: 4px 10px; } .cs-index .cs-tag { align-self: baseline; margin-left: 0; } .cs-index .cs-desc { flex-basis: 100%; text-align: left; margin-left: 0; } }
     /* ── XP bar (reading progress, one segment per section) ── */
-    .xp-bar { position: fixed; top: var(--nav-h); left: 0; right: 0; height: 4px; z-index: 8999; pointer-events: none; display: flex; gap: 2px; background: #fff; --xp: #C9E8FF; }
+    .xp-bar { position: fixed; top: var(--nav-h); left: 0; right: 0; height: 6px; z-index: 8999; pointer-events: none; display: flex; gap: 2px; background: #fff; --xp: #C9E8FF; }
     .xp-seg { flex: 1; height: 100%; background: rgba(0,0,0,0.06); overflow: hidden; }
-    .xp-seg i { display: block; height: 100%; width: 0; background: var(--xp); }
+    .xp-seg i { display: block; height: 100%; width: 0; background: var(--xp); background: linear-gradient(to bottom, color-mix(in srgb, var(--xp) 50%, #fff) 0 33.4%, var(--xp) 33.4% 66.6%, color-mix(in srgb, var(--xp) 75%, #000) 66.6% 100%); }
 </style>
 </head>
 <body>
