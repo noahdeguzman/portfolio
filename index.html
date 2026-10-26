@@ -458,13 +458,9 @@
     @keyframes status-ping { 0% { transform: scale(1); opacity: 0.7; } 75%, 100% { transform: scale(2.6); opacity: 0; } }
     @media (prefers-reduced-motion: reduce) { .status-dot::after { animation: none; display: none; } }
     /* ── First-visit loader ── */
-    .site-loader { position: fixed; inset: 0; z-index: 100000; background: #00E997; pointer-events: all; overflow: hidden; }
+    .site-loader { position: fixed; inset: 0; z-index: 100000; pointer-events: all; overflow: hidden; }
     .no-loader .site-loader { display: none; }
-    .ld-sq { position: absolute; left: 50%; top: 50%; width: var(--s, 40px); height: var(--s, 40px); margin: calc(var(--s, 40px) / -2) 0 0 calc(var(--s, 40px) / -2); background: #fff; transform: translateY(-100vh); will-change: transform; }
-    @keyframes ld-open { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-    .ld-reveal body > *:not(.site-loader):not(script):not(.nav):not(.nav-mobile-menu) { animation: ld-open .7s cubic-bezier(.2,.7,.2,1) both; }
-    .ld-reveal .nav { animation: ld-open .7s cubic-bezier(.2,.7,.2,1) both; }
-    .ld-reveal .hero { animation-delay: .08s; }
+    .ld-sq { position: absolute; left: 50%; top: 50%; width: var(--s, 40px); height: var(--s, 40px); margin: calc(var(--s, 40px) / -2) 0 0 calc(var(--s, 40px) / -2); box-shadow: 0 0 0 250vmax #00E997; transform: translateY(-100vh); will-change: transform; }
 </style>
   <script>try{if(sessionStorage.getItem('loader-seen')||sessionStorage.getItem('px-transition'))document.documentElement.classList.add('no-loader');}catch(e){}</script>
 </head>
@@ -481,8 +477,7 @@
     let done = false;
     const finish = () => {
       if (done) return; done = true;
-      root.classList.add('ld-reveal'); el.remove(); root.style.overflow = '';
-      setTimeout(() => root.classList.remove('ld-reveal'), 1000);
+      el.remove(); root.style.overflow = '';
     };
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !sq.animate) {
       sq.style.transform = 'none';
@@ -500,12 +495,11 @@
       { offset: .95, transform: 'translateY(0) scale(1.04,.96)' },
       { transform: 'translateY(0) scale(1)' }
     ], { duration: 1150, fill: 'forwards' });
-    // 2) beat, then zoom into the square until white fills the screen
+    // 2) beat, then zoom the window open until the page fills the screen
     fall.onfinish = () => setTimeout(() => {
       const k = Math.hypot(innerWidth, innerHeight) / S * 1.1;
       const z = sq.animate([{ transform: 'scale(1)' }, { transform: 'scale(' + k + ')' }],
         { duration: 650, easing: 'cubic-bezier(.7,0,.84,0)', fill: 'forwards' });
-      // 3) open the page
       z.onfinish = finish;
     }, 180);
     setTimeout(finish, 5000);
