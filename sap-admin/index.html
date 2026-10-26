@@ -514,6 +514,11 @@
     .footer-contact a { color: var(--c-text) !important; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--c-border); transition: text-decoration-color 0.2s ease; }
     .footer-contact a:hover { text-decoration-color: currentColor; }
       /* ── XP bar (reading progress, one segment per section) ── */
+    .nda-card { border: 1px solid var(--c-border); padding: clamp(24px, 3vw, 40px); }
+    .nda-card-tag { font-family: var(--font-mono); font-size: 12px; letter-spacing: -0.03em; text-transform: uppercase; color: var(--c-text); display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+    .nda-card-tag::before { content: ""; width: 6px; height: 6px; background: #7858FF; }
+    .nda-card-btn { display: inline-block; margin-top: 8px; padding: 12px 18px; background: var(--c-text); color: #fff; font-family: var(--font-mono); font-size: 12px; letter-spacing: -0.03em; text-transform: uppercase; text-decoration: none; transition: background .2s; }
+    .nda-card-btn:hover { background: #7858FF; }
     .xp-bar { position: fixed; top: var(--nav-h); left: 0; right: 0; height: 4px; z-index: 8999; pointer-events: none; display: flex; gap: 2px; background: #fff; --xp: #7858FF;  opacity: 0; transform: translateY(-4px); transition: opacity .2s ease, transform .2s ease; }
     .xp-bar.on { opacity: 1; transform: none; }
     .xp-seg { flex: 1 1 0; min-width: 6px; height: 100%; background: rgba(0,0,0,0.06); overflow: hidden; }
@@ -573,11 +578,9 @@
     <nav class="sidebar-nav">
       <a href="#overview" class="active">Overview</a>
       <a href="#context">Context</a>
-      <a href="#problem">Problem</a>
-      <a href="#goals">Goals</a>
-      <a href="#process">Process</a>
+      <a href="#my-work">My work</a>
       <a href="#outcome">Outcome</a>
-      <a href="#reflections">Reflections</a>
+      <a href="#full-case-study">Full case study</a>
     </nav>
   </aside>
 
@@ -591,7 +594,8 @@
         <div class="cs-overview-left">
           <p style="font-family:var(--font-mono); font-size:12px; letter-spacing:-0.03em; text-transform:uppercase; color:var(--c-text); display:flex; align-items:center; gap:8px;">SAP<span class="pg-nda" style="display:inline-block; text-transform:uppercase;">NDA</span></p>
           <h1 class="cs-overview-title">Unifying Admin Settings across products in Business Data Cloud</h1>
-          <p class="cs-overview-desc">Business Data Cloud brings together SAP Analytics Cloud (SAC), Datasphere (DSP), and BDC under one platform. Differences in how admin settings were structured across products created a noticeable inconsistency for administrators. Collaborating with one other UX designer, I worked across two connected workstreams: one focused on compliance for browser integration and tenant appearance, and one focused on establishing a shared layout standard for admin settings across all products. This project is under NDA, so details shared here are intentionally high-level.</p>
+          <p class="cs-overview-desc">Business Data Cloud brings SAP Analytics Cloud (SAC), Datasphere (DSP), and BDC together under one platform, but each product's admin settings had been built separately and didn't match. With one other UX designer, I worked on making them consistent across all three products.</p>
+          <p class="cs-overview-desc" style="margin-top:16px;"><strong style="color:var(--c-text);font-weight:500;">This project is under NDA,</strong> so this page is a high-level summary. <a href="#full-case-study" style="color:var(--c-text);text-decoration:underline;">Contact me for the full case study.</a></p>
         </div>
         <div class="cs-overview-right">
           <div class="cs-meta-grid">
@@ -631,71 +635,35 @@
     <!-- Context -->
     <section class="cs-section" id="context">
       <p class="cs-section-label">context</p>
-      <h2 class="cs-section-heading">A platform bringing multiple products under one roof. The admin experience <strong>needed to follow.</strong></h2>
-      <p class="cs-section-body">SAP's Business Data Cloud brings together multiple products under a single platform. Each product had its own administration area, built independently over time. Datasphere was built after Analytics Cloud and reused its components to ship quickly, and different teams owned different sections of the settings. The result was settings that looked and behaved differently between products, with some options, like security settings, appearing in more than one place.</p>
-      <p class="cs-section-body">As the UX Designer on this project, I was embedded within a cross-functional team working across UX, development, user assistance, and product management, with team members distributed across multiple countries and product areas.</p>
+      <h2 class="cs-section-heading">Multiple products under one roof. The admin experience <strong>needed to follow.</strong></h2>
+      <p class="cs-section-body">Each product's admin area had been built independently over time by different teams. Admins moving between products ran into different layouts, interaction patterns, and settings structures, and some settings didn't meet SAP's UX consistency standards.</p>
     </section>
 
-    <!-- Problem -->
-    <section class="cs-section" id="problem">
-      <p class="cs-section-label">problem</p>
-      <h2 class="cs-section-heading">Inconsistent admin experiences across products, <strong>addressed in parallel.</strong></h2>
-      <p class="cs-section-body">Administrators working across multiple products encountered different layouts, interaction patterns, and settings structures depending on which product they were in. Some settings also fell short of SAP's internal UX consistency standards: Datasphere showed its own icon as the browser tab icon instead of SAP's, and both products used hard-coded custom colors instead of themeable design tokens.</p>
-      <p class="cs-section-body">Two related problems were scoped together and run as parallel workstreams, allowing shared learnings to feed into both without duplicating effort.</p>
-    </section>
-
-    <!-- Goals -->
-    <section class="cs-section" id="goals">
-      <p class="cs-section-label">goals</p>
-      <h2 class="cs-section-heading">Align structure, standardize components, and give every admin tab <strong>the same foundation.</strong></h2>
-      <p class="cs-section-body">The goal across both workstreams was consistency: bringing admin settings across products into alignment so administrators experienced a single, predictable interface regardless of which product they were in. This meant meeting the consistency standards, establishing shared layout standards, unifying interaction patterns, and producing one set of specs detailed enough for development teams across multiple countries to implement independently.</p>
-    </section>
-
-    <!-- Process -->
-    <section class="cs-section" id="process">
-      <p class="cs-section-label">process</p>
-
-      <h3 class="cs-subheading" style="margin-top:0;">Auditing the current state</h3>
-      <p class="cs-section-body">Both workstreams started with an audit of the existing experience, mapping inconsistencies across products and identifying what a unified standard would need to cover. The audit surfaced a range of issues that had accumulated over time as each product built its admin area independently.</p>
-
-      <h3 class="cs-subheading">Workstream 1: browser integration and appearance, in three scopes</h3>
-      <p class="cs-section-body"><strong>System information bar.</strong> The bar that tells users which system they're in used hard-coded hex colors. I moved it to design tokens so it follows the theme. The component itself is covered in the <a href="/sap-dna/" data-transition-color="#C9E8FF" style="color:inherit;text-decoration:underline;">DNA Web UI Kit case study</a>.</p>
-      <p class="cs-section-body"><strong>Browser tab icon.</strong> SAP's icon became the default, with a custom option kept for customers who want their own. To avoid surprising anyone, I planned a rollout where existing customers keep their current icon and new customers start with the SAP default. I also designed for an edge case: a light-themed app open in a dark-mode browser, where the icon still needs to be visible.</p>
-      <p class="cs-section-body"><strong>Settings layout.</strong> I explored several layouts for the appearance settings and we chose an object page floorplan. I also moved the "Default Appearance" settings so both products keep them in the same place.</p>
-
-      <h3 class="cs-subheading">Workstream 2: unifying every admin tab</h3>
-      <p class="cs-section-body">The new floorplan then became the standard for every admin tab across Analytics Cloud, Datasphere, and Business Data Cloud, so admins don't need to relearn each tab. We phased it: admin settings first, then configuration settings and a search across tabs. I wrote guidelines for text and input field lengths and turned the layout into a page template for the DNA Web UI Kit, so future tabs start consistent.</p>
-      <p class="cs-section-body">One decision came up repeatedly: toggles versus checkboxes. Toggles suggest a change saves instantly, but the new layout uses save and cancel buttons, so I switched those settings to checkboxes.</p>
-
-      <h3 class="cs-subheading">Designing and iterating</h3>
-      <p class="cs-section-body">Design proposals were reviewed iteratively with the UXC lead, senior designer, and development lead. With the user assistance team, I refined labels so each one said what it does. Feedback also shaped the format of the specs, which were structured to be navigable by development teams without requiring them to work through the design file directly.</p>
-
-      <h3 class="cs-subheading">Working across teams</h3>
-      <p class="cs-section-body">Both workstreams involved coordinating across UX, user assistance, project management, and development. Scope changes mid-project were incorporated without restarting the work, and regular check-ins ensured the direction remained feasible across all product areas involved.</p>
+    <!-- My work -->
+    <section class="cs-section" id="my-work">
+      <p class="cs-section-label">my work</p>
+      <h2 class="cs-section-heading">Two connected workstreams, <strong>one consistent admin experience.</strong></h2>
+      <p class="cs-section-body"><strong>Unifying admin settings.</strong> I designed a shared layout that became the standard for every admin tab across all three products, and turned it into a page template in the DNA Web UI Kit so future tabs start consistent.</p>
+      <p class="cs-section-body"><strong>Browser integration and appearance.</strong> I brought these settings in line with SAP's consistency standards, including moving the system information bar to design tokens, which is covered in the <a href="/sap-dna/" data-transition-color="#C9E8FF" style="color:inherit;text-decoration:underline;">DNA Web UI Kit case study</a>.</p>
+      <p class="cs-section-body">Along the way I ran the audit, iterated on designs through reviews, and wrote specs that development teams across multiple countries could build from, working closely with development, user assistance, and product management.</p>
     </section>
 
     <!-- Outcome -->
     <section class="cs-section" id="outcome">
       <p class="cs-section-label">outcome</p>
-      <h2 class="cs-section-heading">Both specs completed, handed off to development, and unified <strong>20 tabs across 3 products</strong>.</h2>
-      <p class="cs-section-body">Both specs were completed and handed off to development. The settings now meet the consistency standards, the system information bar uses design tokens, and the floorplan and guidelines live in the DNA Web UI Kit for future tabs. Full case study details are available on request.</p>
+      <h2 class="cs-section-heading">Both specs handed off to development, unifying <strong>20 tabs across 3 products</strong>.</h2>
+      <p class="cs-section-body">The settings now meet SAP's consistency standards, and the layout lives in the DNA Web UI Kit for future tabs.</p>
     </section>
 
-    <!-- Reflections -->
-    <section class="cs-section" id="reflections">
-      <p class="cs-section-label">reflections</p>
-
-      <h3 class="cs-subheading" style="margin-top:0;">Decisions take time, and that's okay</h3>
-      <p class="cs-section-body">Even small design decisions can involve multiple stakeholders, reviews, and back-and-forths before a direction is locked. Working at enterprise scale taught me to separate the design work from the decision-making process. Keeping specs well-documented meant that when decisions finally landed, implementation could move quickly.</p>
-
-      <h3 class="cs-subheading">How you present work matters as much as the work itself</h3>
-      <p class="cs-section-body">I learned early on that the format you use to present to developers shapes how well they understand the design intent. A Figma file works in a design review, but a structured spec or a live prototype is what actually moves things forward in a dev handoff. Developers respond well to being able to interact with the design directly rather than interpreting static screens. Finding the right format for the right audience became a skill in itself.</p>
-
-      <h3 class="cs-subheading">A spec should work without you in the room</h3>
-      <p class="cs-section-body">Early feedback was to build each spec so that anyone opening it cold would have enough context to understand it without me presenting. That changed how I wrote them: context first, then the decision, then the details, in the order a developer would need them.</p>
-
-      <h3 class="cs-subheading">Leading design conversations and advocating for decisions</h3>
-      <p class="cs-section-body">Working with developers and project managers on a regular basis gave me hands-on experience presenting design rationale and defending decisions in a professional setting. One thing I underestimated early on was assuming stakeholders remembered the full context of the project. In reality, everyone is juggling multiple workstreams, and coming into a review with full context, not just the latest changes, made conversations more productive and helped move decisions forward faster.</p>
+    <!-- Full case study -->
+    <section class="cs-section" id="full-case-study">
+      <p class="cs-section-label">full case study</p>
+      <div class="nda-card">
+        <p class="nda-card-tag">// Under NDA</p>
+        <h2 class="cs-section-heading" style="margin-bottom:16px;">The full story lives in <strong>my case study deck.</strong></h2>
+        <p class="cs-section-body">This project is under NDA, so what's shared here is intentionally high-level. My full case study covers the process, design decisions, and specs in detail, and I'm happy to walk you through it.</p>
+        <a class="nda-card-btn" href="mailto:noahdeguzman21@gmail.com?subject=SAP%20Admin%20Settings%20case%20study">Contact me for the full details →</a>
+      </div>
     </section>
 
   </main>
@@ -754,6 +722,10 @@
     }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
 
     sections.forEach(s => observer.observe(s));
+    window.addEventListener('scroll', () => {
+      if (window.scrollY >= document.documentElement.scrollHeight - window.innerHeight - 2)
+        navLinks.forEach((a, i) => a.classList.toggle('active', i === navLinks.length - 1));
+    }, { passive: true });
 
     /* ── Hamburger menu ───────────────────────── */
     window.addEventListener('DOMContentLoaded', () => {
