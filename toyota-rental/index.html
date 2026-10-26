@@ -497,9 +497,9 @@
     .footer-contact a { color: var(--c-text) !important; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--c-border); transition: text-decoration-color 0.2s ease; }
     .footer-contact a:hover { text-decoration-color: currentColor; }
       /* ── XP bar (reading progress, one segment per section) ── */
-    .xp-bar { position: fixed; top: var(--nav-h); left: 0; right: 0; height: 6px; z-index: 8999; pointer-events: none; display: flex; gap: 2px; background: #fff; --xp: #EB0A1E; }
+    .xp-bar { position: fixed; top: var(--nav-h); left: 0; right: 0; height: 4px; z-index: 8999; pointer-events: none; display: flex; gap: 2px; background: #fff; --xp: #EB0A1E; }
     .xp-seg { flex: 1 1 0; min-width: 6px; height: 100%; background: rgba(0,0,0,0.06); overflow: hidden; }
-    .xp-seg i { display: block; height: 100%; width: 0; background: var(--xp); background: linear-gradient(to bottom, color-mix(in srgb, var(--xp) 45%, #fff) 0 50%, var(--xp) 50% 83.4%, color-mix(in srgb, var(--xp) 88%, #000) 83.4% 100%); }
+    .xp-seg i { display: block; height: 100%; width: 0; background: var(--xp); }
 </style>
 </head>
 <body>
