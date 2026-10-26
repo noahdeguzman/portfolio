@@ -212,6 +212,8 @@
     }
     .sidebar-nav a:hover,
     .sidebar-nav a.active { color: var(--c-text); }
+    .sidebar-nav a { position: relative; }
+    .sidebar-nav a.active::before { content: ""; position: absolute; left: -14px; top: 50%; width: 6px; height: 6px; margin-top: -3px; background: #00E997; }
 
     /* ─────────────────────────────────────────────
        HERO VIDEO
