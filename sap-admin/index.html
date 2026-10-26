@@ -511,7 +511,19 @@
 
     .footer-contact a { color: var(--c-text) !important; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--c-border); transition: text-decoration-color 0.2s ease; }
     .footer-contact a:hover { text-decoration-color: currentColor; }
-  </style>
+      /* ── Other projects ── */
+    .more-work { padding: 96px var(--pad) 48px; }
+    .more-work-label { font-family: var(--font-mono); font-size: 12px; letter-spacing: -0.03em; text-transform: uppercase; color: var(--c-text); display: flex; align-items: center; gap: 8px; margin: 0 0 24px; }
+    .more-work-label span { display: inline-block; width: 6px; height: 6px; background: #00E997; flex-shrink: 0; }
+    .more-work-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .mw-card { display: flex; flex-direction: column; text-decoration: none; color: var(--c-text); }
+    .mw-scene { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: #fff; }
+    .mw-scene img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94); }
+    .mw-card:hover .mw-scene img { transform: scale(1.03); }
+    .mw-info { display: grid; grid-template-columns: 1fr 1fr; padding: 12px 0 0; }
+    .mw-info p { margin: 0; font-family: var(--font-mono); font-size: 13px; letter-spacing: -0.03em; line-height: 1.4; text-transform: uppercase; color: var(--c-text); }
+    @media (max-width: 700px) { .more-work { padding-top: 64px; } .more-work-grid { grid-template-columns: 1fr; gap: 32px; } .mw-info { grid-template-columns: 1fr; gap: 4px; } }
+</style>
 </head>
 <body>
 
@@ -678,6 +690,21 @@
   </main>
 
   </div><!-- /.page-body -->
+
+  <!-- ── Other projects ────────────────────────────────────────────── -->
+  <section class="more-work" aria-label="Other projects">
+    <p class="more-work-label"><span></span>Other projects</p>
+    <div class="more-work-grid">
+      <a class="mw-card" href="/nokia" data-transition-color="#1E5EF6">
+        <div class="mw-scene"><img src="../images/nokia-tn.png" alt="" loading="lazy" style="object-fit:cover;object-position:center center;" /></div>
+        <div class="mw-info"><p>Nokia [2025]</p><p>// Streamlining the Frostbuster Submission Process</p></div>
+      </a>
+      <a class="mw-card" href="/sap-dna" data-transition-color="#C9E8FF">
+        <div class="mw-scene"><img src="../images/sap-ds-tn.png" alt="" loading="lazy" style="object-fit:cover;object-position:top center;" /></div>
+        <div class="mw-info"><p>SAP [2026]</p><p>// DNA Web UI Kit — Design System</p></div>
+      </a>
+    </div>
+  </section>
 
   <!-- ── Footer ───────────────────────────────────────────────────────── -->
   <footer class="footer" role="contentinfo">
