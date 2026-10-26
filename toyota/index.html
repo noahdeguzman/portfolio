@@ -496,8 +496,7 @@
     .footer-contact a { color: var(--c-text) !important; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--c-border); transition: text-decoration-color 0.2s ease; }
     .footer-contact a:hover { text-decoration-color: currentColor; }
       /* ── XP bar (reading progress, one segment per section) ── */
-    .xp-bar { position: fixed; top: var(--nav-h); left: 0; right: 0; height: 4px; z-index: 8999; pointer-events: none; display: flex; gap: 2px; background: #fff; --xp: #EB0A1E;  opacity: 0; transform: translateY(-4px); transition: opacity .2s ease, transform .2s ease; }
-    .xp-bar.on { opacity: 1; transform: none; }
+    .xp-bar { position: fixed; top: var(--nav-h); left: 0; right: 0; height: 4px; z-index: 8999; pointer-events: none; display: flex; gap: 2px; background: #fff; --xp: #EB0A1E; }
     .xp-seg { flex: 1 1 0; min-width: 6px; height: 100%; background: rgba(0,0,0,0.06); overflow: hidden; }
     .xp-seg i { display: block; height: 100%; width: 0; background: var(--xp); }
     /* ── Achievement toast ── */
@@ -796,10 +795,7 @@
       setTimeout(() => toast.classList.remove('show'), 4750);
     };
     let ticking = false;
-    const hero = document.querySelector('.cs-hero-video'), navEl = document.getElementById('nav');
     const update = () => {
-      const navB = navEl ? navEl.getBoundingClientRect().bottom : 0;
-      bar.classList.toggle('on', !hero || hero.getBoundingClientRect().bottom <= navB + 0.5);
       const max = document.documentElement.scrollHeight - window.innerHeight;
       const atEnd = window.scrollY >= max - 2;
       const line = window.scrollY + window.innerHeight * 0.3;
