@@ -422,9 +422,6 @@
       .ph { background: #fdf4a3; color: #6b5200; padding: 0 4px; border-radius: 3px; text-transform: none; }
     .ph-img { border: 1.5px dashed rgba(0,0,0,0.18); background: var(--c-surface); aspect-ratio: 16 / 9; display: flex; align-items: center; justify-content: center; text-align: center; padding: 24px; font-family: var(--font-mono); font-size: 12px; letter-spacing: -0.03em; text-transform: uppercase; color: var(--c-muted); }
     .film-grid-wrap { padding: 8px var(--pad) 48px; }
-    .film-reel-wrap { width: 100%; padding: 0 0 56px; line-height: 0; }
-    .film-reel-wrap video { width: 100%; display: block; aspect-ratio: 2560 / 694; max-height: 85vh; object-fit: cover; background: var(--c-surface); pointer-events: none; }
-    @media (max-width: 860px) { .film-reel-wrap { padding-bottom: 40px; } .film-reel-wrap video { aspect-ratio: 16 / 9; } }
     #about-hero .about-desc { max-width: 720px; }
     .film-label { font-family: var(--font-mono); font-size: 12px; letter-spacing: -0.03em; text-transform: uppercase; color: var(--c-text); display: flex; align-items: center; gap: 8px; margin-bottom: 24px; }
     .film-label span { width: 6px; height: 6px; background: #00E997; display: inline-block; }
@@ -504,11 +501,6 @@
       </div>
     </div>
   </main>
-
-  <!-- ── Reel ─────────────────────────────────────────────────────────── -->
-  <section class="film-reel-wrap" aria-label="Reel">
-    <video src="../images/portfolio-reel.mp4?v=2" poster="../images/film/portfolio-reel.webp" autoplay muted loop playsinline disablepictureinpicture disableremoteplayback aria-label="Cinematic reel"></video>
-  </section>
 
   <!-- ── Work ─────────────────────────────────────────────────────────── -->
   <section class="film-grid-wrap" aria-label="Selected films">

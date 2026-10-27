@@ -482,6 +482,11 @@
     </div>
   </main>
 
+  <!-- ── Hero Video ──────────────────────────────────────────────────── -->
+  <div class="about-hero-video" id="about-hero-video">
+    <video src="../images/portfolio-reel.mp4?v=2" autoplay muted loop playsinline preload="auto"></video>
+  </div>
+
   <!-- ── Footer ───────────────────────────────────────────────────────── -->
   <footer class="footer" role="contentinfo">
     <div class="footer-inner">
@@ -510,7 +515,7 @@
     window.addEventListener('DOMContentLoaded', () => {
       requestAnimationFrame(() => {
         document.getElementById('nav').classList.add('loaded');
-        document.getElementById('about-hero-video')?.classList.add('loaded');
+        document.getElementById('about-hero-video').classList.add('loaded');
         document.getElementById('about-hero').classList.add('loaded');
       });
     });
