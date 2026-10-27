@@ -422,8 +422,8 @@
       .ph { background: #fdf4a3; color: #6b5200; padding: 0 4px; border-radius: 3px; text-transform: none; }
     .ph-img { border: 1.5px dashed rgba(0,0,0,0.18); background: var(--c-surface); aspect-ratio: 16 / 9; display: flex; align-items: center; justify-content: center; text-align: center; padding: 24px; font-family: var(--font-mono); font-size: 12px; letter-spacing: -0.03em; text-transform: uppercase; color: var(--c-muted); }
     .film-grid-wrap { padding: 8px var(--pad) 48px; }
-    .film-reel-wrap { padding: 0 var(--pad) 56px; }
-    .film-reel-wrap video { width: 100%; display: block; aspect-ratio: 2560 / 694; object-fit: cover; background: var(--c-surface); pointer-events: none; }
+    .film-reel-wrap { width: 100%; padding: 0 0 56px; line-height: 0; }
+    .film-reel-wrap video { width: 100%; display: block; aspect-ratio: 2560 / 694; max-height: 85vh; object-fit: cover; background: var(--c-surface); pointer-events: none; }
     @media (max-width: 860px) { .film-reel-wrap { padding-bottom: 40px; } .film-reel-wrap video { aspect-ratio: 16 / 9; } }
     #about-hero .about-desc { max-width: 720px; }
     .film-label { font-family: var(--font-mono); font-size: 12px; letter-spacing: -0.03em; text-transform: uppercase; color: var(--c-text); display: flex; align-items: center; gap: 8px; margin-bottom: 24px; }
@@ -445,7 +445,7 @@
     .film-bento-b .film-card:not(.film-tall) .film-media { flex: none; aspect-ratio: 16 / 9; }
     @media (max-width: 860px) { .film-bento { grid-template-columns: 1fr; grid-template-rows: none; } .film-bento .film-tall { grid-row: auto; } .film-bento-b { margin-top: 32px; } .film-bento .film-card:not(.film-tall) .film-media { flex: none; aspect-ratio: 16 / 9; } }
     .film-desc { font-family: var(--font-text); font-size: clamp(13px, 1vw, 15px); line-height: 1.6; color: var(--c-muted); margin: 0; }
-    #main.page-content, .film-grid-wrap, .film-reel-wrap { width: 100%; max-width: 1312px; margin-left: auto; margin-right: auto; box-sizing: border-box; }
+    #main.page-content, .film-grid-wrap { width: 100%; max-width: 1312px; margin-left: auto; margin-right: auto; box-sizing: border-box; }
     .cs-sound-btn { position: absolute; right: 12px; bottom: 12px; width: 36px; height: 36px; border: none; border-radius: 50%; background: rgba(20,20,20,0.7); color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s ease; }
     .cs-sound-btn:hover { background: rgba(20,20,20,0.9); }
     .cs-sound-btn:focus-visible { outline: 2px solid #00E997; outline-offset: 2px; }
