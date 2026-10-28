@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" style="background:#141414">
+<html lang="en" style="background:#1C201D">
 <head>
   <meta name="color-scheme" content="dark" />
   <meta charset="UTF-8" />
@@ -33,18 +33,19 @@
       --font-text:    -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Arial, sans-serif;
       --font-mono:    "Space Mono", "SF Mono", "Fira Mono", "Consolas", monospace;
 
-      --c-bg:      #141414;
-      --c-surface: #1f1f1f;
-      --c-border:  rgba(255,255,255,0.12);
-      --c-text:    #f5f5f5;
-      --c-muted:   #a1a1a6;
-      --c-subtle:  #6e6e73;
+      --c-bg:      #1C201D;
+      --c-surface: #252A26;
+      --c-border:  rgba(221,254,203,0.14);
+      --c-text:    #F2F5F0;
+      --c-muted:   #A3ABA4;
+      --c-subtle:  #6F7870;
       --c-blue:    #0071e3;
       --c-green:   #1a9e4a;
       --c-white:   #ffffff;
 
-      --c-nav-bg:      #141414;
-      --c-nav-border:  rgba(255,255,255,0.12);
+      --c-lime:    #DDFECB;
+      --c-nav-bg:      #1C201D;
+      --c-nav-border:  rgba(221,254,203,0.14);
       --c-ring-border: rgba(255,255,255,0.5);
 
       --nav-h:     52px;
@@ -449,6 +450,15 @@
     .cs-sound-btn .i-sound { display: none; }
     .cs-sound-btn.is-on .i-sound { display: block; }
     .cs-sound-btn.is-on .i-muted { display: none; }
+    /* ── Lime-on-dark theme ── */
+    #about-hero .about-desc-heading { color: var(--c-lime); }
+    .history-section h2, .history-company { color: var(--c-lime); }
+    .film-title { color: var(--c-lime); }
+    .film-label { color: var(--c-lime); }
+    .film-label span, .nav-mobile-menu a.active::before { background: var(--c-lime); }
+    .nav-links a.active, .nav-mobile-menu a.active { color: var(--c-lime); }
+    .nav-links a.active::before { background: var(--c-lime) !important; }
+    .cs-sound-btn:focus-visible { outline-color: var(--c-lime); }
 </style>
 </head>
 <body>
@@ -461,7 +471,7 @@
       <ul class="nav-links" role="list">
         <li><a href="/" data-transition-color="#ffffff">Work</a></li>
         <li><a href="/about" data-transition-color="#00E997">About</a></li>
-        <li><a href="/film" class="active" data-transition-color="#141414">Film</a></li>
+        <li><a href="/film" class="active" data-transition-color="#1C201D">Film</a></li>
         <li><a href="../Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">Resume</a></li>
       </ul>
       <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu">[MENU]</button>
@@ -471,7 +481,7 @@
   <nav class="nav-mobile-menu" id="nav-mobile-menu">
     <a href="/" data-transition-color="#ffffff">Work</a>
     <a href="/about" data-transition-color="#00E997">About</a>
-    <a href="/film" class="active" data-transition-color="#141414">Film</a>
+    <a href="/film" class="active" data-transition-color="#1C201D">Film</a>
     <a href="../Noah_DeGuzman_Resume.pdf" target="_blank" rel="noopener">Resume</a>
   </nav>
 
@@ -484,7 +494,7 @@
       </div>
       <div class="history">
         <div class="history-section">
-          <h2 style="display:flex;align-items:center;gap:8px;"><span style="display:inline-block;width:6px;height:6px;background:#00E997;flex-shrink:0;"></span>Gear</h2>
+          <h2 style="display:flex;align-items:center;gap:8px;"><span style="display:inline-block;width:6px;height:6px;background:var(--c-lime);flex-shrink:0;"></span>Gear</h2>
           <div class="history-row">
             <div class="history-left">
               <span class="history-company">Camera</span>
