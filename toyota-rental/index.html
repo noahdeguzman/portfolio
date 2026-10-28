@@ -500,6 +500,11 @@
     .footer-contact a:hover { text-decoration-color: currentColor; }
       /* ── XP bar (reading progress, one segment per section) ── */
     .xp-bar { position: fixed; top: var(--nav-h); left: 0; right: 0; height: 4px; z-index: 8999; pointer-events: none; display: flex; gap: 2px; background: #fff; --xp: #EB0A1E; }
+    .xp-label { display: none; position: fixed; top: calc(var(--nav-h) + 12px); left: var(--pad, 24px); z-index: 8998; pointer-events: none; align-items: center; gap: 8px; padding: 6px 10px; background: rgba(255,255,255,0.92); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border: 1px solid rgba(0,0,0,0.08); font-family: var(--font-mono); font-size: 11px; letter-spacing: -0.03em; text-transform: uppercase; color: var(--c-text); opacity: 0; transform: translateY(-4px); transition: opacity .2s ease, transform .2s ease; }
+    .xp-label i { width: 6px; height: 6px; background: #EB0A1E; flex-shrink: 0; }
+    .xp-label .xp-label-n { color: var(--c-subtle); }
+    .xp-label.on { opacity: 1; transform: none; }
+    @media (max-width: 860px) { .xp-label { display: flex; } }
     .xp-seg { flex: 1 1 0; min-width: 6px; height: 100%; background: rgba(0,0,0,0.06); overflow: hidden; }
     .xp-seg i { display: block; height: 100%; width: 0; background: var(--xp); }
     /* ── Achievement toast ── */
@@ -524,6 +529,7 @@
     <div class="ach-text"><span class="ach-kicker">Achievement unlocked</span><span class="ach-title">Case study complete: Toyota Mobile Rental<span class="ach-xp">+100 XP</span></span></div>
   </div>
   <div class="xp-bar" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+  <div class="xp-label" aria-hidden="true"><i></i><span class="xp-label-t"></span><span class="xp-label-n"></span></div>
   <nav class="nav" id="nav" role="banner">
     <div class="nav-inner">
       <a class="nav-logo" href="/" aria-label="noah de guzman home" data-transition-color="--c-text"><img src="../images/logo-dark.svg" alt="noah de guzman" /></a>
@@ -760,6 +766,8 @@
     const targets = [...document.querySelectorAll('.sidebar-nav a[href^="#"]')]
       .map(a => document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
     if (!targets.length) return;
+    const names = [...document.querySelectorAll('.sidebar-nav a[href^="#"]')].filter(a => document.getElementById(a.getAttribute('href').slice(1))).map(a => a.textContent.trim());
+    const xpLabel = document.querySelector('.xp-label'), xpT = xpLabel && xpLabel.querySelector('.xp-label-t'), xpN = xpLabel && xpLabel.querySelector('.xp-label-n');
     const fills = targets.map(() => { const seg = document.createElement('span'); seg.className = 'xp-seg'; const f = document.createElement('i'); seg.appendChild(f); bar.appendChild(seg); return f; });
     const toast = document.querySelector('.ach-toast');
     const achKey = 'ach-toyota-rental';
@@ -789,6 +797,14 @@
         total += pct;
       });
       bar.setAttribute('aria-valuenow', Math.round(total / fills.length * 100));
+      if (xpLabel) {
+        let cur = 0;
+        tops.forEach((t, i) => { if (line >= t) cur = i; });
+        if (atEnd) cur = tops.length - 1;
+        xpT.textContent = names[cur];
+        xpN.textContent = (cur + 1) + '/' + names.length;
+        xpLabel.classList.toggle('on', window.scrollY > 60);
+      }
       if (atEnd && !achShown) unlock();
       ticking = false;
     };
