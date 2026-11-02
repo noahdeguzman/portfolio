@@ -87,7 +87,7 @@
       || href.startsWith('http')
       || href.startsWith('mailto')
       || href.startsWith('tel')
-      || href.endsWith('.pdf')
+      || /\.pdf(\?|$)/.test(href)
       || a.target === '_blank') return;
 
     e.preventDefault();
