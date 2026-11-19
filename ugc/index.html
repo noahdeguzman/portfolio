@@ -265,8 +265,6 @@
         html += c === ' ' ? '<span class="gap"></span>'
           : '<span class="ch" style="animation-delay:' + (0.05 + (i++) * 0.045) + 's">' + c + '</span>';
       }
-      if (line.classList.contains('l1-full') || line.hasAttribute('data-pix'))
-        html += '<span class="pix" style="animation-delay:' + (0.15 + i * 0.045) + 's"></span>';
       line.innerHTML = html;
     });
 
