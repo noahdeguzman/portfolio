@@ -53,7 +53,7 @@
     .bar-links { display: flex; gap: 24px; }
     .bar-links a { text-decoration: none; color: var(--muted); transition: color .2s; }
     .bar-links a:hover { color: var(--text); }
-    .bar-links a.cta { color: var(--green); }
+    .bar-links a.active { color: var(--green); }
 
     /* hero name */
     .hero { padding: clamp(40px, 7vw, 96px) var(--pad) clamp(20px, 3vw, 36px); }
@@ -140,6 +140,7 @@
       .short .intro-txt { grid-column: 1 / -1; padding: 0 0 12px; }
       .long { grid-template-columns: 1fr; }
       .bar-links a:not(.cta) { display: none; }
+      .bar-links a.cta { color: var(--green); }
     }
     @media (prefers-reduced-motion: reduce) {
       .name .ch, .name .pix { animation: none; transform: none; }
@@ -292,6 +293,20 @@
     fit();
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
     window.addEventListener('resize', fit);
+
+
+    // Highlight the nav link for the section in view
+    var navLinks = Array.prototype.slice.call(document.querySelectorAll('.bar-links a'));
+    var secs = navLinks.map(function (a) { return document.querySelector(a.getAttribute('href')); });
+    function setActive() {
+      var line = window.innerHeight * 0.4, cur = -1;
+      secs.forEach(function (sec, i) { if (sec && sec.getBoundingClientRect().top <= line) cur = i; });
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) cur = secs.length - 1;
+      navLinks.forEach(function (a, i) { a.classList.toggle('active', i === cur); });
+    }
+    setActive();
+    window.addEventListener('scroll', setActive, { passive: true });
+    window.addEventListener('resize', setActive);
 
     // Scroll reveal
     var ro = new IntersectionObserver(function (es) {
